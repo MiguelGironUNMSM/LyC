@@ -95,11 +95,6 @@ t_TODO = r"\*"
 
 t_ignore = ' \t'  # Ignorar espacios y tabs
 
-def t_IDENTIFICADOR_INVALIDO(t):
-    r'[^a-zA-Z_]+([a-zA-Z_]|[0-9])*[a-zA-Z_]+'
-    print(f"Identificador inválido: {t.value}")
-    t.lexer.skip(1)
-
 def t_IDENTIFICADOR(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
     keywords = {
@@ -115,6 +110,11 @@ def t_IDENTIFICADOR(t):
     t.type = keywords.get(t.value.upper(), 'IDENTIFICADOR')
     return t
 
+def t_IDENTIFICADOR_INVALIDO(t):
+    r'[^a-zA-Z_\s]+[a-zA-Z0-9_]*[a-zA-Z]+'
+    print(f"Identificador inválido: {t.value}")
+    t.lexer.skip(1)
+
 def t_NUMERO(t):
     r'\d+'
     t.value = int(t.value)
@@ -127,7 +127,7 @@ def t_error(t):
 lexer = lex.lex()
 
 # Prueba con una consulta
-test_query = "SELECCIONAR * DESDE #$#$##$$#1s12s2s2s tabla1 DONDE columna1 = 10"
+test_query = "SELECCIONAR * DESDE #$#$##$$#1s12s2s2s tabla1 DONDE columna1 = 10 23Ss ddS12 =2w3Sfsa _das21 #dsa IZQUIERDO"
 lexer.input(test_query)
 
 for tok in lexer:
