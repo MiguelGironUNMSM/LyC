@@ -96,6 +96,17 @@ t_ignore = ' \t'  # Ignorar espacios y tabs
 
 def t_IDENTIFICADOR(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
+    keywords = {
+    'SELECCIONAR': 'SELECCIONAR', 'INSERTAR': 'INSERTAR', 'ACTUALIZAR': 'ACTUALIZAR', 'ELIMINAR': 'ELIMINAR',
+    'DESDE': 'DESDE', 'DONDE': 'DONDE', 'ORDENAR': 'ORDENAR_POR', 'AGRUPAR': 'AGRUPAR_POR', 'CREAR': 'CREAR',
+    'ALTERAR': 'ALTERAR', 'TABLA': 'TABLA', 'CLAVE': 'CLAVE_PRIMARIA', 'INICIAR': 'INICIAR_TRANSACCION',
+    'CONFIRMAR': 'CONFIRMAR', 'REVERTIR': 'REVERTIR', 'SI': 'SI', 'SINO': 'SINO', 'CASO': 'CASO',
+    'ENTONCES': 'ENTONCES', 'Y': 'Y', 'O': 'O', 'NO': 'NO', 'CONTAR': 'CONTAR', 'SUMA': 'SUMA', 'PROMEDIO': 'PROMEDIO',
+    'MAXIMO': 'MAXIMO', 'MINIMO': 'MINIMO', 'DISTINTO': 'DISTINTO', 'COMO': 'COMO', 'ENTERO': 'ENTERO', 'TEXTO': 'TEXTO',
+    'FECHA': 'FECHA', 'BOOLEANO': 'BOOLEANO', 'DECIMAL': 'DECIMAL', 'NULO': 'NULO', 'UNIR': 'UNIR',
+    'INTERIOR': 'UNIR_INTERIOR', 'IZQUIERDA': 'UNIR_IZQUIERDA', 'DERECHA': 'UNIR_DERECHA'
+    }
+    t.type = keywords.get(t.value.upper(), 'IDENTIFICADOR')
     return t
 
 def t_NUMERO(t):
@@ -110,7 +121,7 @@ def t_error(t):
 lexer = lex.lex()
 
 # Prueba con una consulta
-test_query = "SELECCIONAR * DESDE tabla1 DONDE columna1 = 10"
+test_query = "SELECCIONAR * DESDE asDSDAS31das tabla1 DONDE columna1 = 10"
 lexer.input(test_query)
 
 for tok in lexer:
