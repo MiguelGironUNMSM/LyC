@@ -1,18 +1,104 @@
 import ply.lex as lex
 
-tokens = ['SELECCIONAR', 'DESDE', 'DONDE', 'IDENTIFIER', 'NUMBER', 'EQUALS']
+tokens = [
+'SELECCIONAR', # SELECT
+'INSERTAR', # INSERT
+'ACTUALIZAR', # UPDATE
+'ELIMINAR', # DELETE
+'DESDE', # FROM
+'DONDE', # WHERE
+'ORDENAR_POR', # ORDER BY
+'AGRUPAR_POR', # GROUP BY
+'CREAR', # CREATE
+'ALTERAR', # ALTER
+'TABLA', # TABLE
+'CLAVE_PRIMARIA', # PRIMARY KEY
+'CLAVE_FORANEA', # FOREIGN KEY
+'INICIAR_TRANSACCION', # BEGIN TRANSACTION
+'CONFIRMAR', # COMMIT
+'REVERTIR', # ROLLBACK
+'SI', # IF
+'SINO', # ELSE
+'CASO', # CASE
+'ENTONCES', # THEN
+'Y', # AND
+'O', # OR
+'NO', # NOT
+'CONTAR', # COUNT
+'SUMA', # SUM
+'PROMEDIO', # AVG
+'MAXIMO', # MAX
+'MINIMO', # MIN
+'DISTINTO', # DISTINCT
+'COMO', # AS
+'ENTERO', # INTEGER
+'TEXTO', # TEXT
+'FECHA', # DATE
+'BOOLEANO', # BOOLEAN
+'DECIMAL', # DECIMAL
+'NULO', # NULL
+'UNIR', # JOIN
+'UNIR_INTERIOR', # INNER JOIN
+'UNIR_IZQUIERDA', # LEFT JOIN
+'UNIR_DERECHA', # RIGHT JOIN
+'IDENTIFICADOR', # IDENTIFICADOR
+'NUMERO', # NÚMERO
+'COMPARACION', # '='
+'COMA', # ','
+'TODO' # '*'
+]
 
 t_SELECCIONAR = r'SELECCIONAR'
+t_INSERTAR = r'INSERTAR'
+t_ACTUALIZAR = r'ACTUALIZAR'
+t_ELIMINAR = r'ELIMINAR'
 t_DESDE = r'DESDE'
 t_DONDE = r'DONDE'
-t_EQUALS = r'='
+t_ORDENAR_POR = r'ORDENAR POR'
+t_AGRUPAR_POR = r'AGRUPAR POR'
+t_CREAR = r'CREAR'
+t_ALTERAR = r'ALTERAR'
+t_TABLA = r'TABLA'
+t_CLAVE_PRIMARIA = r'CLAVE PRIMARIA'
+t_CLAVE_FORANEA = r'CLAVE FORANEA'
+t_INICIAR_TRANSACCION = r'INICIAR TRANSACCION'
+t_CONFIRMAR = r'CONFIRMAR'
+t_REVERTIR = r'REVERTIR'
+t_SI = r'SI'
+t_SINO = r'SINO'
+t_CASO = r'CASO'
+t_ENTONCES = r'ENTONCES'
+t_Y = r'Y'
+t_O = r'O'
+t_NO = r'NO'
+t_CONTAR = r'CONTAR'
+t_SUMA = r'SUMA'
+t_PROMEDIO = r'PROMEDIO'
+t_MAXIMO = r'MAXIMO'
+t_MINIMO = r'MINIMO'
+t_DISTINTO = r'DISTINTO'
+t_COMO = r'COMO'
+t_ENTERO = r'ENTERO'
+t_TEXTO = r'TEXTO'
+t_FECHA = r'FECHA'
+t_BOOLEANO = r'BOOLEANO'
+t_DECIMAL = r'DECIMAL'
+t_NULO = r'NULO'
+t_UNIR = r'UNIR'
+t_UNIR_INTERIOR = r'UNIR INTERIOR'
+t_UNIR_IZQUIERDA = r'UNIR IZQUIERDA'
+t_UNIR_DERECHA = r'UNIR DERECHA'
+t_COMPARACION = r'='
+t_COMA = r','
+t_TODO = r"\*" 
+
 t_ignore = ' \t'  # Ignorar espacios y tabs
 
-def t_IDENTIFIER(t):
+def t_IDENTIFICADOR(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
     return t
 
-def t_NUMBER(t):
+def t_NUMERO(t):
     r'\d+'
     t.value = int(t.value)
     return t
@@ -24,7 +110,8 @@ def t_error(t):
 lexer = lex.lex()
 
 # Prueba con una consulta
-lexer.input("SELECCIONAR nombre DESDE usuarios WHERE edad = 25")
+test_query = "SELECCIONAR * DESDE tabla1 DONDE columna1 = 10"
+lexer.input(test_query)
 
 for tok in lexer:
     print(tok)
