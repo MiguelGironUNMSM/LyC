@@ -47,6 +47,12 @@ tokens = [
 'COMPARACION', # '='
 'COMA', # ','
 'TODO' # '*'
+'EN',
+'VALORES',
+'ASCENDENTE',
+'DESCENDENTE',
+'LIMITAR',
+'DIFERENTE'
 ]
 
 t_SELECCIONAR = r'SELECCIONAR'
