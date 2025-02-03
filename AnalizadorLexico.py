@@ -42,6 +42,7 @@ tokens = [
 'UNIR_IZQUIERDA', # LEFT JOIN
 'UNIR_DERECHA', # RIGHT JOIN
 'IDENTIFICADOR', # IDENTIFICADOR
+'IDENTIFICADOR_INVALIDO', 
 'NUMERO', # NÚMERO
 'COMPARACION', # '='
 'COMA', # ','
@@ -94,6 +95,11 @@ t_TODO = r"\*"
 
 t_ignore = ' \t'  # Ignorar espacios y tabs
 
+def t_IDENTIFICADOR_INVALIDO(t):
+    r'[^a-zA-Z_]+([a-zA-Z_]|[0-9])*[a-zA-Z_]+'
+    print(f"Identificador inválido: {t.value}")
+    t.lexer.skip(1)
+
 def t_IDENTIFICADOR(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
     keywords = {
@@ -121,7 +127,7 @@ def t_error(t):
 lexer = lex.lex()
 
 # Prueba con una consulta
-test_query = "SELECCIONAR * DESDE asDSDAS31das tabla1 DONDE columna1 = 10"
+test_query = "SELECCIONAR * DESDE #$#$##$$#1s12s2s2s tabla1 DONDE columna1 = 10"
 lexer.input(test_query)
 
 for tok in lexer:
