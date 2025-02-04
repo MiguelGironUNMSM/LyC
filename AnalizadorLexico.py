@@ -52,7 +52,7 @@ tokens = [
 'MENOR',#<
 'MAYOR_IGUAL',#>=
 'MENOR_IGUAL',#<=
-'COMPARACION', # '='
+'IGUALDAD', # '='
 'DIFERENTE', #!=
 
 #Operadores aritmeticos
@@ -104,84 +104,121 @@ tokens = [
 'SIMILAR_A', #LIKE
 'DISTINTO', # DISTINCT
 'ENTRE', #BETWEEN
+'OBTENER', #GET
+'COLOCAR', #SET 
 ]
 
+#Comandos SQL
 t_SELECCIONAR = r'SELECCIONAR'
 t_INSERTAR = r'INSERTAR'
 t_ACTUALIZAR = r'ACTUALIZAR'
 t_ELIMINAR = r'ELIMINAR'
+t_CREAR = r'CREAR'
+t_ALTERAR = r'ALTERAR'
+t_TABLA = r'TABLA'
 t_DESDE = r'DESDE'
+
+#Clausulas SQL
 t_DONDE = r'DONDE'
 t_ORDENAR_POR = r'ORDENAR POR'
 t_AGRUPAR_POR = r'AGRUPAR POR'
 t_TENIENDO = r'TENIENDO'
-t_CREAR = r'CREAR'
-t_ALTERAR = r'ALTERAR'
-t_TABLA = r'TABLA'
+
+#Claves
 t_CLAVE_PRIMARIA = r'CLAVE PRIMARIA'
 t_CLAVE_FORANEA = r'CLAVE FORANEA'
+
+#Transacciones
 t_INICIAR_TRANSACCION = r'INICIAR TRANSACCION'
 t_CONFIRMAR = r'CONFIRMAR'
 t_REVERTIR = r'REVERTIR'
+
+#Condicionales
 t_SI = r'SI'
 t_SINO = r'SINO'
 t_CASO = r'CASO'
 t_ENTONCES = r'ENTONCES'
+
+#Operadores Logicos
 t_Y = r'Y'
 t_O = r'O'
 t_NO = r'NO'
+
+#Funciones de Agregacion
 t_CONTAR = r'CONTAR'
 t_SUMA = r'SUMA'
 t_PROMEDIO = r'PROMEDIO'
 t_MAXIMO = r'MAXIMO'
 t_MINIMO = r'MINIMO'
-t_DISTINTO = r'DISTINTO'
-t_ENTRE = r'ENTRE'
-t_COMO = r'COMO'
-t_ENTERO = r'ENTERO'
-t_TEXTO = r'TEXTO'
+
+#Comparadores y operadores
+t_MAYOR = r'>'
+t_MENOR = r'<'
+t_MAYOR_IGUAL = r'>='
+t_MENOR_IGUAL = r'<='
+t_IGUALDAD = r'='
+t_DIFERENTE = r'!='
+
+#Operadores aritmeticos
+t_MAS = r'\+'
+t_MENOS = r'-'
+t_MULTIPLICACION = r'\*'
+t_DIVISION = r'/'
+t_MODULO = r'%'
+
+#Tipos de datos
 t_FECHA = r'FECHA'
 t_BOOLEANO = r'BOOLEANO'
 t_DECIMAL = r'DECIMAL'
 t_NULO = r'NULO'
+t_ENTERO = r'ENTERO'
+t_TEXTO = r'TEXTO'
+t_CARACTER = r'CARACTER'
+
+#Joins
 t_UNIR = r'UNIR'
 t_UNIR_INTERIOR = r'UNIR INTERIOR'
 t_UNIR_IZQUIERDA = r'UNIR IZQUIERDA'
 t_UNIR_DERECHA = r'UNIR DERECHA'
-t_CONVERTIR=r'CONVERTIR'
-t_COMPARACION = r'='
+
+#Caracteres especiales
 t_COMA = r','
 t_PUNTO = r'\.'
 t_TODO = r"\*" 
 t_ignore = ' \t'  # Ignorar espacios y tabs
+t_PARENTESIS_DER = r'\)'
+t_PARENTESIS_IZQ = r'\('
+
+#Otros
+t_CONVERTIR=r'CONVERTIR'
 t_EN = r'EN'
 t_ES = r'ES'
 t_VALORES = r'VALORES'
 t_ASCENDENTE = r'ASCENDENTE'
 t_DESCENDENTE = r'DESCENDENTE'
 t_LIMITAR = r'LIMITAR'
-t_DIFERENTE = r'DIFERENTE'
-t_MAYOR = r'>'
-t_MENOR = r'<'
-t_MAYOR_IGUAL = r'>='
-t_MENOR_IGUAL = r'<='
-t_PARENTESIS_DER = r'('
-t_PARENTESIS_IZQ = r')'
+t_COMO = r'COMO'
+t_DISTINTO = r'DISTINTO'
+t_ENTRE = r'ENTRE'
+t_OBTENER = r'OBTENER'
+t_COLOCAR = r'COLOCAR'
 
 def t_IDENTIFICADOR(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
     keywords = {
-    'SELECCIONAR': 'SELECCIONAR', 'INSERTAR': 'INSERTAR', 'ACTUALIZAR': 'ACTUALIZAR', 'ELIMINAR': 'ELIMINAR',
-    'DESDE': 'DESDE', 'DONDE': 'DONDE', 'ORDENAR': 'ORDENAR', 'AGRUPAR': 'AGRUPAR', 'CREAR': 'CREAR',
-    'ALTERAR': 'ALTERAR', 'TABLA': 'TABLA', 'CLAVE': 'CLAVE_PRIMARIA', 'INICIAR': 'INICIAR_TRANSACCION',
-    'CONFIRMAR': 'CONFIRMAR', 'REVERTIR': 'REVERTIR', 'SI': 'SI', 'SINO': 'SINO', 'CASO': 'CASO',
-    'ENTONCES': 'ENTONCES', 'Y': 'Y', 'O': 'O', 'NO': 'NO', 'CONTAR': 'CONTAR', 'SUMA': 'SUMA', 'PROMEDIO': 'PROMEDIO',
-    'MAXIMO': 'MAXIMO', 'MINIMO': 'MINIMO', 'DISTINTO': 'DISTINTO', 'COMO': 'COMO', 'ENTERO': 'ENTERO', 'TEXTO': 'TEXTO',
-    'FECHA': 'FECHA', 'BOOLEANO': 'BOOLEANO', 'DECIMAL': 'DECIMAL', 'NULO': 'NULO', 'UNIR': 'UNIR',
-    'INTERIOR': 'UNIR_INTERIOR', 'IZQUIERDA': 'UNIR_IZQUIERDA', 'DERECHA': 'UNIR_DERECHA', 'ES':'ES', 'EN': 'EN', 'VALORES':'VALORES', 'ASCENDENTE':'ASCENDENTE', 'DESCENDENTE':'DESCENDENTE', 'LIMITAR':'LIMITAR', 'DIFERENTE':'DIFERENTE', 'MAYOR':'MAYOR', 'MENOR':'MENOR', 'SIMILAR':'SIMILAR', 'A':'A', 'POR': 'POR'
+    'SELECCIONAR': 'SELECCIONAR', 'INSERTAR': 'INSERTAR', 'ACTUALIZAR': 'ACTUALIZAR', 'ELIMINAR': 'ELIMINAR', 'DESDE': 'DESDE','ALTERAR': 'ALTERAR', 'TABLA': 'TABLA', 'CREAR': 'CREAR',
+    'DONDE': 'DONDE', 'ORDENAR': 'ORDENAR', 'AGRUPAR': 'AGRUPAR', 'POR': 'POR',
+    'CLAVE': 'CLAVE', 'PRIMARIA': 'PRIMARIA', 'SECUNDARIA': 'SECUNDARIA',
+    'INICIAR': 'INICIAR','TRANSACCION': 'TRANSACCION','CONFIRMAR': 'CONFIRMAR', 'REVERTIR': 'REVERTIR',
+    'SI': 'SI', 'SINO': 'SINO', 'CASO': 'CASO', 'ENTONCES': 'ENTONCES', 
+    'Y': 'Y', 'O': 'O', 'NO': 'NO',
+    'CONTAR': 'CONTAR', 'SUMA': 'SUMA', 'PROMEDIO': 'PROMEDIO', 'MAXIMO': 'MAXIMO', 'MINIMO': 'MINIMO',
+    'ENTERO': 'ENTERO', 'TEXTO': 'TEXTO', 'FECHA': 'FECHA', 'BOOLEANO': 'BOOLEANO', 'DECIMAL': 'DECIMAL', 'NULO': 'NULO', 'UNIR': 'UNIR', 'INTERIOR': 'INTERIOR', 'IZQUIERDA': 'IZQUIERDA', 'DERECHA': 'DERECHA',
+    'ES':'ES', 'EN': 'EN', 'VALORES':'VALORES', 'ASCENDENTE':'ASCENDENTE', 'DESCENDENTE':'DESCENDENTE', 'LIMITAR':'LIMITAR', 'DIFERENTE':'DIFERENTE', 'MAYOR':'MAYOR', 'MENOR':'MENOR', 'SIMILAR':'SIMILAR', 'A':'A', 'DISTINTO': 'DISTINTO', 'COMO': 'COMO',
     }
     t.type = keywords.get(t.value.upper(), 'IDENTIFICADOR')
     return t
+
 
 def t_IDENTIFICADOR_INVALIDO(t):
     r'[^a-zA-Z_\s-]+[a-zA-Z0-9_]*[a-zA-Z]+'
@@ -218,7 +255,7 @@ def t_SALTO_DE_LINEA(t):
 lexer = lex.lex()
 
 # Prueba con una consulta
-test_query = '''SELECCIONAR *
+test_query = '''SELECCIONAR (Columna1 - Columna2) COMO rata
                 DESDE tabla1 12 
                 DONDE columna1 = 1'''
 lexer.input(test_query)
