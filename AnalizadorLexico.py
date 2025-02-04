@@ -12,6 +12,7 @@ tokens = [
 'DONDE', # WHERE
 'ORDENAR_POR', # ORDER BY
 'AGRUPAR_POR', # GROUP BY
+'TENIENDO', #HAVING
 'CLAVE_PRIMARIA', # PRIMARY KEY
 'CLAVE_FORANEA', # FOREIGN KEY
 'INICIAR_TRANSACCION', # BEGIN TRANSACTION
@@ -30,7 +31,9 @@ tokens = [
 'MAXIMO', # MAX
 'MINIMO', # MIN
 'DISTINTO', # DISTINCT
+'ENTRE', #BETWEEN
 'COMO', # AS
+'SIMILAR_A', #LIKE
 'ENTERO', # INTEGER
 'TEXTO', # TEXT
 'FECHA', # DATE
@@ -51,15 +54,15 @@ tokens = [
 'TODO', # '*'
 'CONVERTIR', #CAST
 'PUNTO', #.
-'COMENTARIO' #--
-'SALTO_DE_LINEA' #\n
+'COMENTARIO', #--
+'SALTO_DE_LINEA', #\n
 'EN', #IN
+'ES', #IS
 'VALORES', #VALUES
 'ASCENDENTE', #ASC
 'DESCENDENTE',#DESC
 'LIMITAR', #LIMIT
 'DIFERENTE', #!=
-'EN', #IN
 'MAYOR',#>
 'MENOR',#<
 'MAYOR_IGUAL',#>=
@@ -76,6 +79,7 @@ t_DESDE = r'DESDE'
 t_DONDE = r'DONDE'
 t_ORDENAR_POR = r'ORDENAR POR'
 t_AGRUPAR_POR = r'AGRUPAR POR'
+t_TENIENDO = r'TENIENDO'
 t_CREAR = r'CREAR'
 t_ALTERAR = r'ALTERAR'
 t_TABLA = r'TABLA'
@@ -97,7 +101,9 @@ t_PROMEDIO = r'PROMEDIO'
 t_MAXIMO = r'MAXIMO'
 t_MINIMO = r'MINIMO'
 t_DISTINTO = r'DISTINTO'
+t_ENTRE = r'ENTRE'
 t_COMO = r'COMO'
+t_SIMILAR_A = r'SIMILAR A'
 t_ENTERO = r'ENTERO'
 t_TEXTO = r'TEXTO'
 t_FECHA = r'FECHA'
@@ -115,6 +121,7 @@ t_PUNTO = r'\.'
 t_TODO = r"\*" 
 t_ignore = ' \t'  # Ignorar espacios y tabs
 t_EN = r'EN'
+t_ES = r'ES'
 t_VALORES = r'VALORES'
 t_ASCENDENTE = r'ASCENDENTE'
 t_DESCENDENTE = r'DESCENDENTE'
@@ -137,7 +144,7 @@ def t_IDENTIFICADOR(t):
     'ENTONCES': 'ENTONCES', 'Y': 'Y', 'O': 'O', 'NO': 'NO', 'CONTAR': 'CONTAR', 'SUMA': 'SUMA', 'PROMEDIO': 'PROMEDIO',
     'MAXIMO': 'MAXIMO', 'MINIMO': 'MINIMO', 'DISTINTO': 'DISTINTO', 'COMO': 'COMO', 'ENTERO': 'ENTERO', 'TEXTO': 'TEXTO',
     'FECHA': 'FECHA', 'BOOLEANO': 'BOOLEANO', 'DECIMAL': 'DECIMAL', 'NULO': 'NULO', 'UNIR': 'UNIR',
-    'INTERIOR': 'UNIR_INTERIOR', 'IZQUIERDA': 'UNIR_IZQUIERDA', 'DERECHA': 'UNIR_DERECHA', 
+    'INTERIOR': 'UNIR_INTERIOR', 'IZQUIERDA': 'UNIR_IZQUIERDA', 'DERECHA': 'UNIR_DERECHA', 'ES':'ES', 'EN': 'EN', 'VALORES':'VALORES', 'ASCENDENTE':'ASCENDENTE', 'DESCENDENTE':'DESCENDENTE', 'LIMITAR':'LIMITAR', 'DIFERENTE':'DIFERENTE', 'MAYOR':'MAYOR', 'MENOR':'MENOR', 'SIMILAR': 'SIMILAR_A'
     }
     t.type = keywords.get(t.value.upper(), 'IDENTIFICADOR')
     return t
@@ -178,9 +185,8 @@ lexer = lex.lex()
 
 # Prueba con una consulta
 test_query = '''SELECCIONAR *
-DESDE tabla1
--- asdajdjsajdasjfasfjasjdfjasdakdj sada sda 
-DONDE columna1 = 10 23Ss ddS12 =2w3Sfsa _das21 #dsa IZQUIERDO'''
+                DESDE tabla1 
+                DONDE columna1 SIMILAR A izq'''
 lexer.input(test_query)
 
 for tok in lexer:
