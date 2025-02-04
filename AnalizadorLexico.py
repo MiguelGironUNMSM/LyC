@@ -40,6 +40,10 @@ tokens = [
 'O', # OR
 'NO', # NOT
 
+#Control de datos
+'CONCEDER', # GRANT
+'REVOCAR', # REVOKE
+
 #Funciones de Agregacion
 'CONTAR', # COUNT
 'SUMA', # SUM
@@ -70,6 +74,7 @@ tokens = [
 'ENTERO', # INTEGER
 'TEXTO', # TEXT
 'CARACTER', # CHAR
+
 #Joins
 'UNIR', # JOIN
 'UNIR_INTERIOR', # INNER JOIN
@@ -144,6 +149,10 @@ t_ENTONCES = r'ENTONCES'
 t_Y = r'Y'
 t_O = r'O'
 t_NO = r'NO'
+
+#Control de datos
+t_CONCEDER = r'CONCEDER'
+t_REVOCAR = r'REVOCAR'
 
 #Funciones de Agregacion
 t_CONTAR = r'CONTAR'
