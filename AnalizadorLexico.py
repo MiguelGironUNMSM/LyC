@@ -43,19 +43,22 @@ tokens = [
 'UNIR_DERECHA', # RIGHT JOIN
 'IDENTIFICADOR', # IDENTIFICADOR
 'IDENTIFICADOR_INVALIDO', 
+'CADENA', #VARCHAR
 'NUMERO', # NÚMERO
 'FLOTANTE', #FLOAT
 'COMPARACION', # '='
 'COMA', # ','
-'TODO' # '*'
+'TODO', # '*'
 'EN', #INTO
 'VALORES', #VALUES
 'ASCENDENTE', #ASC
 'DESCENDENTE', #DESC
 'LIMITAR', #LIMIT
-'DIFERENTE' #!=
-
-
+'DIFERENTE', #!=
+'CONVERTIR', #CAST
+'PUNTO', #.
+'COMENTARIO' #--
+'SALTO_DE_LINEA' #\n
 ]
 
 t_SELECCIONAR = r'SELECCIONAR'
@@ -98,10 +101,13 @@ t_UNIR = r'UNIR'
 t_UNIR_INTERIOR = r'UNIR INTERIOR'
 t_UNIR_IZQUIERDA = r'UNIR IZQUIERDA'
 t_UNIR_DERECHA = r'UNIR DERECHA'
+t_CONVERTIR=r'CONVERTIR'
 t_COMPARACION = r'='
 t_COMA = r','
+t_PUNTO = r'\.'
 t_TODO = r"\*" 
 t_ignore = ' \t'  # Ignorar espacios y tabs
+
 
 def t_IDENTIFICADOR(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
@@ -119,7 +125,7 @@ def t_IDENTIFICADOR(t):
     return t
 
 def t_IDENTIFICADOR_INVALIDO(t):
-    r'[^a-zA-Z_\s]+[a-zA-Z0-9_]*[a-zA-Z]+'
+    r'[^a-zA-Z_\s-]+[a-zA-Z0-9_]*[a-zA-Z]+'
     print(f"Identificador inválido: {t.value}")
     t.lexer.skip(1)
 
@@ -138,14 +144,25 @@ def t_CADENA(t):
     t.value = t.value[1:-1]
     return t
 
+def t_COMENTARIO(t):
+    r'--.*'
+    pass
+
 def t_error(t):
     print(f"Carácter inesperado: {t.value[0]}")
     t.lexer.skip(1)
 
+def t_SALTO_DE_LINEA(t):
+    r'\n+'
+    t.lexer.lineno += len(t.value)
+
 lexer = lex.lex()
 
 # Prueba con una consulta
-test_query = "SELECCIONAR * DESDE #$#$##$$#1s12s2s2s tabla1 DONDE columna1 = 10 23Ss ddS12 =2w3Sfsa _das21 #dsa IZQUIERDO"
+test_query = '''SELECCIONAR *
+DESDE tabla1
+-- asdajdjsajdasjfasfjasjdfjasdakdj sada sda 
+DONDE columna1 = 10 23Ss ddS12 =2w3Sfsa _das21 #dsa IZQUIERDO'''
 lexer.input(test_query)
 
 for tok in lexer:
