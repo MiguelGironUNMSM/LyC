@@ -91,6 +91,8 @@ tokens = [
 'PARENTESIS_DER',#(
 'PARENTESIS_IZQ',#)
 'SALTO_DE_LINEA', #\n
+'GUION', #-
+'PYC', #;
 
 #Otros
 'CONVERTIR', #CAST
@@ -188,6 +190,8 @@ t_TODO = r"\*"
 t_ignore = ' \t'  # Ignorar espacios y tabs
 t_PARENTESIS_DER = r'\)'
 t_PARENTESIS_IZQ = r'\('
+t_GUION = r'\-'
+t_PYC = r'\;'
 
 #Otros
 t_CONVERTIR=r'CONVERTIR'
@@ -221,7 +225,7 @@ def t_IDENTIFICADOR(t):
 
 
 def t_IDENTIFICADOR_INVALIDO(t):
-    r'[^a-zA-Z_\s-]+[a-zA-Z0-9_]*[a-zA-Z]+'
+    r'[^a-zA-Z_\s\(-]+[a-zA-Z0-9_]*[a-zA-Z]+'
     print(f"Identificador inválido: {t.value}")
     t.lexer.skip(1)
 
