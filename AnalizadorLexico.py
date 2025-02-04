@@ -2,16 +2,16 @@ import ply.lex as lex
 
 tokens = [
 'SELECCIONAR', # SELECT
+'DESDE', # FROM
+'CREAR', # CREATE
 'INSERTAR', # INSERT
 'ACTUALIZAR', # UPDATE
 'ELIMINAR', # DELETE
-'DESDE', # FROM
+'ALTERAR', # ALTER
+'TABLA', # TABLE
 'DONDE', # WHERE
 'ORDENAR_POR', # ORDER BY
 'AGRUPAR_POR', # GROUP BY
-'CREAR', # CREATE
-'ALTERAR', # ALTER
-'TABLA', # TABLE
 'CLAVE_PRIMARIA', # PRIMARY KEY
 'CLAVE_FORANEA', # FOREIGN KEY
 'INICIAR_TRANSACCION', # BEGIN TRANSACTION
@@ -44,15 +44,18 @@ tokens = [
 'IDENTIFICADOR', # IDENTIFICADOR
 'IDENTIFICADOR_INVALIDO', 
 'NUMERO', # NÚMERO
+'FLOTANTE', #FLOAT
 'COMPARACION', # '='
 'COMA', # ','
 'TODO' # '*'
-'EN',
-'VALORES',
-'ASCENDENTE',
-'DESCENDENTE',
-'LIMITAR',
-'DIFERENTE'
+'EN', #INTO
+'VALORES', #VALUES
+'ASCENDENTE', #ASC
+'DESCENDENTE', #DESC
+'LIMITAR', #LIMIT
+'DIFERENTE' #!=
+
+
 ]
 
 t_SELECCIONAR = r'SELECCIONAR'
@@ -98,7 +101,6 @@ t_UNIR_DERECHA = r'UNIR DERECHA'
 t_COMPARACION = r'='
 t_COMA = r','
 t_TODO = r"\*" 
-
 t_ignore = ' \t'  # Ignorar espacios y tabs
 
 def t_IDENTIFICADOR(t):
@@ -124,6 +126,16 @@ def t_IDENTIFICADOR_INVALIDO(t):
 def t_NUMERO(t):
     r'\d+'
     t.value = int(t.value)
+    return t
+
+def t_FLOTANTE(t):
+    r'\d+\.\d+'
+    t.value = float(t.value)
+    return t
+
+def t_CADENA(t):
+    r'\".*?\"'
+    t.value = t.value[1:-1]
     return t
 
 def t_error(t):
