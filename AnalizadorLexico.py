@@ -91,7 +91,6 @@ tokens = [
 'PARENTESIS_DER',#(
 'PARENTESIS_IZQ',#)
 'SALTO_DE_LINEA', #\n
-'GUION', #-
 'PYC', #;
 
 #Otros
@@ -190,8 +189,7 @@ t_TODO = r"\*"
 t_ignore = ' \t'  # Ignorar espacios y tabs
 t_PARENTESIS_DER = r'\)'
 t_PARENTESIS_IZQ = r'\('
-t_GUION = r'\-'
-t_PYC = r'\;'
+t_PyC = r'\;'
 
 #Otros
 t_CONVERTIR=r'CONVERTIR'
@@ -218,20 +216,16 @@ def t_IDENTIFICADOR(t):
     'Y': 'Y', 'O': 'O', 'NO': 'NO',
     'CONTAR': 'CONTAR', 'SUMA': 'SUMA', 'PROMEDIO': 'PROMEDIO', 'MAXIMO': 'MAXIMO', 'MINIMO': 'MINIMO',
     'ENTERO': 'ENTERO', 'TEXTO': 'TEXTO', 'FECHA': 'FECHA', 'BOOLEANO': 'BOOLEANO', 'DECIMAL': 'DECIMAL', 'NULO': 'NULO', 'UNIR': 'UNIR', 'INTERIOR': 'INTERIOR', 'IZQUIERDA': 'IZQUIERDA', 'DERECHA': 'DERECHA',
-    'ES':'ES', 'EN': 'EN', 'VALORES':'VALORES', 'ASCENDENTE':'ASCENDENTE', 'DESCENDENTE':'DESCENDENTE', 'LIMITAR':'LIMITAR', 'DIFERENTE':'DIFERENTE', 'MAYOR':'MAYOR', 'MENOR':'MENOR', 'SIMILAR':'SIMILAR', 'A':'A', 'DISTINTO': 'DISTINTO', 'COMO': 'COMO',
+    'ES':'ES', 'EN': 'EN', 'VALORES':'VALORES', 'ASCENDENTE':'ASCENDENTE', 'DESCENDENTE':'DESCENDENTE', 'LIMITAR':'LIMITAR', 'DIFERENTE':'DIFERENTE', 'MAYOR':'MAYOR', 'MENOR':'MENOR', 'SIMILAR':'SIMILAR', 'A':'A', 'DISTINTO': 'DISTINTO', 'COMO': 'COMO', 'ENTRE': 'ENTRE', 'OBTENER': 'OBTENER', 'COLOCAR': 'COLOCAR'
     }
+    
+    
     t.type = keywords.get(t.value.upper(), 'IDENTIFICADOR')
     return t
 
-
-def t_IDENTIFICADOR_INVALIDO(t):
-    r'[^a-zA-Z_\s\(-]+[a-zA-Z0-9_]*[a-zA-Z]+'
-    print(f"Identificador inválido: {t.value}")
-    t.lexer.skip(1)
-
-def t_NUMERO(t):
-    r'\d+'
-    t.value = int(t.value)
+def t_CADENA(t):
+    r'\".*?\"'
+    t.value = t.value[1:-1]
     return t
 
 def t_FLOTANTE(t):
@@ -239,9 +233,9 @@ def t_FLOTANTE(t):
     t.value = float(t.value)
     return t
 
-def t_CADENA(t):
-    r'\".*?\"'
-    t.value = t.value[1:-1]
+def t_NUMERO(t):
+    r'\d+'
+    t.value = int(t.value)
     return t
 
 def t_COMENTARIO(t):
@@ -256,12 +250,17 @@ def t_SALTO_DE_LINEA(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
+def t_IDENTIFICADOR_INVALIDO(t):
+    r'[^a-zA-Z_\s\(-]+[a-zA-Z0-9_]*[a-zA-Z]+'
+    print(f"Identificador inválido: {t.value}")
+    t.lexer.skip(1)
+    
 lexer = lex.lex()
 
 # Prueba con una consulta
 test_query = '''SELECCIONAR (Columna1 - Columna2) COMO rata
-                DESDE tabla1 12 
-                DONDE columna1 = 1'''
+                DESDE data 12 
+                DONDE columna1 = 1.23'''
 lexer.input(test_query)
 
 for tok in lexer:
