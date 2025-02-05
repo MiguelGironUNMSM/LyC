@@ -4,60 +4,57 @@ import ply.lex as lex
 
 tokens = [
 
-# Comandos SQL
-'SELECCIONAR', # SELECT
-'DESDE', # FROM
+# Definición de Datos
 'CREAR', # CREATE
-'INSERTAR', # INSERT
-'ACTUALIZAR', # UPDATE
-'ELIMINAR', # DELETE
 'ALTERAR', # ALTER
-'TABLA', # TABLE
+'SOLTAR', # DROP
+'RENOMBRAR', # RENAME
 
-#Clausulas SQL
+# Manipulación de Datos
+'SELECCIONAR', # SELECT
+'INSERTAR', # INSERT
+'ELIMINAR', # DELETE
+'REEMPLAZAR', # REPLACE
+'VALORES', # VALUES
+'ACTUALIZAR', # UPDATE
+'MEZCLAR', # MERGE
+
+# Consulta y Filtrado de Datos
+'DESDE', # FROM
 'DONDE', # WHERE
-'ORDENAR_POR', # ORDER BY
 'AGRUPAR_POR', # GROUP BY
+'ORDENAR_POR', # ORDER BY
 'TENIENDO', #HAVING
+'TABLA', # TABLE
+'LIMITAR', #LIMIT
 
-#Claves
-'CLAVE_PRIMARIA', # PRIMARY KEY
-'CLAVE_FORANEA', # FOREIGN KEY
-
-#Transacciones
-'INICIAR_TRANSACCION', # BEGIN TRANSACTION
+# Control de Transacciones
 'CONFIRMAR', # COMMIT
 'REVERTIR', # ROLLBACK
+'PUNTO_GUARDADO', # SAVEPOINT
+'INICIAR_TRANSACCION', # BEGIN TRANSACTION
+'ESTABLECER_TRANSACCION', # SET TRANSACTION
 
-#Condicionales
-'SI', # IF
-'SINO', # ELSE
-'CASO', # CASE
-'ENTONCES', # THEN
-
-#Operadores Logicos
+#Operadores Logicos y de Comparación
 'Y', # AND
 'O', # OR
 'NO', # NOT
-
-#Control de datos
-'CONCEDER', # GRANT
-'REVOCAR', # REVOKE
-
-#Funciones de Agregacion
-'CONTAR', # COUNT
-'SUMA', # SUM
-'PROMEDIO', # AVG
-'MAXIMO', # MAX
-'MINIMO', # MIN
-
-#Comparadores y operadores
 'MAYOR',#>
 'MENOR',#<
 'MAYOR_IGUAL',#>=
 'MENOR_IGUAL',#<=
 'IGUALDAD', # '='
 'DIFERENTE', #!=
+'ENTRE', #BETWEEN
+'SIMILAR_A', #LIKE
+'ES_NULO', #IS NULL
+'NO_ES_NULO', #IS NOT NULL
+
+# Unión de Tablas
+'UNIR', # JOIN
+'UNIR_INTERIOR', # INNER JOIN
+'UNIR_IZQUIERDA', # LEFT JOIN
+'UNIR_DERECHA', # RIGHT JOIN
 
 #Operadores aritmeticos
 'MAS', #+
@@ -65,6 +62,21 @@ tokens = [
 'MULTIPLICACION', #*
 'DIVISION', #/
 'MODULO', #%
+
+# Palabras clave de subconsulta
+'EXISTE', # EXISTS
+'TODOS', # ALL
+'ALGUNO', # ANY
+'ALGUNOS', # SOME
+'CUALQUIERA', # ANY
+'RANGO', # RANGE
+
+# Palabras clave de funciones de agregación
+'CONTAR', # COUNT
+'SUMA', # SUM
+'PROMEDIO', # AVG
+'MAXIMO', # MAX
+'MINIMO', # MIN
 
 #Tipos de datos
 'FECHA', # DATE
@@ -76,18 +88,24 @@ tokens = [
 'CARACTER', # CHAR
 'NO_NULO', #NOT NULL
 
-#Joins
-'UNIR', # JOIN
-'UNIR_INTERIOR', # INNER JOIN
-'UNIR_IZQUIERDA', # LEFT JOIN
-'UNIR_DERECHA', # RIGHT JOIN
-
-#Identificadores
+#Identificadores / Claves
 'IDENTIFICADOR', # IDENTIFICADOR
 'IDENTIFICADOR_INVALIDO', 
 'CADENA', #VARCHAR
 'NUMERO', # NÚMERO
 'FLOTANTE', #FLOAT
+'CLAVE_PRIMARIA', # PRIMARY KEY
+'CLAVE_FORANEA', # FOREIGN KEY
+
+# Palabras clave de manejo de procedimientos almacenados
+'INICIO', # BEGIN
+'FIN', # END
+'SI', # IF
+'SINO', # ELSE
+'CASO', # CASE
+'MIENTRAS', # WHILE
+'PARA', # FOR
+'ENTONCES', # THEN
 
 #Caracteres especiales
 'COMA', # ','
@@ -106,11 +124,8 @@ tokens = [
 'VALORES', #VALUES
 'ASCENDENTE', #ASC
 'DESCENDENTE',#DESC
-'LIMITAR', #LIMIT
 'COMO', # AS
-'SIMILAR_A', #LIKE
 'DISTINTO', # DISTINCT
-'ENTRE', #BETWEEN
 'OBTENER', #GET
 'COLOCAR', #SET 
 'AUTOINCREMENTAL', #AUTO_INCREMENT
