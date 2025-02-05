@@ -144,7 +144,7 @@ def analizar_consulta(consulta):
     return parser.parse(consulta)
 
 # Prueba con una consulta SQL en español
-consulta_prueba = '''SELECCIONAR columna1, columna2, columna3 DESDE juguetes'''
+consulta_prueba = '''INSERTAR EN  DESDE juguetes'''
 resultado = analizar_consulta(consulta_prueba)
 print("Resultado de la consulta:")
 print(resultado)
