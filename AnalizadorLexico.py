@@ -198,7 +198,7 @@ t_TODO = r"\*"
 t_ignore = ' \t'  # Ignorar espacios y tabs
 t_PARENTESIS_DER = r'\)'
 t_PARENTESIS_IZQ = r'\('
-t_PyC = r'\;'
+t_PYC = r'\;'
 
 #Otros
 t_CONVERTIR=r'CONVERTIR'
