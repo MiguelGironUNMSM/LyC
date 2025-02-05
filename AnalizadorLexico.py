@@ -132,96 +132,80 @@ tokens = [
 ]
 
 # Definición de Datos
-
-# Manipulación de Datos
-
-# Consulta y Filtrado de Datos
-
-# Control de Transacciones
-
-# Operadores Logicos y de Comparación
-
-# Unión de Tablas
-
-# Operadores aritmeticos 
-
-# Palabras clave de subconsulta
-
-# Palabras clave de funciones de agregación
-
-# Tipos de datos
-
-# Identificadores / Claves
-
-# Palabras clave de manejo de procedimientos almacenados
-
-# Caracteres especiales
-
-# Otros
-
-#Comandos SQL
-t_SELECCIONAR = r'SELECCIONAR'
-t_INSERTAR = r'INSERTAR'
-t_ACTUALIZAR = r'ACTUALIZAR'
-t_ELIMINAR = r'ELIMINAR'
 t_CREAR = r'CREAR'
 t_ALTERAR = r'ALTERAR'
-t_TABLA = r'TABLA'
+t_SOLTAR = r'SOLTAR'
+t_RENOMBRAR = r'RENOMBRAR'
+
+# Manipulación de Datos
+t_SELECCIONAR = r'SELECCIONAR'
+t_INSERTAR = r'INSERTAR'
+t_ELIMINAR = r'ELIMINAR'
+t_REEMPLAZAR = r'REEMPLAZAR'
+t_VALORES = r'VALORES'
+t_ACTUALIZAR = r'ACTUALIZAR'
+t_MEZCLAR = r'MEZCLAR'
+
+# Consulta y Filtrado de Datos
 t_DESDE = r'DESDE'
-
-#Clausulas SQL
 t_DONDE = r'DONDE'
-t_ORDENAR_POR = r'ORDENAR POR'
 t_AGRUPAR_POR = r'AGRUPAR POR'
+t_ORDENAR_POR = r'ORDENAR POR'
 t_TENIENDO = r'TENIENDO'
+t_TABLA = r'TABLA'
+t_LIMITAR = r'LIMITAR'
 
-#Claves
-t_CLAVE_PRIMARIA = r'CLAVE PRIMARIA'
-t_CLAVE_FORANEA = r'CLAVE FORANEA'
-
-#Transacciones
-t_INICIAR_TRANSACCION = r'INICIAR TRANSACCION'
+# Control de Transacciones
 t_CONFIRMAR = r'CONFIRMAR'
 t_REVERTIR = r'REVERTIR'
+t_PUNTO_GUARDADO = r'PUNTO GUARDADO'
+t_INICIAR_TRANSACCION = r'INICIAR TRANSACCION'
+t_ESTABLECER_TRANSACCION = r'ESTABLECER TRANSACCION'
 
-#Condicionales
-t_SI = r'SI'
-t_SINO = r'SINO'
-t_CASO = r'CASO'
-t_ENTONCES = r'ENTONCES'
-
-#Operadores Logicos
+# Operadores Logicos y de Comparación
 t_Y = r'Y'
 t_O = r'O'
 t_NO = r'NO'
-
-#Control de datos
-t_CONCEDER = r'CONCEDER'
-t_REVOCAR = r'REVOCAR'
-
-#Funciones de Agregacion
-t_CONTAR = r'CONTAR'
-t_SUMA = r'SUMA'
-t_PROMEDIO = r'PROMEDIO'
-t_MAXIMO = r'MAXIMO'
-t_MINIMO = r'MINIMO'
-
-#Comparadores y operadores
 t_MAYOR = r'>'
 t_MENOR = r'<'
 t_MAYOR_IGUAL = r'>='
 t_MENOR_IGUAL = r'<='
 t_IGUALDAD = r'='
 t_DIFERENTE = r'!='
+t_ENTRE = r'ENTRE'
+t_SIMILAR_A = r'SIMILAR A'
+t_ES_NULO = r'ES NULO'
+t_NO_ES_NULO = r'NO ES NULO'
 
-#Operadores aritmeticos
+# Unión de Tablas
+t_UNIR = r'UNIR'
+t_UNIR_INTERIOR = r'UNIR INTERIOR'
+t_UNIR_IZQUIERDA = r'UNIR IZQUIERDA'
+t_UNIR_DERECHA = r'UNIR DERECHA'
+
+# Operadores aritmeticos 
 t_MAS = r'\+'
 t_MENOS = r'-'
 t_MULTIPLICACION = r'\*'
 t_DIVISION = r'/'
-t_MODULO = r'%'
+t_MODULO=r'%'
 
-#Tipos de datos
+# Palabras clave de subconsulta
+t_EXISTE = r'EXISTE'
+t_TODOS = r'TODOS'
+t_ALGUNO = r'ALGUNO'
+t_ALGUNOS = r'ALGUNOS'
+t_CUALQUIERA = r'CUALQUIERA'
+t_RANGO = r'RANGO'
+
+# Palabras clave de funciones de agregación
+t_CONTAR = r'CONTAR'
+t_SUMA = r'SUMA'
+t_PROMEDIO = r'PROMEDIO'
+t_MAXIMO = r'MAXIMO'
+t_MINIMO = r'MINIMO'
+
+# Tipos de datos
 t_FECHA = r'FECHA'
 t_BOOLEANO = r'BOOLEANO'
 t_DECIMAL = r'DECIMAL'
@@ -229,14 +213,23 @@ t_NULO = r'NULO'
 t_ENTERO = r'ENTERO'
 t_TEXTO = r'TEXTO'
 t_CARACTER = r'CARACTER'
+t_NO_NULO = r'NO_NULO'
 
-#Joins
-t_UNIR = r'UNIR'
-t_UNIR_INTERIOR = r'UNIR INTERIOR'
-t_UNIR_IZQUIERDA = r'UNIR IZQUIERDA'
-t_UNIR_DERECHA = r'UNIR DERECHA'
+# Identificadores / Claves
+t_CLAVE_PRIMARIA = r'CLAVE PRIMARIA'
+t_CLAVE_FORANEA = r'CLAVE FORANEA'
 
-#Caracteres especiales
+# Palabras clave de manejo de procedimientos almacenados
+t_INICIO = r'INICIO'
+t_FIN = r'FIN'
+t_SI = r'SI'
+t_SINO = r'SINO'
+t_CASO = r'CASO'
+t_MIENTRAS = r'MIENTRAS'
+t_PARA = r'PARA'
+t_ENTONCES = r'ENTONCES'
+
+# Caracteres especiales
 t_COMA = r','
 t_PUNTO = r'\.'
 t_TODO = r"\*" 
@@ -245,19 +238,18 @@ t_PARENTESIS_DER = r'\)'
 t_PARENTESIS_IZQ = r'\('
 t_PYC = r'\;'
 
-#Otros
+# Otros
 t_CONVERTIR=r'CONVERTIR'
 t_EN = r'EN'
 t_ES = r'ES'
 t_VALORES = r'VALORES'
 t_ASCENDENTE = r'ASCENDENTE'
 t_DESCENDENTE = r'DESCENDENTE'
-t_LIMITAR = r'LIMITAR'
 t_COMO = r'COMO'
 t_DISTINTO = r'DISTINTO'
-t_ENTRE = r'ENTRE'
 t_OBTENER = r'OBTENER'
 t_COLOCAR = r'COLOCAR'
+t_AUTOINCREMENTAL = r'AUTOINCREMENTAL'
 
 def t_IDENTIFICADOR(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
