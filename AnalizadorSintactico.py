@@ -22,6 +22,8 @@ def p_instruccion(t):
 def p_seleccion(t):
     '''seleccion : SELECCIONAR lista_columnas DESDE IDENTIFICADOR condicion_opt'''
     t[0] = ('seleccion', t[2], t[4], t[5])
+    if t[5] == None:
+        t[0] = ('seleccion', t[2], t[4])
 
 # Agregar la regla para manejar el token 'TODO' (asterisco)
 def p_lista_columnas(t):
@@ -142,7 +144,7 @@ def analizar_consulta(consulta):
     return parser.parse(consulta)
 
 # Prueba con una consulta SQL en español
-consulta_prueba = '''INSERTAR EN usuarios VALORES (1, "Juan Pérez", 50)'''
+consulta_prueba = '''SELECCIONAR columna1, columna2, columna3 DESDE juguetes'''
 resultado = analizar_consulta(consulta_prueba)
 print("Resultado de la consulta:")
 print(resultado)
