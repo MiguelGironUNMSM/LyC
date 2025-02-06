@@ -15,10 +15,66 @@ def p_instruccion(t):
                    | insertar
                    | actualizar
                    | eliminar
-                   | crear
-                   | transaccion'''
+                   | crear    
+                   | transaccion''' 
     t[0] = t[1]
 
+###########################################################################
+def p_crear(t):
+    '''crear : CREAR TABLA IDENTIFICADOR PARENTESIS_IZQ lista_columnas PARENTESIS_DER'''
+    t[0] = ('crear', t[3], t[5])
+
+def p_lista_columnas_crear(t):
+    '''lista_columnas : lista_columnas COMA lista_columna
+                      | lista_columna'''
+    if len(t)==4:
+        t[0]=t[1]+[t[3]]
+    else:
+        t[0]=[t[1]]
+
+
+def p_tipo_dato(t):
+    '''tipo_dato : ENTERO
+                | CADENA
+                | CARACTER
+                | FECHA
+                | BOOLEANO
+                | DECIMAL'''
+    t[0] = t[1]
+
+def p_restricciones(t):
+    '''restricciones : restricciones restriccion
+                     | restriccion
+                     | empty '''
+    
+    if len(t)==3:
+        t[0]=t[1]+[t[2]]
+    elif len(t)==2:
+        t[0]=[t[1]]
+    else:
+        t[0]:[]
+
+def p_restriccion(t):
+    '''restriccion : CLAVE_PRIMARIA
+                   | CLAVE_FORANEA
+                   | AUTOINCREMENTAL
+                   | NO_NULO'''
+    t[0] = t[1] 
+
+def p_lista_columna_crear(t):
+    '''lista_columna : IDENTIFICADOR  tipo_dato restricciones'''
+    nombreColumna=t[1]
+    tipoDato=t[2]
+    restricciones=t[3]
+    if 'AUTOINCREMENTAL' in restricciones and 'CLAVE_PRIMARIA' not in restricciones:
+        raise SyntaxError("AUTOINCREMENTAL solo puede ser usado con PRIMARY KEY.")
+    if 'CLAVE_PRIMARIA' in restricciones and 'AUTOINCREMENTAL' in restricciones:
+        restricciones.append('NO_NULO')
+    
+    t[0]=("columna",t[1],t[2],t[3])
+###########################################################################
+
+###########################################################################
 def p_seleccion(t):
     '''seleccion : SELECCIONAR lista_columnas DESDE IDENTIFICADOR condicion_opt'''
     t[0] = ('seleccion', t[2], t[4], t[5])
@@ -69,7 +125,9 @@ def p_valor(t):
              | CADENA
              | IDENTIFICADOR'''
     t[0] = t[1]
+###########################################################################
 
+###########################################################################
 def p_insertar(t):
     '''insertar : INSERTAR EN IDENTIFICADOR VALORES PARENTESIS_IZQ lista_valores PARENTESIS_DER'''
     t[0] = ('insertar', t[3], t[6])
@@ -81,7 +139,9 @@ def p_lista_valores(t):
         t[0] = [t[1]]
     else:
         t[0] = t[1] + [t[3]]
+###########################################################################
 
+###########################################################################
 def p_actualizar(t):
     '''actualizar : ACTUALIZAR IDENTIFICADOR COLOCAR lista_asignaciones condicion_opt'''
     t[0] = ('actualizar', t[2], t[4], t[5])
@@ -93,36 +153,21 @@ def p_lista_asignaciones(t):
         t[0] = [(t[1], t[2], t[3])]
     else:
         t[0] = t[1] + [(t[3], t[4], t[5])]
+###########################################################################
 
+###########################################################################
 def p_eliminar(t):
     '''eliminar : ELIMINAR DESDE IDENTIFICADOR condicion_opt'''
     t[0] = ('eliminar', t[3], t[4])
+###########################################################################
 
-def p_crear(t):
-    '''crear : CREAR TABLA IDENTIFICADOR PARENTESIS_IZQ lista_columnas PARENTESIS_DER'''
-    t[0] = ('crear', t[3], t[5])
-
-def p_lista_columnas_crear(t):
-    '''lista_columnas : IDENTIFICADOR tipo_dato
-                     | lista_columnas COMA IDENTIFICADOR tipo_dato'''
-    if len(t) == 3:
-        t[0] = [(t[1], t[2])]
-    else:
-        t[0] = t[1] + [(t[3], t[4])]
-
-def p_tipo_dato(t):
-    '''tipo_dato : ENTERO
-                | TEXTO
-                | FECHA
-                | BOOLEANO
-                | DECIMAL'''
-    t[0] = t[1]
-
+###########################################################################
 def p_transaccion(t):
     '''transaccion : INICIAR_TRANSACCION
                    | CONFIRMAR
                    | REVERTIR'''
     t[0] = t[1]
+###########################################################################
 
 # Regla de la producción vacía (para manejar la opción 'empty')
 def p_empty(t):
@@ -144,7 +189,10 @@ def analizar_consulta(consulta):
     return parser.parse(consulta)
 
 # Prueba con una consulta SQL en español
-consulta_prueba = '''INSERTAR EN  DESDE juguetes'''
+consulta_prueba = '''CREAR TABLA empleados (
+                        id BOOLEANO CLAVE PRIMARIA,
+                        nombre ENTERO )'''
+
 resultado = analizar_consulta(consulta_prueba)
 print("Resultado de la consulta:")
 print(resultado)

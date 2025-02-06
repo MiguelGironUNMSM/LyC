@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'leftYOleftMENORMAYORMENOR_IGUALMAYOR_IGUALIGUALDADDIFERENTEleftMASMENOSleftMULTIPLICACIONDIVISIONMODULOACTUALIZAR AGRUPAR_POR ALTERAR ASCENDENTE BOOLEANO CADENA CARACTER CASO CLAVE_FORANEA CLAVE_PRIMARIA COLOCAR COMA COMENTARIO COMO CONCEDER CONFIRMAR CONTAR CONVERTIR CREAR DECIMAL DESCENDENTE DESDE DIFERENTE DISTINTO DIVISION DONDE ELIMINAR EN ENTERO ENTONCES ENTRE ES FECHA FLOTANTE IDENTIFICADOR IDENTIFICADOR_INVALIDO IGUALDAD INICIAR_TRANSACCION INSERTAR LIMITAR MAS MAXIMO MAYOR MAYOR_IGUAL MENOR MENOR_IGUAL MENOS MINIMO MODULO MULTIPLICACION NO NULO NUMERO O OBTENER ORDENAR_POR PARENTESIS_DER PARENTESIS_IZQ PROMEDIO PUNTO PYC REVERTIR REVOCAR SALTO_DE_LINEA SELECCIONAR SI SIMILAR_A SINO SUMA TABLA TENIENDO TEXTO TODO UNIR UNIR_DERECHA UNIR_INTERIOR UNIR_IZQUIERDA VALORES Yinstruccion : seleccion\n| insertar\n| actualizar\n| eliminar\n| crear\n| transaccionseleccion : SELECCIONAR lista_columnas DESDE IDENTIFICADOR condicion_optlista_columnas : IDENTIFICADOR\n| lista_columnas COMA IDENTIFICADOR\n| TODOcondicion_opt : DONDE condicion\n| emptycondicion : IDENTIFICADOR comparador valor\n| condicion Y condicion\n| condicion O condicioncomparador : IGUALDAD\n| MAYOR\n| MENOR\n| MAYOR_IGUAL\n| MENOR_IGUAL\n| DIFERENTEvalor : NUMERO\n| CADENA\n| IDENTIFICADORinsertar : INSERTAR EN IDENTIFICADOR VALORES PARENTESIS_IZQ lista_valores PARENTESIS_DERlista_valores : valor\n| lista_valores COMA valoractualizar : ACTUALIZAR IDENTIFICADOR COLOCAR lista_asignaciones condicion_optlista_asignaciones : IDENTIFICADOR IGUALDAD valor\n| lista_asignaciones COMA IDENTIFICADOR IGUALDAD valoreliminar : ELIMINAR DESDE IDENTIFICADOR condicion_optcrear : CREAR TABLA IDENTIFICADOR PARENTESIS_IZQ lista_columnas PARENTESIS_DERlista_columnas : IDENTIFICADOR tipo_dato\n| lista_columnas COMA IDENTIFICADOR tipo_datotipo_dato : ENTERO\n| TEXTO\n| FECHA\n| BOOLEANO\n| DECIMALtransaccion : INICIAR_TRANSACCION\n| CONFIRMAR\n| REVERTIRempty :'
+_lr_signature = 'leftYOleftMENORMAYORMENOR_IGUALMAYOR_IGUALIGUALDADDIFERENTEleftMASMENOSleftMULTIPLICACIONDIVISIONMODULOACTUALIZAR AGRUPAR_POR ALGUNO ALGUNOS ALTERAR ASCENDENTE AUTOINCREMENTAL BOOLEANO CADENA CARACTER CASO CLAVE_FORANEA CLAVE_PRIMARIA COLOCAR COMA COMENTARIO COMO CONFIRMAR CONTAR CONVERTIR CREAR CUALQUIERA DECIMAL DESCENDENTE DESDE DIFERENTE DISTINTO DIVISION DONDE ELIMINAR EN ENTERO ENTONCES ENTRE ES ESTABLECER_TRANSACCION ES_NULO EXISTE FECHA FIN FLOTANTE IDENTIFICADOR IDENTIFICADOR_INVALIDO IGUALDAD INICIAR_TRANSACCION INICIO INSERTAR LIMITAR MAS MAXIMO MAYOR MAYOR_IGUAL MENOR MENOR_IGUAL MENOS MEZCLAR MIENTRAS MINIMO MODULO MULTIPLICACION NO NO_ES_NULO NO_NULO NULO NUMERO O OBTENER ORDENAR_POR PARA PARENTESIS_DER PARENTESIS_IZQ PROMEDIO PUNTO PUNTO_GUARDADO PYC RANGO REEMPLAZAR RENOMBRAR REVERTIR SALTO_DE_LINEA SELECCIONAR SI SIMILAR_A SINO SOLTAR SUMA TABLA TENIENDO TEXTO TODO TODOS UNIR UNIR_DERECHA UNIR_INTERIOR UNIR_IZQUIERDA VALORES Yinstruccion : seleccion\n| insertar\n| actualizar\n| eliminar\n| crear    \n| transaccioncrear : CREAR TABLA IDENTIFICADOR PARENTESIS_IZQ lista_columnas PARENTESIS_DERlista_columnas : lista_columnas COMA lista_columna\n| lista_columnatipo_dato : ENTERO\n| CADENA\n| CARACTER\n| FECHA\n| BOOLEANO\n| DECIMALrestricciones : restricciones restriccion\n| restriccion\n| empty restriccion : CLAVE_PRIMARIA\n| CLAVE_FORANEA\n| AUTOINCREMENTAL\n| NO_NULOlista_columna : IDENTIFICADOR  tipo_dato restriccionesseleccion : SELECCIONAR lista_columnas DESDE IDENTIFICADOR condicion_optlista_columnas : IDENTIFICADOR\n| lista_columnas COMA IDENTIFICADOR\n| TODOcondicion_opt : DONDE condicion\n| emptycondicion : IDENTIFICADOR comparador valor\n| condicion Y condicion\n| condicion O condicioncomparador : IGUALDAD\n| MAYOR\n| MENOR\n| MAYOR_IGUAL\n| MENOR_IGUAL\n| DIFERENTEvalor : NUMERO\n| CADENA\n| IDENTIFICADORinsertar : INSERTAR EN IDENTIFICADOR VALORES PARENTESIS_IZQ lista_valores PARENTESIS_DERlista_valores : valor\n| lista_valores COMA valoractualizar : ACTUALIZAR IDENTIFICADOR COLOCAR lista_asignaciones condicion_optlista_asignaciones : IDENTIFICADOR IGUALDAD valor\n| lista_asignaciones COMA IDENTIFICADOR IGUALDAD valoreliminar : ELIMINAR DESDE IDENTIFICADOR condicion_opttransaccion : INICIAR_TRANSACCION\n| CONFIRMAR\n| REVERTIRempty :'
     
-_lr_action_items = {'SELECCIONAR':([0,],[8,]),'INSERTAR':([0,],[9,]),'ACTUALIZAR':([0,],[10,]),'ELIMINAR':([0,],[11,]),'CREAR':([0,],[12,]),'INICIAR_TRANSACCION':([0,],[13,]),'CONFIRMAR':([0,],[14,]),'REVERTIR':([0,],[15,]),'$end':([1,2,3,4,5,6,7,13,14,15,33,35,39,40,42,44,48,50,53,56,57,58,69,70,73,74,75,77,],[0,-1,-2,-3,-4,-5,-6,-40,-41,-42,-43,-43,-43,-31,-12,-7,-28,-11,-24,-22,-23,-29,-32,-25,-14,-15,-13,-30,]),'IDENTIFICADOR':([8,10,19,21,22,23,24,32,41,43,46,47,49,60,61,62,63,64,65,66,67,68,71,72,],[17,20,31,33,34,35,36,38,51,17,53,53,59,51,51,53,-16,-17,-18,-19,-20,-21,53,53,]),'TODO':([8,43,],[18,18,]),'EN':([9,],[19,]),'DESDE':([11,16,17,18,25,26,27,28,29,30,36,45,],[21,23,-8,-10,-33,-35,-36,-37,-38,-39,-9,-34,]),'TABLA':([12,],[22,]),'COMA':([16,17,18,25,26,27,28,29,30,36,39,45,52,53,54,55,56,57,58,76,77,],[24,-8,-10,-33,-35,-36,-37,-38,-39,-9,49,-34,24,-24,71,-26,-22,-23,-29,-27,-30,]),'PARENTESIS_DER':([17,18,25,26,27,28,29,30,36,45,52,53,54,55,56,57,76,],[-8,-10,-33,-35,-36,-37,-38,-39,-9,-34,69,-24,70,-26,-22,-23,-27,]),'ENTERO':([17,36,],[26,26,]),'TEXTO':([17,36,],[27,27,]),'FECHA':([17,36,],[28,28,]),'BOOLEANO':([17,36,],[29,29,]),'DECIMAL':([17,36,],[30,30,]),'COLOCAR':([20,],[32,]),'VALORES':([31,],[37,]),'DONDE':([33,35,39,53,56,57,58,77,],[41,41,41,-24,-22,-23,-29,-30,]),'PARENTESIS_IZQ':([34,37,],[43,46,]),'IGUALDAD':([38,51,59,],[47,63,72,]),'NUMERO':([46,47,62,63,64,65,66,67,68,71,72,],[56,56,56,-16,-17,-18,-19,-20,-21,56,56,]),'CADENA':([46,47,62,63,64,65,66,67,68,71,72,],[57,57,57,-16,-17,-18,-19,-20,-21,57,57,]),'Y':([50,53,56,57,73,74,75,],[60,-24,-22,-23,-14,-15,-13,]),'O':([50,53,56,57,73,74,75,],[61,-24,-22,-23,-14,-15,-13,]),'MAYOR':([51,],[64,]),'MENOR':([51,],[65,]),'MAYOR_IGUAL':([51,],[66,]),'MENOR_IGUAL':([51,],[67,]),'DIFERENTE':([51,],[68,]),}
+_lr_action_items = {'SELECCIONAR':([0,],[8,]),'INSERTAR':([0,],[9,]),'ACTUALIZAR':([0,],[10,]),'ELIMINAR':([0,],[11,]),'CREAR':([0,],[12,]),'INICIAR_TRANSACCION':([0,],[13,]),'CONFIRMAR':([0,],[14,]),'REVERTIR':([0,],[15,]),'$end':([1,2,3,4,5,6,7,13,14,15,35,37,49,50,52,54,58,60,63,66,67,68,79,80,83,84,85,87,],[0,-1,-2,-3,-4,-5,-6,-49,-50,-51,-52,-52,-52,-48,-29,-24,-45,-28,-41,-39,-40,-46,-7,-42,-31,-32,-30,-47,]),'IDENTIFICADOR':([8,10,20,22,23,24,25,34,51,53,56,57,59,70,71,72,73,74,75,76,77,78,81,82,],[17,21,33,35,36,37,39,48,61,17,63,63,69,61,61,63,-33,-34,-35,-36,-37,-38,63,63,]),'TODO':([8,53,],[19,19,]),'EN':([9,],[20,]),'DESDE':([11,16,17,18,19,26,27,28,29,30,31,32,38,39,40,41,42,43,44,45,46,55,],[22,24,-25,-9,-27,-52,-10,-11,-12,-13,-14,-15,-8,-26,-23,-17,-18,-19,-20,-21,-22,-16,]),'TABLA':([12,],[23,]),'COMA':([16,17,18,19,26,27,28,29,30,31,32,38,39,40,41,42,43,44,45,46,49,55,62,63,64,65,66,67,68,86,87,],[25,-25,-9,-27,-52,-10,-11,-12,-13,-14,-15,-8,-26,-23,-17,-18,-19,-20,-21,-22,59,-16,25,-41,81,-43,-39,-40,-46,-44,-47,]),'PARENTESIS_DER':([17,18,19,26,27,28,29,30,31,32,38,39,40,41,42,43,44,45,46,55,62,63,64,65,66,67,86,],[-25,-9,-27,-52,-10,-11,-12,-13,-14,-15,-8,-26,-23,-17,-18,-19,-20,-21,-22,-16,79,-41,80,-43,-39,-40,-44,]),'ENTERO':([17,39,],[27,27,]),'CADENA':([17,39,56,57,72,73,74,75,76,77,78,81,82,],[28,28,67,67,67,-33,-34,-35,-36,-37,-38,67,67,]),'CARACTER':([17,39,],[29,29,]),'FECHA':([17,39,],[30,30,]),'BOOLEANO':([17,39,],[31,31,]),'DECIMAL':([17,39,],[32,32,]),'COLOCAR':([21,],[34,]),'CLAVE_PRIMARIA':([26,27,28,29,30,31,32,40,41,42,43,44,45,46,55,],[43,-10,-11,-12,-13,-14,-15,43,-17,-18,-19,-20,-21,-22,-16,]),'CLAVE_FORANEA':([26,27,28,29,30,31,32,40,41,42,43,44,45,46,55,],[44,-10,-11,-12,-13,-14,-15,44,-17,-18,-19,-20,-21,-22,-16,]),'AUTOINCREMENTAL':([26,27,28,29,30,31,32,40,41,42,43,44,45,46,55,],[45,-10,-11,-12,-13,-14,-15,45,-17,-18,-19,-20,-21,-22,-16,]),'NO_NULO':([26,27,28,29,30,31,32,40,41,42,43,44,45,46,55,],[46,-10,-11,-12,-13,-14,-15,46,-17,-18,-19,-20,-21,-22,-16,]),'VALORES':([33,],[47,]),'DONDE':([35,37,49,63,66,67,68,87,],[51,51,51,-41,-39,-40,-46,-47,]),'PARENTESIS_IZQ':([36,47,],[53,56,]),'IGUALDAD':([48,61,69,],[57,73,82,]),'NUMERO':([56,57,72,73,74,75,76,77,78,81,82,],[66,66,66,-33,-34,-35,-36,-37,-38,66,66,]),'Y':([60,63,66,67,83,84,85,],[70,-41,-39,-40,-31,-32,-30,]),'O':([60,63,66,67,83,84,85,],[71,-41,-39,-40,-31,-32,-30,]),'MAYOR':([61,],[74,]),'MENOR':([61,],[75,]),'MAYOR_IGUAL':([61,],[76,]),'MENOR_IGUAL':([61,],[77,]),'DIFERENTE':([61,],[78,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'instruccion':([0,],[1,]),'seleccion':([0,],[2,]),'insertar':([0,],[3,]),'actualizar':([0,],[4,]),'eliminar':([0,],[5,]),'crear':([0,],[6,]),'transaccion':([0,],[7,]),'lista_columnas':([8,43,],[16,52,]),'tipo_dato':([17,36,],[25,45,]),'lista_asignaciones':([32,],[39,]),'condicion_opt':([33,35,39,],[40,44,48,]),'empty':([33,35,39,],[42,42,42,]),'condicion':([41,60,61,],[50,73,74,]),'lista_valores':([46,],[54,]),'valor':([46,47,62,71,72,],[55,58,75,76,77,]),'comparador':([51,],[62,]),}
+_lr_goto_items = {'instruccion':([0,],[1,]),'seleccion':([0,],[2,]),'insertar':([0,],[3,]),'actualizar':([0,],[4,]),'eliminar':([0,],[5,]),'crear':([0,],[6,]),'transaccion':([0,],[7,]),'lista_columnas':([8,53,],[16,62,]),'lista_columna':([8,25,53,],[18,38,18,]),'tipo_dato':([17,39,],[26,26,]),'restricciones':([26,],[40,]),'restriccion':([26,40,],[41,55,]),'empty':([26,35,37,49,],[42,52,52,52,]),'lista_asignaciones':([34,],[49,]),'condicion_opt':([35,37,49,],[50,54,58,]),'condicion':([51,70,71,],[60,83,84,]),'lista_valores':([56,],[64,]),'valor':([56,57,72,81,82,],[65,68,85,86,87,]),'comparador':([61,],[72,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -33,41 +33,50 @@ _lr_productions = [
   ('instruccion -> eliminar','instruccion',1,'p_instruccion','AnalizadorSintactico.py',17),
   ('instruccion -> crear','instruccion',1,'p_instruccion','AnalizadorSintactico.py',18),
   ('instruccion -> transaccion','instruccion',1,'p_instruccion','AnalizadorSintactico.py',19),
-  ('seleccion -> SELECCIONAR lista_columnas DESDE IDENTIFICADOR condicion_opt','seleccion',5,'p_seleccion','AnalizadorSintactico.py',23),
-  ('lista_columnas -> IDENTIFICADOR','lista_columnas',1,'p_lista_columnas','AnalizadorSintactico.py',28),
-  ('lista_columnas -> lista_columnas COMA IDENTIFICADOR','lista_columnas',3,'p_lista_columnas','AnalizadorSintactico.py',29),
-  ('lista_columnas -> TODO','lista_columnas',1,'p_lista_columnas','AnalizadorSintactico.py',30),
-  ('condicion_opt -> DONDE condicion','condicion_opt',2,'p_condicion_opt','AnalizadorSintactico.py',39),
-  ('condicion_opt -> empty','condicion_opt',1,'p_condicion_opt','AnalizadorSintactico.py',40),
-  ('condicion -> IDENTIFICADOR comparador valor','condicion',3,'p_condicion','AnalizadorSintactico.py',47),
-  ('condicion -> condicion Y condicion','condicion',3,'p_condicion','AnalizadorSintactico.py',48),
-  ('condicion -> condicion O condicion','condicion',3,'p_condicion','AnalizadorSintactico.py',49),
-  ('comparador -> IGUALDAD','comparador',1,'p_comparador','AnalizadorSintactico.py',57),
-  ('comparador -> MAYOR','comparador',1,'p_comparador','AnalizadorSintactico.py',58),
-  ('comparador -> MENOR','comparador',1,'p_comparador','AnalizadorSintactico.py',59),
-  ('comparador -> MAYOR_IGUAL','comparador',1,'p_comparador','AnalizadorSintactico.py',60),
-  ('comparador -> MENOR_IGUAL','comparador',1,'p_comparador','AnalizadorSintactico.py',61),
-  ('comparador -> DIFERENTE','comparador',1,'p_comparador','AnalizadorSintactico.py',62),
-  ('valor -> NUMERO','valor',1,'p_valor','AnalizadorSintactico.py',66),
-  ('valor -> CADENA','valor',1,'p_valor','AnalizadorSintactico.py',67),
-  ('valor -> IDENTIFICADOR','valor',1,'p_valor','AnalizadorSintactico.py',68),
-  ('insertar -> INSERTAR EN IDENTIFICADOR VALORES PARENTESIS_IZQ lista_valores PARENTESIS_DER','insertar',7,'p_insertar','AnalizadorSintactico.py',72),
-  ('lista_valores -> valor','lista_valores',1,'p_lista_valores','AnalizadorSintactico.py',76),
-  ('lista_valores -> lista_valores COMA valor','lista_valores',3,'p_lista_valores','AnalizadorSintactico.py',77),
-  ('actualizar -> ACTUALIZAR IDENTIFICADOR COLOCAR lista_asignaciones condicion_opt','actualizar',5,'p_actualizar','AnalizadorSintactico.py',84),
-  ('lista_asignaciones -> IDENTIFICADOR IGUALDAD valor','lista_asignaciones',3,'p_lista_asignaciones','AnalizadorSintactico.py',88),
-  ('lista_asignaciones -> lista_asignaciones COMA IDENTIFICADOR IGUALDAD valor','lista_asignaciones',5,'p_lista_asignaciones','AnalizadorSintactico.py',89),
-  ('eliminar -> ELIMINAR DESDE IDENTIFICADOR condicion_opt','eliminar',4,'p_eliminar','AnalizadorSintactico.py',96),
-  ('crear -> CREAR TABLA IDENTIFICADOR PARENTESIS_IZQ lista_columnas PARENTESIS_DER','crear',6,'p_crear','AnalizadorSintactico.py',100),
-  ('lista_columnas -> IDENTIFICADOR tipo_dato','lista_columnas',2,'p_lista_columnas_crear','AnalizadorSintactico.py',104),
-  ('lista_columnas -> lista_columnas COMA IDENTIFICADOR tipo_dato','lista_columnas',4,'p_lista_columnas_crear','AnalizadorSintactico.py',105),
-  ('tipo_dato -> ENTERO','tipo_dato',1,'p_tipo_dato','AnalizadorSintactico.py',112),
-  ('tipo_dato -> TEXTO','tipo_dato',1,'p_tipo_dato','AnalizadorSintactico.py',113),
-  ('tipo_dato -> FECHA','tipo_dato',1,'p_tipo_dato','AnalizadorSintactico.py',114),
-  ('tipo_dato -> BOOLEANO','tipo_dato',1,'p_tipo_dato','AnalizadorSintactico.py',115),
-  ('tipo_dato -> DECIMAL','tipo_dato',1,'p_tipo_dato','AnalizadorSintactico.py',116),
-  ('transaccion -> INICIAR_TRANSACCION','transaccion',1,'p_transaccion','AnalizadorSintactico.py',120),
-  ('transaccion -> CONFIRMAR','transaccion',1,'p_transaccion','AnalizadorSintactico.py',121),
-  ('transaccion -> REVERTIR','transaccion',1,'p_transaccion','AnalizadorSintactico.py',122),
-  ('empty -> <empty>','empty',0,'p_empty','AnalizadorSintactico.py',127),
+  ('crear -> CREAR TABLA IDENTIFICADOR PARENTESIS_IZQ lista_columnas PARENTESIS_DER','crear',6,'p_crear','AnalizadorSintactico.py',24),
+  ('lista_columnas -> lista_columnas COMA lista_columna','lista_columnas',3,'p_lista_columnas_crear','AnalizadorSintactico.py',28),
+  ('lista_columnas -> lista_columna','lista_columnas',1,'p_lista_columnas_crear','AnalizadorSintactico.py',29),
+  ('tipo_dato -> ENTERO','tipo_dato',1,'p_tipo_dato','AnalizadorSintactico.py',37),
+  ('tipo_dato -> CADENA','tipo_dato',1,'p_tipo_dato','AnalizadorSintactico.py',38),
+  ('tipo_dato -> CARACTER','tipo_dato',1,'p_tipo_dato','AnalizadorSintactico.py',39),
+  ('tipo_dato -> FECHA','tipo_dato',1,'p_tipo_dato','AnalizadorSintactico.py',40),
+  ('tipo_dato -> BOOLEANO','tipo_dato',1,'p_tipo_dato','AnalizadorSintactico.py',41),
+  ('tipo_dato -> DECIMAL','tipo_dato',1,'p_tipo_dato','AnalizadorSintactico.py',42),
+  ('restricciones -> restricciones restriccion','restricciones',2,'p_restricciones','AnalizadorSintactico.py',46),
+  ('restricciones -> restriccion','restricciones',1,'p_restricciones','AnalizadorSintactico.py',47),
+  ('restricciones -> empty','restricciones',1,'p_restricciones','AnalizadorSintactico.py',48),
+  ('restriccion -> CLAVE_PRIMARIA','restriccion',1,'p_restriccion','AnalizadorSintactico.py',58),
+  ('restriccion -> CLAVE_FORANEA','restriccion',1,'p_restriccion','AnalizadorSintactico.py',59),
+  ('restriccion -> AUTOINCREMENTAL','restriccion',1,'p_restriccion','AnalizadorSintactico.py',60),
+  ('restriccion -> NO_NULO','restriccion',1,'p_restriccion','AnalizadorSintactico.py',61),
+  ('lista_columna -> IDENTIFICADOR tipo_dato restricciones','lista_columna',3,'p_lista_columna_crear','AnalizadorSintactico.py',65),
+  ('seleccion -> SELECCIONAR lista_columnas DESDE IDENTIFICADOR condicion_opt','seleccion',5,'p_seleccion','AnalizadorSintactico.py',79),
+  ('lista_columnas -> IDENTIFICADOR','lista_columnas',1,'p_lista_columnas','AnalizadorSintactico.py',86),
+  ('lista_columnas -> lista_columnas COMA IDENTIFICADOR','lista_columnas',3,'p_lista_columnas','AnalizadorSintactico.py',87),
+  ('lista_columnas -> TODO','lista_columnas',1,'p_lista_columnas','AnalizadorSintactico.py',88),
+  ('condicion_opt -> DONDE condicion','condicion_opt',2,'p_condicion_opt','AnalizadorSintactico.py',97),
+  ('condicion_opt -> empty','condicion_opt',1,'p_condicion_opt','AnalizadorSintactico.py',98),
+  ('condicion -> IDENTIFICADOR comparador valor','condicion',3,'p_condicion','AnalizadorSintactico.py',105),
+  ('condicion -> condicion Y condicion','condicion',3,'p_condicion','AnalizadorSintactico.py',106),
+  ('condicion -> condicion O condicion','condicion',3,'p_condicion','AnalizadorSintactico.py',107),
+  ('comparador -> IGUALDAD','comparador',1,'p_comparador','AnalizadorSintactico.py',115),
+  ('comparador -> MAYOR','comparador',1,'p_comparador','AnalizadorSintactico.py',116),
+  ('comparador -> MENOR','comparador',1,'p_comparador','AnalizadorSintactico.py',117),
+  ('comparador -> MAYOR_IGUAL','comparador',1,'p_comparador','AnalizadorSintactico.py',118),
+  ('comparador -> MENOR_IGUAL','comparador',1,'p_comparador','AnalizadorSintactico.py',119),
+  ('comparador -> DIFERENTE','comparador',1,'p_comparador','AnalizadorSintactico.py',120),
+  ('valor -> NUMERO','valor',1,'p_valor','AnalizadorSintactico.py',124),
+  ('valor -> CADENA','valor',1,'p_valor','AnalizadorSintactico.py',125),
+  ('valor -> IDENTIFICADOR','valor',1,'p_valor','AnalizadorSintactico.py',126),
+  ('insertar -> INSERTAR EN IDENTIFICADOR VALORES PARENTESIS_IZQ lista_valores PARENTESIS_DER','insertar',7,'p_insertar','AnalizadorSintactico.py',132),
+  ('lista_valores -> valor','lista_valores',1,'p_lista_valores','AnalizadorSintactico.py',136),
+  ('lista_valores -> lista_valores COMA valor','lista_valores',3,'p_lista_valores','AnalizadorSintactico.py',137),
+  ('actualizar -> ACTUALIZAR IDENTIFICADOR COLOCAR lista_asignaciones condicion_opt','actualizar',5,'p_actualizar','AnalizadorSintactico.py',146),
+  ('lista_asignaciones -> IDENTIFICADOR IGUALDAD valor','lista_asignaciones',3,'p_lista_asignaciones','AnalizadorSintactico.py',150),
+  ('lista_asignaciones -> lista_asignaciones COMA IDENTIFICADOR IGUALDAD valor','lista_asignaciones',5,'p_lista_asignaciones','AnalizadorSintactico.py',151),
+  ('eliminar -> ELIMINAR DESDE IDENTIFICADOR condicion_opt','eliminar',4,'p_eliminar','AnalizadorSintactico.py',160),
+  ('transaccion -> INICIAR_TRANSACCION','transaccion',1,'p_transaccion','AnalizadorSintactico.py',166),
+  ('transaccion -> CONFIRMAR','transaccion',1,'p_transaccion','AnalizadorSintactico.py',167),
+  ('transaccion -> REVERTIR','transaccion',1,'p_transaccion','AnalizadorSintactico.py',168),
+  ('empty -> <empty>','empty',0,'p_empty','AnalizadorSintactico.py',174),
 ]

@@ -161,7 +161,8 @@ t_REVERTIR = r'REVERTIR'
 t_PUNTO_GUARDADO = r'PUNTO GUARDADO'
 t_INICIAR_TRANSACCION = r'INICIAR TRANSACCION'
 t_ESTABLECER_TRANSACCION = r'ESTABLECER TRANSACCION'
-
+t_CLAVE_PRIMARIA = r'CLAVE PRIMARIA'
+t_CLAVE_FORANEA = r'CLAVE FORANEA'
 # Operadores Logicos y de Comparación
 t_Y = r'Y'
 t_O = r'O'
@@ -216,8 +217,8 @@ t_CARACTER = r'CARACTER'
 t_NO_NULO = r'NO_NULO'
 
 # Identificadores / Claves
-t_CLAVE_PRIMARIA = r'CLAVE PRIMARIA'
-t_CLAVE_FORANEA = r'CLAVE FORANEA'
+#t_CLAVE = r'CLAVE (PRIMARIA|FORANEA)'
+#t_CLAVE_FORANEA = r'CLAVE FORANEA'
 
 # Palabras clave de manejo de procedimientos almacenados
 t_INICIO = r'INICIO'
@@ -250,6 +251,7 @@ t_DISTINTO = r'DISTINTO'
 t_OBTENER = r'OBTENER'
 t_COLOCAR = r'COLOCAR'
 t_AUTOINCREMENTAL = r'AUTOINCREMENTAL'
+
 
 def t_IDENTIFICADOR(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
@@ -290,7 +292,7 @@ def t_IDENTIFICADOR(t):
     'ENTERO': 'ENTERO', 'TEXTO': 'TEXTO', 'CARACTER': 'CARACTER', 'NO_NULO': 'NO_NULO',
 
     # Identificadores / Claves
-    'CLAVE': 'CLAVE', 'PRIMARIA': 'PRIMARIA', 'FORANEA': 'FORANEA',
+    'CLAVE PRIMARIA': 'CLAVE_PRIMARIA', 'CLAVE FORANEA': 'CLAVE_FORANEA',
 
     # Palabras clave de Manejo de Procedimientos Almacenados
     'INICIO': 'INICIO', 'FIN': 'FIN', 'SI': 'SI', 'SINO': 'SINO', 'CASO': 'CASO',
@@ -307,10 +309,14 @@ def t_IDENTIFICADOR(t):
     t.type = keywords.get(t.value.upper(), 'IDENTIFICADOR')
     return t
 
+
 def t_CADENA(t):
     r'\".*?\"'
     t.value = t.value[1:-1]
     return t
+
+
+
 
 def t_FLOTANTE(t):
     r'\d+\.\d+'
@@ -342,10 +348,11 @@ def t_IDENTIFICADOR_INVALIDO(t):
 lexer = lex.lex()
 
 # Prueba con una consulta
-test_query = '''SELECCIONAR (Columna1 - Columna2) COMO rata
-                DESDE data 12 
-                DONDE columna1 = 1.23'''
+test_query = '''CREAR TABLA empleados (
+                        id BOOLEANO CLAVE PRIMARIA,
+                        nombre ENTERO )'''
 lexer.input(test_query)
+# Tokenize the input
 
 for tok in lexer:
     print(tok)
