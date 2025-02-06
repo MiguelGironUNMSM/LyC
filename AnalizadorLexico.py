@@ -149,8 +149,6 @@ t_MEZCLAR = r'MEZCLAR'
 # Consulta y Filtrado de Datos
 t_DESDE = r'DESDE'
 t_DONDE = r'DONDE'
-t_AGRUPAR_POR = r'AGRUPAR POR'
-t_ORDENAR_POR = r'ORDENAR POR'
 t_TENIENDO = r'TENIENDO'
 t_TABLA = r'TABLA'
 t_LIMITAR = r'LIMITAR'
@@ -158,11 +156,7 @@ t_LIMITAR = r'LIMITAR'
 # Control de Transacciones
 t_CONFIRMAR = r'CONFIRMAR'
 t_REVERTIR = r'REVERTIR'
-t_PUNTO_GUARDADO = r'PUNTO GUARDADO'
-t_INICIAR_TRANSACCION = r'INICIAR TRANSACCION'
-t_ESTABLECER_TRANSACCION = r'ESTABLECER TRANSACCION'
-t_CLAVE_PRIMARIA = r'CLAVE PRIMARIA'
-t_CLAVE_FORANEA = r'CLAVE FORANEA'
+
 # Operadores Logicos y de Comparación
 t_Y = r'Y'
 t_O = r'O'
@@ -174,15 +168,9 @@ t_MENOR_IGUAL = r'<='
 t_IGUALDAD = r'='
 t_DIFERENTE = r'!='
 t_ENTRE = r'ENTRE'
-t_SIMILAR_A = r'SIMILAR A'
-t_ES_NULO = r'ES NULO'
-t_NO_ES_NULO = r'NO ES NULO'
 
 # Unión de Tablas
 t_UNIR = r'UNIR'
-t_UNIR_INTERIOR = r'UNIR INTERIOR'
-t_UNIR_IZQUIERDA = r'UNIR IZQUIERDA'
-t_UNIR_DERECHA = r'UNIR DERECHA'
 
 # Operadores aritmeticos 
 t_MAS = r'\+'
@@ -214,7 +202,6 @@ t_NULO = r'NULO'
 t_ENTERO = r'ENTERO'
 t_TEXTO = r'TEXTO'
 t_CARACTER = r'CARACTER'
-t_NO_NULO = r'NO_NULO'
 
 # Identificadores / Claves
 #t_CLAVE = r'CLAVE (PRIMARIA|FORANEA)'
@@ -252,6 +239,67 @@ t_OBTENER = r'OBTENER'
 t_COLOCAR = r'COLOCAR'
 t_AUTOINCREMENTAL = r'AUTOINCREMENTAL'
 
+# Consulta y Filtrado de Datos
+def t_AGRUPAR_POR(t):
+    r'AGRUPAR\s+POR'
+    return t
+
+def t_ORDENAR_POR(t):
+    r'ORDENAR\s+POR'
+    return t
+
+def t_SIMILAR_A(t):
+    r'SIMILAR\s+A'
+    return t
+
+# Control de Transacciones
+def t_PUNTO_GUARDADO(t):
+    r'PUNTO\s+GUARDADO'
+    return t
+
+def t_INICIAR_TRANSACCION(t):
+    r'INICIAR\s+TRANSACCION'
+    return t
+
+def t_ESTABLECER_TRANSACCION(t):
+    r'ESTABLECER\s+TRANSACCION'
+    return t
+
+# Control de Transacciones
+def t_CLAVE_PRIMARIA(t):
+    r'CLAVE\s+PRIMARIA'
+    return t
+
+def t_CLAVE_FORANEA(t):
+    r'CLAVE\s+FORANEA'
+    return t
+
+# Operadores Logicos y de Comparación
+def t_ES_NULO(t):
+    r'ES\s+NULO'
+    return t
+
+def t_NO_ES_NULO(t):
+    r'NO\s+ES\s+NULO'
+    return t
+
+# Unión de Tablas
+def t_UNIR_INTERIOR(t):
+    r'UNIR\s+INTERIOR'
+    return t
+
+def t_UNIR_IZQUIERDA(t):
+    r'UNIR\s+IZQUIERDA'
+    return t
+
+def t_UNIR_DERECHA(t):
+    r'UNIR\s+DERECHA'
+    return t
+
+# Tipos de datos
+def t_NO_NULO(t):
+    r'NO\s+NULO'
+    return t
 
 def t_IDENTIFICADOR(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
@@ -264,15 +312,14 @@ def t_IDENTIFICADOR(t):
     'REEMPLAZAR': 'REEMPLAZAR', 'VALORES': 'VALORES', 'ACTUALIZAR': 'ACTUALIZAR', 'MEZCLAR': 'MEZCLAR',
 
     # Consulta y Filtrado de Datos
-    'DESDE': 'DESDE', 'DONDE': 'DONDE', 'AGRUPAR': 'AGRUPAR', 'ORDENAR': 'ORDENAR', 'POR': 'POR',
+    'DESDE': 'DESDE', 'DONDE': 'DONDE',
     'TENIENDO': 'TENIENDO', 'TABLA': 'TABLA', 'LIMITAR': 'LIMITAR',
 
     # Control de Transacciones
-    'CONFIRMAR': 'CONFIRMAR', 'REVERTIR': 'REVERTIR', 'PUNTO': 'PUNTO', 'GUARDADO': 'GUARDADO', 
-    'INICIAR': 'INICIAR', 'TRANSACCION': 'TRANSACCION', 'ESTABLECER': 'ESTABLECER',
+    'CONFIRMAR': 'CONFIRMAR', 'REVERTIR': 'REVERTIR', 
 
     # Operadores Lógicos y de Comparación
-    'Y': 'Y', 'O': 'O', 'NO': 'NO','ENTRE': 'ENTRE', 'SIMILAR_A': 'SIMILAR_A',
+    'Y': 'Y', 'O': 'O', 'NO': 'NO','ENTRE': 'ENTRE',  
     'ES_NULO': 'ES_NULO', 'NO_ES_NULO': 'NO_ES_NULO',
 
     # Unión de Tablas
@@ -315,9 +362,6 @@ def t_CADENA(t):
     t.value = t.value[1:-1]
     return t
 
-
-
-
 def t_FLOTANTE(t):
     r'\d+\.\d+'
     t.value = float(t.value)
@@ -348,9 +392,8 @@ def t_IDENTIFICADOR_INVALIDO(t):
 lexer = lex.lex()
 
 # Prueba con una consulta
-test_query = '''CREAR TABLA empleados (
-                        id BOOLEANO CLAVE PRIMARIA,
-                        nombre ENTERO )'''
+test_query = '''SIMILAR A 
+NO NULO AGRUPAR POR AGRUPAR CLAVE PRIMARIA'''
 lexer.input(test_query)
 # Tokenize the input
 
