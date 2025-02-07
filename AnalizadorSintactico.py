@@ -15,6 +15,7 @@ def p_instruccion(t):
                    | insertar
                    | actualizar
                    | eliminar
+                   | soltar
                    | crear    
                    | transaccion''' 
     t[0] = t[1]
@@ -34,13 +35,22 @@ def p_lista_columnas_crear(t):
 
 
 def p_tipo_dato(t):
-    '''tipo_dato : ENTERO
-                | CADENA
+    '''tipo_dato : ENTERO 
+                | CADENA 
                 | CARACTER
                 | FECHA
                 | BOOLEANO
-                | DECIMAL'''
-    t[0] = t[1]
+                | DECIMAL
+                | TEXTO especificacion
+                | FLOTANTE'''
+    if len(t) == 3:
+        t[0]=(t[1],t[2])
+    else:
+        t[0] = t[1]
+
+def p_especificacion(t):
+    '''especificacion : PARENTESIS_IZQ NUMERO PARENTESIS_DER'''
+    t[0]=t[2]
 
 def p_restricciones(t):
     '''restricciones : restricciones restriccion
@@ -65,13 +75,9 @@ def p_lista_columna_crear(t):
     '''lista_columna : IDENTIFICADOR  tipo_dato restricciones'''
     nombreColumna=t[1]
     tipoDato=t[2]
-    restricciones=t[3]
-    if 'AUTOINCREMENTAL' in restricciones and 'CLAVE_PRIMARIA' not in restricciones:
-        raise SyntaxError("AUTOINCREMENTAL solo puede ser usado con PRIMARY KEY.")
-    if 'CLAVE_PRIMARIA' in restricciones and 'AUTOINCREMENTAL' in restricciones:
-        restricciones.append('NO_NULO')
+    restricciones = list(t[3])  
     
-    t[0]=("columna",t[1],t[2],t[3])
+    t[0]=("columna",nombreColumna,tipoDato,restricciones)
 ###########################################################################
 
 ###########################################################################
@@ -125,12 +131,15 @@ def p_valor(t):
              | CADENA
              | IDENTIFICADOR'''
     t[0] = t[1]
+
+
 ###########################################################################
 
 ###########################################################################
 def p_insertar(t):
-    '''insertar : INSERTAR EN IDENTIFICADOR VALORES PARENTESIS_IZQ lista_valores PARENTESIS_DER'''
+    '''insertar : INSERTAR EN IDENTIFICADOR lista_columnas VALORES PARENTESIS_IZQ lista_valores PARENTESIS_DER'''
     t[0] = ('insertar', t[3], t[6])
+
 
 def p_lista_valores(t):
     '''lista_valores : valor
@@ -162,6 +171,12 @@ def p_eliminar(t):
 ###########################################################################
 
 ###########################################################################
+def p_soltar(t):
+    '''soltar : SOLTAR TABLA IDENTIFICADOR'''
+    t[0]=('soltar',t[3])
+###########################################################################
+
+###########################################################################
 def p_transaccion(t):
     '''transaccion : INICIAR_TRANSACCION
                    | CONFIRMAR
@@ -189,9 +204,9 @@ def analizar_consulta(consulta):
     return parser.parse(consulta)
 
 # Prueba con una consulta SQL en español
-consulta_prueba = '''CREAR TABLA empleados (
-                        id BOOLEANO CLAVE PRIMARIA,
-                        nombre ENTERO )'''
+consulta_prueba = '''CREAR TABLA wasaa (
+                        id ENTERO AUTOINCREMENTAL CLAVE PRIMARIA,
+                        nombre "CADENA" NO NULO)'''
 
 resultado = analizar_consulta(consulta_prueba)
 print("Resultado de la consulta:")

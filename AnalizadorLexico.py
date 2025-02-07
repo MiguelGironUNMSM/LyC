@@ -392,8 +392,9 @@ def t_IDENTIFICADOR_INVALIDO(t):
 lexer = lex.lex()
 
 # Prueba con una consulta
-test_query = '''SIMILAR A 
-NO NULO AGRUPAR POR AGRUPAR CLAVE PRIMARIA'''
+test_query = '''CREAR TABLA empleados (
+                        id ENTERO  AUTOINCREMENTAL CLAVE PRIMARIA,
+                        nombre CARACTER(8) )'''
 lexer.input(test_query)
 # Tokenize the input
 
