@@ -337,6 +337,7 @@ def t_IDENTIFICADOR(t):
     # Tipos de Datos
     'FECHA': 'FECHA', 'BOOLEANO': 'BOOLEANO', 'DECIMAL': 'DECIMAL', 'NULO': 'NULO',
     'ENTERO': 'ENTERO', 'TEXTO': 'TEXTO', 'CARACTER': 'CARACTER', 'NO_NULO': 'NO_NULO',
+    'CADENA': 'CADENA','FLOTANTE':'FLOTANTE',
 
     # Identificadores / Claves
     'CLAVE PRIMARIA': 'CLAVE_PRIMARIA', 'CLAVE FORANEA': 'CLAVE_FORANEA',
@@ -357,15 +358,15 @@ def t_IDENTIFICADOR(t):
     return t
 
 
-def t_CADENA(t):
-    r'\".*?\"'
-    t.value = t.value[1:-1]
-    return t
+#def t_CADENA(t):
+ #   r'\".*?\"'
+  #  t.value = t.value[1:-1]
+   # return t
 
-def t_FLOTANTE(t):
-    r'\d+\.\d+'
-    t.value = float(t.value)
-    return t
+#def t_FLOTANTE(t):
+ #   r'\d+\.\d+'
+  #  t.value = float(t.value)
+   # return t
 
 def t_NUMERO(t):
     r'\d+'
