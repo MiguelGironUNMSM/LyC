@@ -13,6 +13,7 @@ precedence = (
 def p_instruccion(t):
     '''instruccion : seleccion
                    | insertar
+                   | alterar
                    | actualizar
                    | eliminar
                    | soltar
@@ -134,8 +135,10 @@ def p_comparador(t):
 
 def p_valor(t):
     '''valor : NUMERO
-             | CADENA
-             | IDENTIFICADOR'''
+             | COMILLAS_SIMPLES CADENA COMILLAS_SIMPLES
+             | BOOLEANO
+             | FLOTANTE '''
+             
     t[0] = t[1]
 
 
@@ -143,9 +146,16 @@ def p_valor(t):
 
 ###########################################################################
 def p_insertar(t):
-    '''insertar : INSERTAR EN IDENTIFICADOR lista_columnas VALORES PARENTESIS_IZQ lista_valores PARENTESIS_DER'''
+    '''insertar : INSERTAR EN IDENTIFICADOR lista_columnas_creadas VALORES PARENTESIS_IZQ lista_valores PARENTESIS_DER'''
     t[0] = ('insertar', t[3], t[6])
 
+def p_lista_columnas_creadas(t):
+    '''lista_columnas_creadas : IDENTIFICADOR
+                              | lista_columnas_creadas COMA IDENTIFICADOR'''
+    if len(t) == 4:
+        t[0]= t[1]+[t[3]]
+    else :
+        t[0]=[t[1]]
 
 def p_lista_valores(t):
     '''lista_valores : valor
@@ -155,6 +165,10 @@ def p_lista_valores(t):
     else:
         t[0] = t[1] + [t[3]]
 ###########################################################################
+
+def p_alterar(t):
+    '''alterar : ALTERAR TABLA IDENTIFICADOR ADD IDENTIFICADOR tipo_dato restricciones'''
+    t[0] = ('alterar', t[3], t[4])
 
 ###########################################################################
 def p_actualizar(t):
