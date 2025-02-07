@@ -35,22 +35,28 @@ def p_lista_columnas_crear(t):
 
 
 def p_tipo_dato(t):
-    '''tipo_dato : ENTERO 
-                | CADENA 
-                | CARACTER
-                | FECHA
-                | BOOLEANO
-                | DECIMAL
+    '''tipo_dato : ENTERO especificacion
+                | CADENA especificacion
+                | CARACTER especificacion
+                | FECHA especificacion
+                | BOOLEANO especificacion
+                | DECIMAL especificacion
                 | TEXTO especificacion
-                | FLOTANTE'''
+                | FLOTANTE especificacion'''
     if len(t) == 3:
         t[0]=(t[1],t[2])
     else:
-        t[0] = t[1]
+        t[0] = (t[1],None)
 
 def p_especificacion(t):
-    '''especificacion : PARENTESIS_IZQ NUMERO PARENTESIS_DER'''
-    t[0]=t[2]
+    '''especificacion : PARENTESIS_IZQ NUMERO PARENTESIS_DER
+                      | empty '''
+    if len(t)==4:
+        t[0]=t[2]
+    else:
+        t[0]= None
+
+
 
 def p_restricciones(t):
     '''restricciones : restricciones restriccion
@@ -205,8 +211,8 @@ def analizar_consulta(consulta):
 
 # Prueba con una consulta SQL en español
 consulta_prueba = '''CREAR TABLA wasaa (
-                        id ENTERO AUTOINCREMENTAL CLAVE PRIMARIA,
-                        nombre "CADENA" NO NULO)'''
+                        id ENTERO(10) AUTOINCREMENTAL CLAVE PRIMARIA,
+                        nombre CADENA NO NULO)'''
 
 resultado = analizar_consulta(consulta_prueba)
 print("Resultado de la consulta:")
