@@ -50,6 +50,7 @@ tokens = [
 'SIMILAR_A', #LIKE
 'ES_NULO', #IS NULL
 'NO_ES_NULO', #IS NOT NULL
+'A', #TO
 
 # Unión de Tablas
 'UNIR', # JOIN
@@ -172,6 +173,7 @@ t_MENOR_IGUAL = r'<='
 t_IGUALDAD = r'='
 t_DIFERENTE = r'!='
 t_ENTRE = r'ENTRE'
+t_A = r'A'
 
 # Unión de Tablas
 t_UNIR = r'UNIR'
@@ -326,7 +328,7 @@ def t_IDENTIFICADOR(t):
 
     # Operadores Lógicos y de Comparación
     'Y': 'Y', 'O': 'O', 'NO': 'NO','ENTRE': 'ENTRE',  
-    'ES_NULO': 'ES_NULO', 'NO_ES_NULO': 'NO_ES_NULO',
+    'ES_NULO': 'ES_NULO', 'NO_ES_NULO': 'NO_ES_NULO', 'A': 'A',
 
     # Unión de Tablas
     'UNIR': 'UNIR', 'UNIR_INTERIOR': 'UNIR_INTERIOR', 'UNIR_IZQUIERDA': 'UNIR_IZQUIERDA',
