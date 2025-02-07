@@ -39,7 +39,7 @@ def p_crear(t):
 
 def p_lista_columnas_crear(t):
     """lista_columnas : lista_columnas COMA lista_columna
-    | lista_columna"""
+                      | lista_columna"""
     if len(t) == 4:
         t[0] = t[1] + [t[3]]
     else:
@@ -48,13 +48,13 @@ def p_lista_columnas_crear(t):
 
 def p_tipo_dato(t):
     """tipo_dato : ENTERO especificacion
-    | CADENA especificacion
-    | CARACTER especificacion
-    | FECHA especificacion
-    | BOOLEANO especificacion
-    | DECIMAL especificacion
-    | TEXTO especificacion
-    | FLOTANTE especificacion"""
+                | CADENA especificacion
+                | CARACTER especificacion
+                | FECHA especificacion
+                | BOOLEANO especificacion
+                | DECIMAL especificacion
+                | TEXTO especificacion
+                | FLOTANTE especificacion"""
     if len(t) == 3:
         t[0] = (t[1], t[2])
     else:
@@ -62,8 +62,8 @@ def p_tipo_dato(t):
 
 
 def p_especificacion(t):
-    """especificacion : PARENTESIS_IZQ NUMERO PARENTESIS_DER
-    | empty"""
+    """especificacion : PARENTESIS_IZQ VALOR_NUMERO PARENTESIS_DER
+                        | empty"""
     if len(t) == 4:
         t[0] = t[2]
     else:
@@ -72,8 +72,8 @@ def p_especificacion(t):
 
 def p_restricciones(t):
     """restricciones : restricciones restriccion
-    | restriccion
-    | empty"""
+                    | restriccion
+                    | empty"""
 
     if len(t) == 3:
         t[0] = t[1] + [t[2]]
@@ -85,9 +85,9 @@ def p_restricciones(t):
 
 def p_restriccion(t):
     """restriccion : CLAVE_PRIMARIA
-    | CLAVE_FORANEA
-    | AUTOINCREMENTAL
-    | NO_NULO"""
+                    | CLAVE_FORANEA
+                    | AUTOINCREMENTAL
+                    | NO_NULO"""
     t[0] = t[1]
 
 
@@ -155,11 +155,11 @@ def p_comparador(t):
 
 
 def p_valor(t):
-    """valor : NUMERO
-    | COMILLAS_SIMPLES CADENA COMILLAS_SIMPLES
-    | BOOLEANO
-    | FLOTANTE"""
-
+    """valor : VALOR_NUMERO
+            |  VALOR_CADENA
+            |  VALOR_BOOLEANO
+            |  VALOR_FLOTANTE"""
+    
     t[0] = t[1]
 
 
@@ -168,8 +168,8 @@ def p_valor(t):
 
 ###########################################################################
 def p_insertar(t):
-    """insertar : INSERTAR EN IDENTIFICADOR lista_columnas_creadas VALORES PARENTESIS_IZQ lista_valores PARENTESIS_DER"""
-    t[0] = ("insertar", t[3], t[6])
+    """insertar : INSERTAR EN IDENTIFICADOR PARENTESIS_IZQ lista_columnas_creadas PARENTESIS_DER VALORES PARENTESIS_IZQ lista_valores PARENTESIS_DER"""
+    t[0] = ("insertar", t[5], t[9])
 
 
 def p_lista_columnas_creadas(t):
@@ -365,7 +365,7 @@ def analizar_consulta(consulta):
 
 
 # Prueba con una consulta SQL en español
-consulta_prueba = """ALTERAR TABLA Employees SOLTAR COLUMNA DateOfBirth
+consulta_prueba = """INSERTAR EN wasaa (id, pepe) VALORES ("Mantari", 3.43)
 """
 
 resultado = analizar_consulta(consulta_prueba)

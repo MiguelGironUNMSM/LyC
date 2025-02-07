@@ -89,12 +89,15 @@ tokens = [
 'TEXTO', # TEXT
 'CARACTER', # CHAR
 'NO_NULO', #NOT NULL
+'VALOR_CADENA', #CADENA entre comillas simples
+'VALOR_FLOTANTE', #FLOTANTE
+'VALOR_BOOLEANO', #BOOLEANO
 
 #Identificadores / Claves
 'IDENTIFICADOR', # IDENTIFICADOR
 'IDENTIFICADOR_INVALIDO', 
 'CADENA', #VARCHAR
-'NUMERO', # NÚMERO
+'VALOR_NUMERO', # NÚMERO
 'FLOTANTE', #FLOAT
 'CLAVE_PRIMARIA', # PRIMARY KEY
 'CLAVE_FORANEA', # FOREIGN KEY
@@ -359,27 +362,25 @@ def t_IDENTIFICADOR(t):
     'DESCENDENTE': 'DESCENDENTE', 'COMO': 'COMO', 'DISTINTO': 'DISTINTO',
     'OBTENER': 'OBTENER', 'COLOCAR': 'COLOCAR', 'AUTOINCREMENTAL': 'AUTOINCREMENTAL', 'COLUMNA': 'COLUMNA'
 }
-
-    
-    
     t.type = keywords.get(t.value.upper(), 'IDENTIFICADOR')
     return t
 
 
-#def t_CADENA(t):
- #   r'\".*?\"'
-  #  t.value = t.value[1:-1]
-   # return t
+def t_VALOR_CADENA(t):
+    r'\".*?\"'
+    t.value = t.value[1:-1]
+    return t
 
-#def t_FLOTANTE(t):
- #   r'\d+\.\d+'
-  #  t.value = float(t.value)
-   # return t
+def t_VALOR_FLOTANTE(t):
+    r'\d+\.\d+'
+    t.value = float(t.value)
+    return t
 
-def t_NUMERO(t):
+def t_VALOR_NUMERO(t):
     r'\d+'
     t.value = int(t.value)
     return t
+
 
 def t_COMENTARIO(t):
     r'--.*'
@@ -401,11 +402,11 @@ def t_IDENTIFICADOR_INVALIDO(t):
 lexer = lex.lex()
 
 # Prueba con una consulta
-test_query = '''CREAR TABLA empleados (
-                        id ENTERO  AUTOINCREMENTAL CLAVE PRIMARIA,
-                        nombre CARACTER(8) )'''
-lexer.input(test_query)
+#test_query = '''CREAR TABLA empleados (
+ #                       id ENTERO  AUTOINCREMENTAL CLAVE PRIMARIA,
+  #                      nombre CARACTER(8) )'''
+#lexer.input(test_query)
 # Tokenize the input
 
-for tok in lexer:
-    print(tok)
+#for tok in lexer:
+#    print(tok)
