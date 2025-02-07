@@ -28,6 +28,7 @@ tokens = [
 'TENIENDO', #HAVING
 'TABLA', # TABLE
 'LIMITAR', #LIMIT
+'PRIMEROS', #TOP
 
 # Control de Transacciones
 'CONFIRMAR', # COMMIT
@@ -160,6 +161,7 @@ t_DONDE = r'DONDE'
 t_TENIENDO = r'TENIENDO'
 t_TABLA = r'TABLA'
 t_LIMITAR = r'LIMITAR'
+t_PRIMEROS = r'PRIMEROS'
 
 # Control de Transacciones
 t_CONFIRMAR = r'CONFIRMAR'
@@ -324,7 +326,7 @@ def t_IDENTIFICADOR(t):
 
     # Consulta y Filtrado de Datos
     'DESDE': 'DESDE', 'DONDE': 'DONDE',
-    'TENIENDO': 'TENIENDO', 'TABLA': 'TABLA', 'LIMITAR': 'LIMITAR',
+    'TENIENDO': 'TENIENDO', 'TABLA': 'TABLA', 'LIMITAR': 'LIMITAR','PRIMEROS':'PRIMEROS',
 
     # Control de Transacciones
     'CONFIRMAR': 'CONFIRMAR', 'REVERTIR': 'REVERTIR', 
@@ -402,11 +404,11 @@ def t_IDENTIFICADOR_INVALIDO(t):
 lexer = lex.lex()
 
 # Prueba con una consulta
-#test_query = '''CREAR TABLA empleados (
- #                       id ENTERO  AUTOINCREMENTAL CLAVE PRIMARIA,
-  #                      nombre CARACTER(8) )'''
-#lexer.input(test_query)
+test_query = '''
+                 SELECCIONAR wasaa DESDE empleados ORDENAR POR casa DESCENDENTE
+'''
+lexer.input(test_query)
 # Tokenize the input
 
-#for tok in lexer:
-#    print(tok)
+for tok in lexer:
+    print(tok)
