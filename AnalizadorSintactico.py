@@ -107,8 +107,8 @@ def p_lista_columna_crear(t):
 def p_seleccion(t):
     """seleccion : SELECCIONAR lista_floro lista_columnas DESDE IDENTIFICADOR condicion_opt"""
     t[0] = ("seleccion", t[2], t[3], t[5],t[6])
-    if t[5] == None:
-        t[0] = ("seleccion", t[2], t[3], t[4])
+    if t[6] == None:
+        t[0] = ("seleccion", t[2], t[3], t[4], t[5])
 
 def p_lista_floro(t):
     """lista_floro : lista_floro floro
@@ -137,9 +137,9 @@ def p_lista_columnas(t):
                     | lista_columnas COMA IDENTIFICADOR
                     | TODO"""  # Agregar aquí la opción para 'TODO' (el asterisco)
     if len(t) == 2:
-        t[0] = [t[1]]
+        t[0] = ('COLUMNAS',[t[1]])
     elif len(t) == 4:
-        t[0] = t[1] + [t[3]]
+        t[0] = ('COLUMNAS',t[1][1] + [t[3]])
     else:
         t[0] = ["*"]  # Si es el caso de 'TODO'
 
@@ -197,18 +197,29 @@ def p_condicion_order(t):
 
 ###########################################################################
 def p_insertar(t):
-    """insertar : INSERTAR EN IDENTIFICADOR PARENTESIS_IZQ lista_columnas_creadas PARENTESIS_DER VALORES PARENTESIS_IZQ lista_valores PARENTESIS_DER"""
-    t[0] = ("insertar", t[5], t[9])
+    """insertar : INSERTAR EN IDENTIFICADOR PARENTESIS_IZQ lista_columnas_creadas PARENTESIS_DER VALORES lista_filas"""
+    t[0] = ("insertar", t[3], t[5], t[8])
 
 
 def p_lista_columnas_creadas(t):
     """lista_columnas_creadas : IDENTIFICADOR
-    | lista_columnas_creadas COMA IDENTIFICADOR"""
+                              | lista_columnas_creadas COMA IDENTIFICADOR"""
     if len(t) == 4:
-        t[0] = t[1] + [t[3]]
+        t[0] = ('COLUMNAS',t[1][1] + [t[3]])
     else:
-        t[0] = [t[1]]
+        t[0] = ('COLUMNAS',[t[1]])
 
+def p_lista_filas(t):
+    """lista_filas : fila 
+                  | lista_filas COMA fila"""
+    if len(t)==2:
+        t[0]=[t[1]]
+    else:
+        t[0]=t[1]+[t[3]]
+
+def p_fila(t):
+    """fila : PARENTESIS_IZQ lista_valores PARENTESIS_DER"""
+    t[0]=t[2]
 
 def p_lista_valores(t):
     """lista_valores : valor
@@ -217,7 +228,6 @@ def p_lista_valores(t):
         t[0] = [t[1]]
     else:
         t[0] = t[1] + [t[3]]
-
 
 ###########################################################################
 
@@ -395,7 +405,8 @@ def analizar_consulta(consulta):
 
 # Prueba con una consulta SQL en español
 consulta_prueba = """
-                    SELECCIONAR DISTINTO PRIMEROS 10 wasaa DESDE empleados ORDENAR POR conejo 
+                    INSERTAR EN tablita (columna1, columna2) VALORES (10, "Mantari") , (20, "Cuenca")
+
 """
 
 resultado = analizar_consulta(consulta_prueba)
