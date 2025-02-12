@@ -33,13 +33,13 @@ def p_instruccion(t):
 
 ###########################################################################
 def p_crear(t):
-    """crear : CREAR TABLA IDENTIFICADOR PARENTESIS_IZQ lista_columnas PARENTESIS_DER"""
+    """crear : CREAR TABLA IDENTIFICADOR PARENTESIS_IZQ lista_columnas_crear PARENTESIS_DER"""
     t[0] = ("crear", t[3], t[5])
 
 
 def p_lista_columnas_crear(t):
-    """lista_columnas : lista_columnas COMA lista_columna
-                      | lista_columna"""
+    """lista_columnas_crear : lista_columnas_crear COMA lista_columna_crear
+                      | lista_columna_crear"""
     if len(t) == 4:
         t[0] = t[1] + [t[3]]
     else:
@@ -92,7 +92,7 @@ def p_restriccion(t):
 
 
 def p_lista_columna_crear(t):
-    """lista_columna : IDENTIFICADOR  tipo_dato restricciones"""
+    """lista_columna_crear : IDENTIFICADOR  tipo_dato restricciones"""
     nombreColumna = t[1]
     tipoDato = t[2]
     restricciones = list(t[3])
@@ -405,8 +405,7 @@ def analizar_consulta(consulta):
 
 # Prueba con una consulta SQL en español
 consulta_prueba = """
-                    INSERTAR EN tablita (columna1, columna2) VALORES (10, "Mantari") , (20, "Cuenca")
-
+                    ALTERAR TABLA kuka SOLTAR COLUMNA mamacia
 """
 
 resultado = analizar_consulta(consulta_prueba)
