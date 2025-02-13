@@ -17,7 +17,8 @@ tokens = [
 'ACTUALIZAR', # UPDATE
 'MEZCLAR', # MERGE
 'AGREGAR', # ADD
-'MODIFICAR', # MODIFICAR
+'MODIFICAR', # MODIFY
+'CAMBIAR', #CHANGE
 
 # Consulta y Filtrado de Datos
 'DESDE', # FROM
@@ -72,6 +73,7 @@ tokens = [
 'ALGUNOS', # SOME
 'CUALQUIERA', # ANY
 'RANGO', # RANGE
+'RESTRICCION', #CONSTRAINT
 
 # Palabras clave de funciones de agregación
 'CONTAR', # COUNT
@@ -154,6 +156,7 @@ t_ACTUALIZAR = r'ACTUALIZAR'
 t_MEZCLAR = r'MEZCLAR'
 t_AGREGAR = r'AGREGAR'
 t_MODIFICAR = r'MODIFICAR'
+t_CAMBIAR = r'CAMBIAR'
 
 # Consulta y Filtrado de Datos
 t_DESDE = r'DESDE'
@@ -197,6 +200,7 @@ t_ALGUNO = r'ALGUNO'
 t_ALGUNOS = r'ALGUNOS'
 t_CUALQUIERA = r'CUALQUIERA'
 t_RANGO = r'RANGO'
+t_RESTRICCION = r'RESTRICCION'
 
 # Palabras clave de funciones de agregación
 t_CONTAR = r'CONTAR'
@@ -322,7 +326,8 @@ def t_IDENTIFICADOR(t):
 
     # Manipulación de Datos
     'SELECCIONAR': 'SELECCIONAR', 'INSERTAR': 'INSERTAR', 'ELIMINAR': 'ELIMINAR', 
-    'REEMPLAZAR': 'REEMPLAZAR', 'VALORES': 'VALORES', 'ACTUALIZAR': 'ACTUALIZAR', 'MEZCLAR': 'MEZCLAR', 'AGREGAR': 'AGREGAR', 'MODIFICAR': 'MODIFICAR'
+    'REEMPLAZAR': 'REEMPLAZAR', 'VALORES': 'VALORES', 'ACTUALIZAR': 'ACTUALIZAR', 'MEZCLAR': 'MEZCLAR', 'AGREGAR': 'AGREGAR', 'MODIFICAR': 'MODIFICAR',
+    'CAMBIAR':'CAMBIAR',
 
     # Consulta y Filtrado de Datos
     'DESDE': 'DESDE', 'DONDE': 'DONDE',
@@ -341,7 +346,7 @@ def t_IDENTIFICADOR(t):
 
     # Palabras clave de Subconsulta
     'EXISTE': 'EXISTE', 'TODOS': 'TODOS', 'ALGUNO': 'ALGUNO', 'ALGUNOS': 'ALGUNOS', 
-    'CUALQUIERA': 'CUALQUIERA', 'RANGO': 'RANGO',
+    'CUALQUIERA': 'CUALQUIERA', 'RANGO': 'RANGO', 'RESTRICCION': 'RESTRICCCION',
 
     # Palabras clave de Funciones de Agregación
     'CONTAR': 'CONTAR', 'SUMA': 'SUMA', 'PROMEDIO': 'PROMEDIO', 
