@@ -1,9 +1,6 @@
-import ply.yacc as yacc
-from AnalizadorLexico import tokens  # Importar los tokens de tu analizador léxico
-
 def p_insertar(t):
-    """insertar : INSERTAR EN IDENTIFICADOR PARENTESIS_IZQ lista_columnas_creadas PARENTESIS_DER VALORES lista_filas"""
-    t[0] = ("insertar", t[3], t[5], t[8])
+    """insertar : INSERTAR_EN IDENTIFICADOR PARENTESIS_IZQ lista_columnas_creadas PARENTESIS_DER VALORES lista_filas"""
+    t[0] = ("insertar_en", t[2], t[4], t[7])
 
 
 def p_lista_columnas_creadas(t):

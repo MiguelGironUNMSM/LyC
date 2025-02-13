@@ -1,6 +1,3 @@
-import ply.yacc as yacc
-from AnalizadorLexico import tokens  # Importar los tokens de tu analizador léxico
-
 def p_actualizar(t):
     """actualizar : ACTUALIZAR IDENTIFICADOR COLOCAR lista_asignaciones condicion_opt"""
     t[0] = ("actualizar", t[2], t[4], t[5])

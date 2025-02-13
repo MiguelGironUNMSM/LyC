@@ -50,30 +50,30 @@ def p_alteracion_rename(t):
 def p_alteracion_change(t): 
     """alteracion : CAMBIAR opt_column IDENTIFICADOR IDENTIFICADOR lista_columna_crear"""
 
-# 6. Agregar una restricción (constraint):
-# Ejemplo: ALTER TABLE nombre_tabla AGREGAR RESTRICCION PK_Person CLAVE_PRIMARIA (ID);
-def p_alteracion_add_constraint(t):
-    """alteracion : AGREGAR RESTRICCION IDENTIFICADOR constraint_definicion"""
-    # t[3] es el nombre de la restricción, t[4] su definición
-    t[0] = ("add_constraint", t[3], t[4])
+# # 6. Agregar una restricción (constraint):
+# # Ejemplo: ALTER TABLE nombre_tabla AGREGAR RESTRICCION PK_Person CLAVE_PRIMARIA (ID);
+# def p_alteracion_add_constraint(t):
+#     """alteracion : AGREGAR RESTRICCION IDENTIFICADOR constraint_definicion"""
+#     # t[3] es el nombre de la restricción, t[4] su definición
+#     t[0] = ("add_constraint", t[3], t[4])
 
-# 7. Eliminar una restricción:
-# Ejemplo: ALTER TABLE nombre_tabla SOLTAR RESTRICCION PK_Person;
-def p_alteracion_drop_constraint(t):
-    """alteracion : SOLTAR RESTRICCION IDENTIFICADOR"""
-    # t[3] es el nombre de la restricción a eliminar
-    t[0] = ("drop_constraint", t[3])
+# # 7. Eliminar una restricción:
+# # Ejemplo: ALTER TABLE nombre_tabla SOLTAR RESTRICCION PK_Person;
+# def p_alteracion_drop_constraint(t):
+#     """alteracion : SOLTAR RESTRICCION IDENTIFICADOR"""
+#     # t[3] es el nombre de la restricción a eliminar
+#     t[0] = ("drop_constraint", t[3])
 
-# Definición de restricciones Basicas
+# # Definición de restricciones Basicas
 
-def p_constraint_definicion(t):
-    """constraint_definicion : CLAVE_PRIMARIA PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER
-                             | UNICO PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER
-    """
-    # Manejo de la producción
-    if t.slice[1].type == "CLAVE_PRIMARIA":
-        # CLAVE_PRIMARIA (columna)
-        t[0] = ("primary_key", t[3])
-    else:
-        # UNICO (columna)
-        t[0] = ("unique", t[3])
+# def p_constraint_definicion(t):
+#     """constraint_definicion : CLAVE_PRIMARIA PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER
+#                              | UNICO PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER
+#     """
+#     # Manejo de la producción
+#     if t.slice[1].type == "CLAVE_PRIMARIA":
+#         # CLAVE_PRIMARIA (columna)
+#         t[0] = ("primary_key", t[3])
+#     else:
+#         # UNICO (columna)
+#         t[0] = ("unique", t[3])

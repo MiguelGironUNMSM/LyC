@@ -1,26 +1,42 @@
 import ply.yacc as yacc
 from AnalizadorLexico import tokens  # Importar los tokens de tu analizador léxico
 
-# Precedencia
-# Instruccion
-# Crear
-# Select
-# Alter
-# Update
+from reglas import Create, Select, Insert, Alter, Update, Delete, DropTable, Transaction, Join, ReglasComunes
 
-###########################################################################
-def p_transaccion(t):
-    """transaccion : INICIAR_TRANSACCION
-    | CONFIRMAR
-    | REVERTIR"""
+modulos = [Create, Select, Insert, Alter, Update, Delete, DropTable, Transaction, Join, ReglasComunes]
+
+for mod in modulos:
+    for nombre in dir(mod):
+        if nombre.startswith("p_"):  # Si la función comienza con "p_", es una regla
+            globals()[nombre] = getattr(mod, nombre)
+
+# Definir la precedencia de los operadores
+precedence = (
+    ("left", "Y", "O"),  # Operadores lógicos
+    (
+        "left",
+        "MENOR",
+        "MAYOR",
+        "MENOR_IGUAL",
+        "MAYOR_IGUAL",
+        "IGUALDAD",
+        "DIFERENTE",
+    ),  # Comparadores
+    ("left", "MAS", "MENOS"),  # Operadores aritméticos
+    ("left", "MULTIPLICACION", "DIVISION", "MODULO"),  # Operadores aritméticos
+)
+
+# Definición de la gramática del analizador sintáctico
+def p_instruccion(t):
+    """instruccion : seleccion
+    | insertar
+    | alterar
+    | actualizar
+    | eliminar
+    | soltar
+    | crear
+    | transaccion"""
     t[0] = t[1]
-###########################################################################
-
-
-# Regla de la producción vacía (para manejar la opción 'empty')
-def p_empty(t):
-    "empty :"
-    pass
 
 # Manejo de errores sintácticos
 def p_error(t):
@@ -37,17 +53,3 @@ parser = yacc.yacc()
 # Función para analizar una consulta SQL en español
 def analizar_consulta(consulta):
     return parser.parse(consulta)
-
-
-# Prueba con una consulta SQL en español
-consulta_prueba = """                           
-                    ALTERAR TABLA usuarios
-AGREGAR edad ENTERO(3) NO_NULO,
-AGREGAR RESTRICCION pk_usuarios CLAVE_PRIMARIA (id_usuario),
-AGREGAR RESTRICCION unq_correo UNICO (correo);
-
-"""
-                                                
-resultado = analizar_consulta(consulta_prueba)
-print("Resultado de la consulta:")
-print(resultado)
