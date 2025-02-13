@@ -251,45 +251,42 @@ def p_alteraciones_multiple(t):
     t[0] = [t[1]] + t[3]
 
 
-# 1. Agregar una nueva columna:
-#    Ejemplo: ALTER TABLE Persons ADD DateOfBirth date;
+# 1. Agregar una nueva columna (se puede permitir la palabra opcional COLUMN)
 def p_alteracion_add(t):
-    """alteracion : AGREGAR columna_definicion"""
-    # t[2] contiene la definición de la columna (nombre y tipo)
-    t[0] = ("add_column", t[2])
-
-
-# 2. Eliminar una columna (con o sin la palabra COLUMN):
-#    Ejemplo: ALTER TABLE Persons DROP COLUMN DateOfBirth;
-def p_alteracion_drop(t):
-    """alteracion : SOLTAR opt_COLUMN IDENTIFICADOR"""
-    # t[3] es el nombre de la columna a eliminar
-    t[0] = ("drop_column", t[3])
-
+    """alteracion : AGREGAR opt_column lista_columna_crear"""
+    t[0] = ("add_column", t[3])
 
 # Regla para la opción COLUMN (puede estar o no)
 def p_opt_column(t):
-    """opt_COLUMN : COLUMNA
-    | empty"""
-    # Si se presenta 'COLUMN', t[1] será ese token; de lo contrario, se omite.
+    """opt_column : COLUMNA
+                  | empty"""
     t[0] = t[1] if len(t) > 1 else None
+
+# 2. Eliminar una columna (con o sin la palabra COLUMN):
+def p_alteracion_drop(t):
+    """alteracion : SOLTAR opt_column IDENTIFICADOR"""
+    t[0] = ("drop_column", t[3])
 
 
 # 3. Modificar (alterar) la definición de una columna:
-#    Ejemplo: ALTER TABLE Persons ALTER COLUMN DateOfBirth datetime;
+#    Ejemplo: ALTER TABLE [table_name] MODIFY COLUMN [column definition (nombre, tipo de dato, reestriccion)];
 def p_alteracion_alter(t):
-    """alteracion : ALTERAR opt_COLUMN IDENTIFICADOR columna_definicion"""
+    """alteracion : MODIFICAR opt_column IDENTIFICADOR lista_columna_crear"""
     # t[3] es el nombre de la columna, t[4] la nueva definición (por ejemplo, nuevo tipo)
-    t[0] = ("alter_column", t[3], t[4])
+    t[0] = ("modify_column", t[3], t[4])
 
 
-# 4. Renombrar una columna:
-#    Ejemplo: ALTER TABLE Persons RENAME COLUMN OldName TO NewName;
+# 4. Renombrar una columna:  
+#    Ejemplo: ALTER TABLE [table_name] RENAME COLUMN [OldName] TO [NewName];
 def p_alteracion_rename(t):
-    """alteracion : RENOMBRAR opt_COLUMN IDENTIFICADOR A IDENTIFICADOR"""
+    """alteracion : RENOMBRAR opt_column IDENTIFICADOR A IDENTIFICADOR"""
     # t[3] es el nombre actual, t[5] es el nuevo nombre
     t[0] = ("rename_column", t[3], t[5])
 
+# 5. Cambiar una columna:
+# ALTER TABLE [table_name] CHANGE [old_column_name] [new_column_name] [column definition]
+def p_alteracion_change(t): 
+    """alteracion : CAMBIAR opt_column IDENTIFICADOR IDENTIFICADOR lista_columna_crear"""
 
 # # 5. Agregar una restricción (constraint):
 # #    Ejemplo: ALTER TABLE Persons ADD CONSTRAINT PK_Person PRIMARY KEY (ID);
@@ -310,13 +307,6 @@ def p_alteracion_rename(t):
 # ---------------------------
 # Reglas auxiliares
 # ---------------------------
-
-
-# Definición de una columna (nombre y tipo de dato)
-def p_columna_definicion(t):
-    """columna_definicion : IDENTIFICADOR tipo_dato"""
-    # t[1] es el nombre de la columna, t[2] es el tipo de dato
-    t[0] = (t[1], t[2])
 
 
 # Ejemplo sencillo para la definición de restricción.
@@ -404,10 +394,10 @@ def analizar_consulta(consulta):
 
 
 # Prueba con una consulta SQL en español
-consulta_prueba = """
-                    ALTERAR TABLA kuka SOLTAR COLUMNA mamacia
+consulta_prueba = """                           
+                    ALTERAR TABLA kuka AGREGAR mamacita cadena(8), AGREGAR papacito entero
 """
-
+                                                
 resultado = analizar_consulta(consulta_prueba)
 print("Resultado de la consulta:")
 print(resultado)

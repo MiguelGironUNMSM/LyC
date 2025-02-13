@@ -1,7 +1,5 @@
 import ply.lex as lex
 
-
-
 tokens = [
 
 # Definición de Datos
@@ -19,6 +17,7 @@ tokens = [
 'ACTUALIZAR', # UPDATE
 'MEZCLAR', # MERGE
 'AGREGAR', # ADD
+'MODIFICAR', # MODIFICAR
 
 # Consulta y Filtrado de Datos
 'DESDE', # FROM
@@ -154,6 +153,7 @@ t_VALORES = r'VALORES'
 t_ACTUALIZAR = r'ACTUALIZAR'
 t_MEZCLAR = r'MEZCLAR'
 t_AGREGAR = r'AGREGAR'
+t_MODIFICAR = r'MODIFICAR'
 
 # Consulta y Filtrado de Datos
 t_DESDE = r'DESDE'
@@ -322,7 +322,7 @@ def t_IDENTIFICADOR(t):
 
     # Manipulación de Datos
     'SELECCIONAR': 'SELECCIONAR', 'INSERTAR': 'INSERTAR', 'ELIMINAR': 'ELIMINAR', 
-    'REEMPLAZAR': 'REEMPLAZAR', 'VALORES': 'VALORES', 'ACTUALIZAR': 'ACTUALIZAR', 'MEZCLAR': 'MEZCLAR', 'AGREGAR': 'AGREGAR',
+    'REEMPLAZAR': 'REEMPLAZAR', 'VALORES': 'VALORES', 'ACTUALIZAR': 'ACTUALIZAR', 'MEZCLAR': 'MEZCLAR', 'AGREGAR': 'AGREGAR', 'MODIFICAR': 'MODIFICAR'
 
     # Consulta y Filtrado de Datos
     'DESDE': 'DESDE', 'DONDE': 'DONDE',
