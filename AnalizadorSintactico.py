@@ -1,9 +1,9 @@
 import ply.yacc as yacc
 from AnalizadorLexico import tokens  # Importar los tokens de tu analizador léxico
 
-from reglas import Create, Select, Insert, Alter, Update, Delete, DropTable, Transaction, Join, ReglasComunes
+from reglas import  ReglasComunes, Select, Insert, Create, Alter, Update, Delete, DropTable, Transaction, Join
 
-modulos = [Create, Select, Insert, Alter, Update, Delete, DropTable, Transaction, Join, ReglasComunes]
+modulos = [ReglasComunes, Select, Insert, Create, Alter, Update, Delete, DropTable, Transaction, Join]
 
 for mod in modulos:
     for nombre in dir(mod):
@@ -47,9 +47,17 @@ def p_error(t):
 
 
 # Construcción del analizador
-parser = yacc.yacc()
-
+parser = yacc.yacc(start='instruccion')
 
 # Función para analizar una consulta SQL en español
 def analizar_consulta(consulta):
     return parser.parse(consulta)
+
+resultado = analizar_consulta("""
+CREAR TABLA empleados (nombre TEXTO, edad ENTERO, salario DECIMAL)
+
+""")
+
+
+print("Resultado de la consulta:")
+print(resultado)
