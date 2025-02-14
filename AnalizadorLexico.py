@@ -454,7 +454,7 @@ def t_IDENTIFICADOR_INVALIDO(t):
 lexer = lex.lex()
 
 # # Prueba con una consulta
-test_query = """SELECCIONAR nombre, edad, salario DESDE empleados DONDE edad > 25
+test_query = """ALTERAR TABLA empleados CAMBIAR nombre A "nuevoNombre"
 
 """
 lexer.input(test_query)
