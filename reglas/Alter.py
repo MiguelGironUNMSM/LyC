@@ -38,9 +38,9 @@ def p_alteracion_drop(t):
 
 # 3. Modificar la definición de una columna:
 def p_alteracion_modificar(t):
-    """alteracion : MODIFICAR opt_column IDENTIFICADOR lista_columna_crear"""
+    """alteracion : MODIFICAR opt_column lista_columna_crear"""
     # t[3] es el nombre de la columna, t[4] la nueva definición (por ejemplo, nuevo tipo)
-    t[0] = ("modify_column", t[3], t[4])
+    t[0] = ("modify_column", t[3])
 
 
 # 4. Renombrar una columna:
@@ -53,5 +53,5 @@ def p_alteracion_rename(t):
 # 5. Cambiar una columna:
 #    ALTER TABLE [table_name] CHANGE [old_column_name] [new_column_name] [column definition]
 def p_alteracion_change(t):
-    """alteracion : CAMBIAR opt_column IDENTIFICADOR IDENTIFICADOR lista_columna_crear"""
-    t[0] = ("change_column", t[3], t[4], t[5])
+    """alteracion : CAMBIAR opt_column IDENTIFICADOR lista_columna_crear"""
+    t[0] = ("change_column", t[3], t[4])

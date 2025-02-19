@@ -54,7 +54,7 @@ def analizar_consulta(consulta):
     return parser.parse(consulta)
 
 resultado = analizar_consulta("""
-ALTERAR TABLA empleados RENOMBRAR nombre A nuevoNombre
+ALTERAR TABLA empleados CAMBIAR COLUMNA nombre nuevaNombre cadena(100)
 
 """)
 
