@@ -1,4 +1,5 @@
 # Regla principal para ALTER TABLE
+# ALTER TABLE nombreTabla ***************
 def p_alterar(t):
     """alterar : ALTERAR TABLA IDENTIFICADOR alteraciones"""
     # t[3]: nombre de la tabla
@@ -18,6 +19,7 @@ def p_alteraciones_multiple(t):
 
 
 # 1. Agregar una nueva columna (se puede permitir la palabra opcional COLUMN)
+# ALTER TABLE ADD COLUMN 'nombreColumna' 'tipoDato' 'reestriccion'
 def p_alteracion_add(t):
     """alteracion : AGREGAR opt_column lista_columna_crear"""
     t[0] = ("add_column", t[3])
@@ -31,12 +33,14 @@ def p_opt_column(t):
 
 
 # 2. Eliminar una columna (con o sin la palabra COLUMN):
+# ALTER TABLE DROP COLUMN 'nombreColumna'
 def p_alteracion_drop(t):
     """alteracion : SOLTAR opt_column IDENTIFICADOR"""
     t[0] = ("drop_column", t[3])
 
 
 # 3. Modificar la definición de una columna:
+# ALTER TABLE MODIFY COLUMN 'nombreColumna' 'tipoDato' 'restriccion'
 def p_alteracion_modificar(t):
     """alteracion : MODIFICAR opt_column lista_columna_crear"""
     # t[3] es el nombre de la columna, t[4] la nueva definición (por ejemplo, nuevo tipo)

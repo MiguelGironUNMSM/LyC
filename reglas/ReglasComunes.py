@@ -51,7 +51,7 @@ def p_restriccion(t):
 
 
 # --- Reglas para cláusulas opcionales (p.ej. DONDE y ORDENAR_POR) ---
-
+# --Regla que se usa para DELETE,UPDATE
 def p_opt_condiciones(t):
     """opt_condiciones : condiciones
                        | empty"""

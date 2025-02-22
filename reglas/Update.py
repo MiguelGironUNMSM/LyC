@@ -1,3 +1,4 @@
+# UPDATE nombreTabla SET nombreColumna = 'dato' WHERE 'nombreColumna'= 'dato'
 def p_actualizar(t):
     """actualizar : ACTUALIZAR IDENTIFICADOR COLOCAR lista_asignaciones opt_condiciones"""
     t[0] = ("actualizar", t[2], t[4], t[5])

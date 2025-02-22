@@ -1,3 +1,4 @@
+# INSERT INTO nombreTabla (columna1,columna2) VALORES ('Mantari',9.9)
 def p_insertar(t):
     """insertar : INSERTAR_EN IDENTIFICADOR PARENTESIS_IZQ lista_columnas_creadas PARENTESIS_DER VALORES lista_filas"""
     t[0] = ("insertar_en", t[2], t[4], t[7])
