@@ -35,7 +35,8 @@ def p_instruccion(t):
     | eliminar
     | soltar
     | crear
-    | transaccion"""
+    | transaccion
+    | unir"""
     t[0] = t[1]
 
 # Manejo de errores sintácticos
@@ -54,7 +55,7 @@ def analizar_consulta(consulta):
     return parser.parse(consulta)
 
 resultado = analizar_consulta("""
-SOLTAR TABLA cuenca 
+UNIR COMPLETO departamentos CON departamento = id
 """)
 
 print("Resultado de la consulta:")

@@ -50,9 +50,12 @@ tokens = [
     "A",  # TO
     # Unión de Tablas
     "UNIR",  # JOIN
-    "UNIR_INTERIOR",  # INNER JOIN
-    "UNIR_IZQUIERDA",  # LEFT JOIN
-    "UNIR_DERECHA",  # RIGHT JOIN
+    "NORMAL",  # INNER
+    "IZQUIERDO",  # LEFT JOIN
+    "DERECHO",  # RIGHT JOIN
+    "COMPLETO", #FULL 
+    "CON", # ON (para condiciones de JOIN)
+    
     # Operadores aritmeticos
     "MAS",  # +
     "MENOS",  # -
@@ -168,6 +171,11 @@ t_A = r"A"
 
 # Unión de Tablas
 t_UNIR = r"UNIR"
+t_NORMAL = r'NORMAL'
+t_IZQUIERDO = r'IZQUIERDO'
+t_DERECHO = r'DERECHO'
+t_COMPLETO = r'COMPLETO'
+t_CON = r'CON'
 
 # Operadores aritmeticos
 t_MAS = r"\+"
@@ -357,9 +365,11 @@ def t_IDENTIFICADOR(t):
         "A": "A",
         # Unión de Tablas
         "UNIR": "UNIR",
-        "UNIR_INTERIOR": "UNIR_INTERIOR",
-        "UNIR_IZQUIERDA": "UNIR_IZQUIERDA",
-        "UNIR_DERECHA": "UNIR_DERECHA",
+        "NORMAL": "NORMAL",  # INNER JOIN
+        "IZQUIERDO": "IZQUIERDO",  # LEFT JOIN
+        "DERECHO": "DERECHO",  # RIGHT JOIN
+        "COMPLETO": "COMPLETO",  # FULL JOIN
+        "CON": "CON",  # ON (condición de JOIN)
         # Palabras clave de Subconsulta
         "EXISTE": "EXISTE",
         "TODOS": "TODOS",
