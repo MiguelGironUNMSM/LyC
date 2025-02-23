@@ -464,7 +464,7 @@ def t_IDENTIFICADOR_INVALIDO(t):
 lexer = lex.lex()
 
 # # Prueba con una consulta
-test_query = """ALTERAR TABLA empleados CAMBIAR nombre A "nuevoNombre"
+test_query = """ELIMINAR DESDE Clientes DONDE ID = 5.5
 
 """
 lexer.input(test_query)

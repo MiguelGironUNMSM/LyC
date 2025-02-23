@@ -36,7 +36,8 @@ def p_instruccion(t):
     | soltar
     | crear
     | transaccion
-    | unir"""
+    | unir
+    | valor"""
     t[0] = t[1]
 
 # Manejo de errores sintácticos
@@ -55,7 +56,7 @@ def analizar_consulta(consulta):
     return parser.parse(consulta)
 
 resultado = analizar_consulta("""
-UNIR COMPLETO departamentos CON departamento = id
+ELIMINAR PRIMEROS 3 DESDE Ventas DONDE Edad > 30
 """)
 
 print("Resultado de la consulta:")
