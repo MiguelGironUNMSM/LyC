@@ -119,9 +119,9 @@ Rule 61    instruccion -> crear
 Rule 62    instruccion -> transaccion
 Rule 63    instruccion -> unir
 Rule 64    instruccion -> valor
-Rule 65    opt_column -> COLUMNA
-Rule 66    opt_column -> empty
-Rule 67    clausula -> DONDE IDENTIFICADOR comparador valor
+Rule 65    clausula -> DONDE IDENTIFICADOR comparador valor
+Rule 66    opt_column -> COLUMNA
+Rule 67    opt_column -> empty
 Rule 68    restricciones -> restricciones restriccion
 Rule 69    restricciones -> restriccion
 Rule 70    restricciones -> empty
@@ -176,7 +176,7 @@ CASO                 :
 CLAVE_FORANEA        : 88
 CLAVE_PRIMARIA       : 87
 COLOCAR              : 4
-COLUMNA              : 65
+COLUMNA              : 66
 COMA                 : 17 19 38 42 54 78 80
 COMENTARIO           : 
 COMILLAS_SIMPLES     : 
@@ -195,7 +195,7 @@ DESDE                : 9 35 39 44 50
 DIFERENTE            : 76
 DISTINTO             : 51
 DIVISION             : 
-DONDE                : 67
+DONDE                : 65
 ELIMINAR             : 35 39 44 50
 ENTERO               : 20
 ENTONCES             : 
@@ -207,7 +207,7 @@ EXISTE               : 34
 FECHA                : 23
 FIN                  : 
 FLOTANTE             : 27
-IDENTIFICADOR        : 1 3 4 5 6 7 8 9 14 16 17 18 19 35 39 43 43 44 50 67 77 78 82 92 92 93 93 94 99 100 101
+IDENTIFICADOR        : 1 3 4 5 6 7 8 9 14 16 17 18 19 35 39 43 43 44 50 65 77 78 82 92 92 93 93 94 99 100 101
 IDENTIFICADOR_INVALIDO : 
 IGUALDAD             : 18 19 43 71
 INICIAR_TRANSACCION  : 2
@@ -278,7 +278,7 @@ alteracion           : 36 42
 alteraciones         : 14 42
 alterar              : 57
 clausula             : 39 50 97 98
-comparador           : 67
+comparador           : 65
 condicion            : 8
 condicion_order      : 
 condicional          : 7
@@ -289,7 +289,7 @@ eliminar_donde       : 11
 eliminar_hasta_donde : 13
 eliminar_hasta_todo  : 12
 eliminar_todo        : 10
-empty                : 33 47 52 66 70 96
+empty                : 33 47 52 67 70 96
 especificacion       : 
 fila                 : 37 38
 floro                : 40 41
@@ -314,7 +314,7 @@ tipo_dato            : 1
 tipo_unir            : 8
 transaccion          : 62
 unir                 : 63
-valor                : 18 19 53 54 64 67
+valor                : 18 19 53 54 64 65
 
 Parsing method: LALR
 
@@ -888,7 +888,7 @@ state 58
 
     (35) eliminar_todo -> ELIMINAR DESDE IDENTIFICADOR .
     (39) eliminar_donde -> ELIMINAR DESDE IDENTIFICADOR . clausula
-    (67) clausula -> . DONDE IDENTIFICADOR comparador valor
+    (65) clausula -> . DONDE IDENTIFICADOR comparador valor
 
     $end            reduce using rule 35 (eliminar_todo -> ELIMINAR DESDE IDENTIFICADOR .)
     DONDE           shift and go to state 78
@@ -953,8 +953,8 @@ state 65
 state 66
 
     (48) alteracion -> AGREGAR . opt_column lista_columna_crear
-    (65) opt_column -> . COLUMNA
-    (66) opt_column -> . empty
+    (66) opt_column -> . COLUMNA
+    (67) opt_column -> . empty
     (49) empty -> .
 
     COLUMNA         shift and go to state 86
@@ -966,8 +966,8 @@ state 66
 state 67
 
     (82) alteracion -> SOLTAR . opt_column IDENTIFICADOR
-    (65) opt_column -> . COLUMNA
-    (66) opt_column -> . empty
+    (66) opt_column -> . COLUMNA
+    (67) opt_column -> . empty
     (49) empty -> .
 
     COLUMNA         shift and go to state 86
@@ -979,8 +979,8 @@ state 67
 state 68
 
     (91) alteracion -> MODIFICAR . opt_column lista_columna_crear
-    (65) opt_column -> . COLUMNA
-    (66) opt_column -> . empty
+    (66) opt_column -> . COLUMNA
+    (67) opt_column -> . empty
     (49) empty -> .
 
     COLUMNA         shift and go to state 86
@@ -992,8 +992,8 @@ state 68
 state 69
 
     (92) alteracion -> RENOMBRAR . opt_column IDENTIFICADOR A IDENTIFICADOR
-    (65) opt_column -> . COLUMNA
-    (66) opt_column -> . empty
+    (66) opt_column -> . COLUMNA
+    (67) opt_column -> . empty
     (49) empty -> .
 
     COLUMNA         shift and go to state 86
@@ -1005,8 +1005,8 @@ state 69
 state 70
 
     (94) alteracion -> CAMBIAR . opt_column IDENTIFICADOR lista_columna_crear
-    (65) opt_column -> . COLUMNA
-    (66) opt_column -> . empty
+    (66) opt_column -> . COLUMNA
+    (67) opt_column -> . empty
     (49) empty -> .
 
     COLUMNA         shift and go to state 86
@@ -1031,7 +1031,7 @@ state 72
     (97) condiciones -> . condiciones clausula
     (98) condiciones -> . clausula
     (49) empty -> .
-    (67) clausula -> . DONDE IDENTIFICADOR comparador valor
+    (65) clausula -> . DONDE IDENTIFICADOR comparador valor
 
     COMA            shift and go to state 94
     $end            reduce using rule 49 (empty -> .)
@@ -1086,7 +1086,7 @@ state 77
 
 state 78
 
-    (67) clausula -> DONDE . IDENTIFICADOR comparador valor
+    (65) clausula -> DONDE . IDENTIFICADOR comparador valor
 
     IDENTIFICADOR   shift and go to state 104
 
@@ -1107,7 +1107,7 @@ state 80
     (97) condiciones -> . condiciones clausula
     (98) condiciones -> . clausula
     (49) empty -> .
-    (67) clausula -> . DONDE IDENTIFICADOR comparador valor
+    (65) clausula -> . DONDE IDENTIFICADOR comparador valor
 
     $end            reduce using rule 49 (empty -> .)
     DONDE           shift and go to state 78
@@ -1170,16 +1170,16 @@ state 85
 
 state 86
 
-    (65) opt_column -> COLUMNA .
+    (66) opt_column -> COLUMNA .
 
-    IDENTIFICADOR   reduce using rule 65 (opt_column -> COLUMNA .)
+    IDENTIFICADOR   reduce using rule 66 (opt_column -> COLUMNA .)
 
 
 state 87
 
-    (66) opt_column -> empty .
+    (67) opt_column -> empty .
 
-    IDENTIFICADOR   reduce using rule 66 (opt_column -> empty .)
+    IDENTIFICADOR   reduce using rule 67 (opt_column -> empty .)
 
 
 state 88
@@ -1245,7 +1245,7 @@ state 95
 
     (95) opt_condiciones -> condiciones .
     (97) condiciones -> condiciones . clausula
-    (67) clausula -> . DONDE IDENTIFICADOR comparador valor
+    (65) clausula -> . DONDE IDENTIFICADOR comparador valor
 
     $end            reduce using rule 95 (opt_condiciones -> condiciones .)
     DONDE           shift and go to state 78
@@ -1330,7 +1330,7 @@ state 103
 
 state 104
 
-    (67) clausula -> DONDE IDENTIFICADOR . comparador valor
+    (65) clausula -> DONDE IDENTIFICADOR . comparador valor
     (71) comparador -> . IGUALDAD
     (72) comparador -> . MAYOR
     (73) comparador -> . MENOR
@@ -1351,7 +1351,7 @@ state 105
 
     (44) eliminar_hasta_todo -> ELIMINAR PRIMEROS VALOR_NUMERO DESDE IDENTIFICADOR .
     (50) eliminar_hasta_donde -> ELIMINAR PRIMEROS VALOR_NUMERO DESDE IDENTIFICADOR . clausula
-    (67) clausula -> . DONDE IDENTIFICADOR comparador valor
+    (65) clausula -> . DONDE IDENTIFICADOR comparador valor
 
     $end            reduce using rule 44 (eliminar_hasta_todo -> ELIMINAR PRIMEROS VALOR_NUMERO DESDE IDENTIFICADOR .)
     DONDE           shift and go to state 78
@@ -1618,7 +1618,7 @@ state 129
 
 state 130
 
-    (67) clausula -> DONDE IDENTIFICADOR comparador . valor
+    (65) clausula -> DONDE IDENTIFICADOR comparador . valor
     (83) valor -> . VALOR_NUMERO
     (84) valor -> . VALOR_CADENA
     (85) valor -> . VALOR_BOOLEANO
@@ -1873,10 +1873,10 @@ state 152
 
 state 153
 
-    (67) clausula -> DONDE IDENTIFICADOR comparador valor .
+    (65) clausula -> DONDE IDENTIFICADOR comparador valor .
 
-    $end            reduce using rule 67 (clausula -> DONDE IDENTIFICADOR comparador valor .)
-    DONDE           reduce using rule 67 (clausula -> DONDE IDENTIFICADOR comparador valor .)
+    $end            reduce using rule 65 (clausula -> DONDE IDENTIFICADOR comparador valor .)
+    DONDE           reduce using rule 65 (clausula -> DONDE IDENTIFICADOR comparador valor .)
 
 
 state 154

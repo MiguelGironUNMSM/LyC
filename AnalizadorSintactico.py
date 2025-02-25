@@ -1,7 +1,7 @@
 import ply.yacc as yacc
 from AnalizadorLexico import tokens  # Importar los tokens de tu analizador léxico
 
-from reglas import  ReglasComunes, Select, Insert, Create, Alter, Update, Delete, DropTable, Transaction, Join
+from reglas import ReglasComunes, Select, Insert, Create, Alter, Update, Delete, DropTable, Transaction, Join
 
 modulos = [ReglasComunes, Select, Insert, Create, Alter, Update, Delete, DropTable, Transaction, Join]
 
