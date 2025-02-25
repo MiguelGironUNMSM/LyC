@@ -1,44 +1,54 @@
-class Nodo:
+class Instruccion:
     def analizar_semantica(self, base_datos):
         raise NotImplementedError()
     
     def ejecutar(self):
         raise NotImplementedError()
     
-class Crear(Nodo):
-    def __init__(self, nombre_tabla, columnas):
-        self.nombre_tabla = nombre_tabla
-        self.columnas = columnas
-        
-    def analizar_semantica(self, base_datos):
-        
-        # Verificar que la tabla no exista
-        if self.nombre_tabla in base_datos:
-            raise Exception(f"La tabla {self.nombre_tabla} ya existe")
-        
-        # Verificar que se estén creando columnas en dicha tabla
-        if not self.columnas:
-            raise Exception(f"La tabla {self.nombre_tabla} debe tener al menos una columna")
-        
-        # Verificar que las columnas no existan (la tabla sí existe)
-        
+class Seleccion(Instruccion):
+    def __init__(self, columnas, tabla, condiciones=None):
+        self.columnas = columnas  # Lista de columnas a seleccionar
+        self.tabla = tabla  # Nombre de la tabla
+        self.condiciones = condiciones  # Condiciones opcionales
 
-def analizar(raiz, base_datos):
-    if not isinstance(raiz, Nodo):
+    def analizar_semantica(self, base_datos):
+        """Verifica que la tabla y las columnas existan en la base de datos."""
+        if self.tabla not in base_datos:
+            raise Exception(f"Error: La tabla '{self.tabla}' no existe.")
+        
+        columnas_disponibles = base_datos[self.tabla]["columnas"]
+        
+        for columna in self.columnas:
+            if columna != "*" and columna not in columnas_disponibles:
+                raise Exception(f"Error: La columna '{columna}' no existe en '{self.tabla}'.")
+
+    def ejecutar(self):
+        """Genera la consulta SQL en formato de texto."""
+        sql = f"SELECT {', '.join(self.columnas)} FROM {self.tabla}"
+        if self.condiciones:
+            sql += f" WHERE {self.condiciones}"
+        return sql
+    
+def analizar(query, base_datos):
+    if not isinstance(query, Instruccion):
         raise Exception
     
     try:
-        raiz.analizar_semantica(base_datos)
-        raiz.ejecutar()
+        query.analizar_semantica(base_datos)
+        sql_generado = query.ejecutar()
+        print("SQL Generado:", sql_generado)  # Muestra la consulta generada
+        return sql_generado  # Devuelve la consulta
     except Exception as e:
         print("Error:", e)
-        
-base_de_datos = {
+        return None
+
+# Base de datos simulada        
+base_de_datos = {  # Osea si se encuentran estas cositas, para hacer validaciones.
     "Usuarios": {
         "columnas": ["id", "nombre", "edad"]
     }
 }
 
 
-consulta = Insertar("Usuarios", ["apellido", "edad"], [25, "Juan"])
-analizar(consulta, base_de_datos)  # Insertando en la tabla Usuarios los valores ['Juan', 25]
+consulta = Seleccion(["nombre", "edad"], "Usuarios")
+analizar(consulta, base_de_datos)  

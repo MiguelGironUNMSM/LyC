@@ -1,3 +1,5 @@
+from AnalizadorSemantico import Seleccion
+
 def p_seleccion(t):
     """seleccion : SELECCIONAR lista_floro lista_columnas DESDE IDENTIFICADOR opt_condiciones"""
     # t[1] : SELECCIONAR
