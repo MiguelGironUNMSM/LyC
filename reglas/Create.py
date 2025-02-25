@@ -4,7 +4,7 @@ def p_crear(t):
     """crear : CREAR TABLA IDENTIFICADOR PARENTESIS_IZQ lista_columnas_crear PARENTESIS_DER"""
     # t[1] : CREAR
     # t[2] : TABLA
-    # t[3] : IDENTIFICADOR
+    # t[3] : IDENTIFICADOR (nombre de la variable)
     # t[4] : PARENTESIS_IZQ
     # t[5] : lista_columnas_crear ("columna", nombreColumna, tipoDato, restricciones)
     # t[6] : PARENTESIS_DER

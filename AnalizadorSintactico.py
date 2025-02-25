@@ -54,3 +54,5 @@ parser = yacc.yacc(start='instruccion')
 # Función para analizar una consulta SQL en español
 def analizar_sintaxis(consulta):
     return parser.parse(consulta)
+
+
