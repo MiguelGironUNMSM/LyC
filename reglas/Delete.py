@@ -1,4 +1,4 @@
-from clases.Eliminar import E
+from clases.Eliminar import Eliminar
 
 # DELETE FROM 'nombreTabla'
 def p_eliminar(t):
@@ -11,25 +11,26 @@ def p_eliminar(t):
 # 1️⃣ Eliminar todos los registros de la tabla
 def p_eliminar_todo(t):
     """eliminar_todo : ELIMINAR DESDE IDENTIFICADOR"""
-    t[0] = ("eliminar todo", t[2], "todo")  # `todo` indica que elimina todo
-    
+    t[0] = Eliminar(tabla = t[3])
+
 def p_eliminar_donde(t):
     """eliminar_donde : ELIMINAR DESDE IDENTIFICADOR clausula"""
-    t[0] = ("eliminar con condicion", t[3], t[4])   # t[4] es la condición
+    t[0] = Eliminar(tabla= t[3], clausula = t[4])
 
 # 3️⃣ Eliminar los primeros `N` registros sin condición
 def p_eliminar_hasta_todo(t):
     """eliminar_hasta_todo : ELIMINAR PRIMEROS VALOR_NUMERO DESDE IDENTIFICADOR"""
-    t[0] = ("eliminar todo con tope", t[4], t[2], "todo")  # `t[2]` es `N`, `todo` indica que elimina sin filtro
+    t[0] = Eliminar(tabla=t[5], limite=t[3])  # `t[3]` es `N`, `t[5]` es la tabla
 
 # 4️⃣ Eliminar los primeros `N` registros con una condición
 def p_eliminar_hasta_donde(t):
     """eliminar_hasta_donde : ELIMINAR PRIMEROS VALOR_NUMERO DESDE IDENTIFICADOR clausula"""
-    t[0] = ("eliminar con condicion con tope", t[4], t[2], t[5], t[6])  # `t[2]` es `N`, `t[5]` es la condición
-    
+    # `t[3]` es `N`, `t[5]` es la tabla, `t[6]` la condición
+    t[0] = Eliminar(tabla=t[5], clausula=t[6], limite=t[3])  
+
 def p_clausula(t):
     """clausula : DONDE IDENTIFICADOR comparador valor"""
-    t[0] = (t[3], t[2], t[4])
+    t[0] = f"{t[2]} {t[3]} {t[4]}" 
     
 def p_comparador(t):
     """comparador : IGUALDAD

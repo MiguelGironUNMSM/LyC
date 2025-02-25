@@ -1,8 +1,9 @@
 from AnalizadorLexico import analizar_lexico
 from AnalizadorSintactico import analizar_sintaxis
+from clases.Eliminar import Eliminar
 
 query = """
-SELECCIONAR nombre , apellido DESDE Usuarios
+ELIMINAR DESDE empleados 
 """
 
 resultado_lexico = analizar_lexico(query)
@@ -10,12 +11,8 @@ print("Resultado del analisis lexico:")
 for token in resultado_lexico:
     print(token)
 
-resultado_sintactico = analizar_sintaxis(query)
-print("\nResultado del analisis sintactico:")
-print(resultado_sintactico)
-
 # Base de datos simulada        
-base_de_datos = {
+base_datos = {
     "empleados": {
         "columnas": {"id": "INT", "nombre": "VARCHAR", "edad": "INT" },
         "llave_primaria": "id",
@@ -27,3 +24,6 @@ base_de_datos = {
     }
 }
 
+resultado_sintactico = analizar_sintaxis(query)
+print("\nResultado del analisis sintactico:")
+print(resultado_sintactico.ejecutar(base_datos)) 
