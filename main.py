@@ -17,15 +17,23 @@ print("Resultado del analisis lexico:")
 for token in resultado_lexico:
     print(token)
 
-# Base de datos simulada        
+# Base de datos simulada con restricciones y auto-incremental
 base_datos = {
     "empleados": {
-        "columnas": {"id": "entero", "nombre": "texto", "edad": "INT" },
+        "columnas": {
+            "id": {"tipo": "entero", "restricciones": ["PRIMARY KEY", "AUTOINCREMENT"]},
+            "nombre": {"tipo": "texto", "restricciones": ["NOT NULL"]},
+            "edad": {"tipo": "entero", "restricciones": ["NOT NULL"]},
+            "departamento_id": {"tipo": "entero", "restricciones": ["FOREIGN KEY", "NOT NULL"]}
+        },
         "llave_primaria": "id",
         "llaves_foraneas": {"departamento_id": "departamentos.id"}
     },
     "departamentos": {
-        "columnas": {"id": "entero", "nombre": "texto"},
+        "columnas": {
+            "id": {"tipo": "entero", "restricciones": ["PRIMARY KEY", "AUTOINCREMENT"]},
+            "nombre": {"tipo": "texto", "restricciones": ["NOT NULL"]}
+        },
         "llave_primaria": "id"
     }
 }
@@ -33,3 +41,4 @@ base_datos = {
 resultado_sintactico = analizar_sintaxis(query)
 print("\nResultado del analisis sintáctico:")
 print(resultado_sintactico)
+print(resultado_sintactico.ejecutar(base_datos))
