@@ -1,0 +1,1 @@
+from AnalizadorSemantico import Instruccion

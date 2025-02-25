@@ -1,3 +1,5 @@
+from clases.Eliminar import E
+
 # DELETE FROM 'nombreTabla'
 def p_eliminar(t):
     """eliminar : eliminar_todo
