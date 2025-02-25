@@ -1,7 +1,6 @@
 from AnalizadorSemantico import Instruccion
 
 class Soltar(Instruccion):
-
     def __init__(self,tabla,condicional=None):
         self.tabla = tabla
         self.condicional = condicional
@@ -14,6 +13,6 @@ class Soltar(Instruccion):
 
         sql = f"DROP TABLE {self.tabla}"
         if self.condicional:
-            sql +=
+            sql += f" IF EXIST"
+        return sql
         
-
