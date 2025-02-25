@@ -16,5 +16,14 @@ class Actualizar_tabla(Instruccion):
         if (self.nombre_tabla not in base_datos):
             raise Exception(f"La tabla '{self.nombre_tabla}' no existe.")
         
-    def ejecutar():
-        pass
+        for alteracion in self.alteraciones:
+            alteracion.analizar_semantica(base_datos, self.nombre_tabla)
+        
+        
+    def ejecutar(self, base_datos):
+        self.analizar_semantica(base_datos)
+        
+        sql = f"UPDATE {self.nombre_tabla} SET "
+        sql += ", ".join([alteracion.ejecutar(base_datos, self.nombre_tabla) for alteracion in self.alteraciones])
+        
+        return sql

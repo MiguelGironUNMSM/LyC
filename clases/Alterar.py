@@ -145,14 +145,14 @@ class AgregarColumna(Instruccion):
         # Validar si la tabla tiene la columna
         if nombre_tabla not in base_datos:
             raise Exception(f"La tabla '{nombre_tabla}' no existe.")
-
+       
         for col_def in self.lista_columnas:
             nombre_columna = col_def.nombre
             if nombre_columna in base_datos[nombre_tabla]["columnas"]:
                 raise Exception(f"La columna '{nombre_columna}' ya existe en la tabla '{nombre_tabla}'.")
-            if col_def.tipo_dato not in ["entero", "texto", "fecha", "decimal", "booleano"]:
+            if col_def.tipo_dato not in ["ENTERO", "TEXTO", "FECHA", "DECIMAL", "BOOLEANO"]:
                 raise Exception(f"El tipo de dato '{col_def.tipo_dato}' no es válido para la columna '{nombre_columna}'.")
-            if not all(restriccion in ["NOT NULL", "UNIQUE", "PRIMARY KEY", "FOREIGN KEY"] for restriccion in col_def.restricciones):
+            if not all(restriccion in ["NO NULO", "UNICO", "LLAVE PRIMARIA", "LLAVE FORANEA"] for restriccion in col_def.restricciones):
                 raise Exception(f"Las restricciones para '{nombre_columna}' no son válidas.")
     
     def ejecutar(self, base_datos, nombre_tabla):
