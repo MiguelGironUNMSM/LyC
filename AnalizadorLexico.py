@@ -463,12 +463,10 @@ def t_IDENTIFICADOR_INVALIDO(t):
 
 lexer = lex.lex()
 
-# # Prueba con una consulta
-test_query = """ELIMINAR DESDE Clientes DONDE ID = 5.5
-
-"""
-lexer.input(test_query)
-# Tokenize the input
-
-for tok in lexer:
-    print(tok)
+def analizar_lexico(query):
+    lexer.input(query)
+    tokens = []
+    for token in lexer:
+        tokens.append(token)
+    return tokens
+        

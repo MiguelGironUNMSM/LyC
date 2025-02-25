@@ -1,10 +1,18 @@
-from AnalizadorSintactico import analizar_consulta
+from AnalizadorLexico import analizar_lexico
+from AnalizadorSintactico import analizar_sintaxis
 
-resultado = analizar_consulta("""
-UNIR departamentos CON departamento = id;
-""")
+query = """
+ELIMINAR PRIMEROS 3 DESDE Ventas DONDE Edad > 30
+"""
+
+resultado_lexico = analizar_lexico(query)
+print("Resultado del análisis léxico:")
+for token in resultado_lexico:
+    print(token)
+
+resultado_sintactico = analizar_sintaxis(query)
+print("\nResultado del análisis sintáctico:")
+print(resultado_sintactico)
 
 
-print("Resultado de la consulta:")
-print(resultado)
 

@@ -52,12 +52,5 @@ def p_error(t):
 parser = yacc.yacc(start='instruccion')
 
 # Función para analizar una consulta SQL en español
-def analizar_consulta(consulta):
+def analizar_sintaxis(consulta):
     return parser.parse(consulta)
-
-resultado = analizar_consulta("""
-ELIMINAR PRIMEROS 3 DESDE Ventas DONDE Edad > 30
-""")
-
-print("Resultado de la consulta:")
-print(resultado)
