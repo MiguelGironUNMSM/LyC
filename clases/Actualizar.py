@@ -27,11 +27,8 @@ class Actualizar(Instruccion):
         sql = f"UPDATE {self.nombre_tabla} SET "
         sql += ", ".join([alteracion.ejecutar(base_datos, self.nombre_tabla) for alteracion in self.alteraciones])
         
-<<<<<<< HEAD
         if self.condicionales:
             sql += " WHERE "
      
             sql += " AND ".join([condicional.ejecutar(base_datos, self.nombre_tabla) for condicional in self.condicionales])
-=======
->>>>>>> 0b3c593f28bc65878045499b5b85a8779252ad74
         return sql
