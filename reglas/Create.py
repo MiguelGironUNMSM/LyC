@@ -6,13 +6,21 @@ def p_crear(t):
     # t[2] : TABLA
     # t[3] : IDENTIFICADOR (nombre de la variable)
     # t[4] : PARENTESIS_IZQ
-    # t[5] : lista_columnas_crear ("columna", nombreColumna, tipoDato, restricciones)
+    # t[5] : lista_columnas_crear ("columna", nombreColumna, tipoDato, [(restricciones, (tabla_referencia, columna_referencia))])
     # t[6] : PARENTESIS_DER
     
     nombre_tabla = t[3]
     columnas = {}
     llave_primaria = None
     llaves_foraneas = {}
+    
+    for columna in t[5]:
+        nombreColumna = columna[1]
+        tipoDato = columna[2]
+        restricciones = columna[3]
+        
+        if restricciones[0] != "CLAVE_FORANEA":
+            columnas[nombreColumna] = tipoDato
 
     t[0] = ("crear", t[3], t[5])
 

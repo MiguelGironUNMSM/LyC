@@ -6,9 +6,9 @@ from clases.Seleccion import Seleccion
 
 query = """
 CREAR TABLA mascotas (
-    id ENTERO(10) CLAVE_PRIMARIA,
-    nombre TEXTO(20),
-    dueno_id ENTERO(10) CLAVE_FORANEA REFERENCIA duenos(id) 
+    id ENTERO CLAVE_PRIMARIA ,
+    nombre TEXTO,
+    dueno_id ENTERO CLAVE_FORANEA REFERENCIA duenos(id) 
 )
 """
 

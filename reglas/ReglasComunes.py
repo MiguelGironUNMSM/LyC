@@ -5,21 +5,21 @@ def p_lista_columna_crear(t):
     restricciones = list(t[3])
     t[0] = ("columna", nombreColumna, tipoDato, restricciones)
 
-
+# He eliminado "especificacion"
 def p_tipo_dato(t):
-    """tipo_dato : ENTERO especificacion
-                 | CADENA especificacion
-                 | CARACTER especificacion
-                 | FECHA especificacion
-                 | BOOLEANO especificacion
-                 | DECIMAL especificacion
-                 | TEXTO especificacion
-                 | FLOTANTE especificacion"""
+    """tipo_dato : ENTERO
+                 | CADENA
+                 | CARACTER
+                 | FECHA
+                 | BOOLEANO
+                 | DECIMAL
+                 | TEXTO
+                 | FLOTANTE"""
     if len(t) == 3:
-        t[0] = (t[1], t[2])
+        t[0] = t[1]  # (t[1], t[2])
     else:
-        t[0] = (t[1], None)
-
+        t[0] = t[1]  # (t[1], None)
+ 
 
 def p_especificacion(t):
     """especificacion : PARENTESIS_IZQ VALOR_NUMERO PARENTESIS_DER
@@ -47,11 +47,14 @@ def p_restriccion(t):
                    | CLAVE_FORANEA referencia 
                    | AUTOINCREMENTAL
                    | NO_NULO"""
-    t[0] = t[1]
+    if t[1] == "CLAVE_FORANEA":
+        t[0] = (t[1], t[2])
+    else:
+        t[0] = t[1]
     
 def p_referencia(t):
     """referencia : REFERENCIA IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER"""
-    t[0] = (t[1], t[3])
+    t[0] = (t[2], t[4])
 
 
 # --- Reglas para cláusulas opcionales (p.ej. DONDE y ORDENAR_POR) ---
