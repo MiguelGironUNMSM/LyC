@@ -15,14 +15,25 @@ def p_crear(t):
     llaves_foraneas = {}
     
     for columna in t[5]:
-        nombreColumna = columna[1]
-        tipoDato = columna[2]
+        nombre_columna = columna[1]
+        tipo_dato = columna[2]
         restricciones = columna[3]
         
-        if restricciones[0] != "CLAVE_FORANEA":
-            columnas[nombreColumna] = tipoDato
-
-    t[0] = ("crear", t[3], t[5])
+        columnas[nombre_columna] = {
+            "tipo": tipo_dato,
+            "restricciones": restricciones
+        }
+        
+        llave_primaria = nombre_columna if "CLAVE_PRIMARIA" in restricciones else None
+        
+  
+        for restriccion in restricciones:
+            if isinstance(restriccion, tuple) and restriccion[0] == "CLAVE FORANEA":
+                tabla_ref, columna_ref = restriccion[1]
+                llaves_foraneas[nombre_columna] = f"{tabla_ref}.{columna_ref}"
+                
+        
+    t[0] = Crear(nombre_tabla, columnas, llave_primaria, llaves_foraneas)
 
 def p_lista_columnas_crear(t):
     """lista_columnas_crear : lista_columnas_crear COMA lista_columna_crear
