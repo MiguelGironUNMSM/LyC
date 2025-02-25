@@ -8,7 +8,7 @@ def p_seleccion(t):
     # t[4] : DESDE
     # t[5] : IDENTIFICADOR (nombre de la tabla)
     # t[6] : opt_condiciones (lista de cláusulas, o [] si no hay)
-    if t[6]:
+    if t[6] == None:
         t[0] = Seleccion(columnas=t[3], tabla = t[5])
     else:
         t[0] = Seleccion(columnas=t[3], tabla = t[5],condiciones = t[6])
@@ -37,9 +37,9 @@ def p_lista_columnas(t):
                       | lista_columnas COMA IDENTIFICADOR
                       | TODO"""
     if len(t) == 2:
-        t[0] = [t[1]]
+        if t[1] == "TODO":
+            t[0] = ["*"]  # Reemplaza "TODO" por "*"
+        else:
+            t[0] = [t[1]]
     elif len(t) == 4:
-        # Se asume que t[1] ya es una tupla ('COLUMNAS', lista) para ir acumulando
-        t[0] = t[1] + [t[3]]
-    else:
-        t[0] = ["*"]
+        t[0] = t[1] + [t[3]]  # Concatena las columnas correctamente

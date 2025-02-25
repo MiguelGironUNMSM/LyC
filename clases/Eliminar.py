@@ -1,18 +1,5 @@
 from AnalizadorSemantico import Instruccion
 
-# Base de datos simulada        
-base_de_datos = {
-    "empleados": {
-        "columnas": {"id": "INT", "nombre": "VARCHAR", "edad": "INT" },
-        "llave_primaria": "id",
-        "llaves_foraneas": {"departamento_id": "departamentos.id"}
-    },
-    "departamentos": {
-        "columnas": {"id": "INT", "nombre": "VARCHAR"},
-        "llave_primaria": "id"
-    }
-}
-
 class Eliminar(Instruccion):
     def __init__(self, tabla, clausula= None, limite = None):
         self.tabla = tabla

@@ -1,19 +1,3 @@
-from AnalizadorLexico import analizar_lexico
-from AnalizadorSintactico import analizar_sintaxis
-from clases.Eliminar import Eliminar
-from clases.Soltar import Soltar
-from clases.Seleccion import Seleccion
-
-query = """
-SELECCIONAR TODO DESDE empleados DONDE nombre = 5.343
-"""
-#ALTERAR TABLA empleados AGREGAR casa ENTERO CLAVE PRIMARIA 
-resultado_lexico = analizar_lexico(query)
-print("Resultado del analisis lexico:")
-for token in resultado_lexico:
-    print(token)
-
-# Base de datos simulada con restricciones y auto-incremental
 base_datos = {
     "empleados": {
         "columnas": {
@@ -34,7 +18,18 @@ base_datos = {
     }
 }
 
-resultado_sintactico = analizar_sintaxis(query)
-print("\nResultado del analisis sintáctico:")
-print(resultado_sintactico)
-print(resultado_sintactico.ejecutar(base_datos))
+def obtener_columnas(tabla):
+    if tabla in base_datos:
+        return list(base_datos[tabla]["columnas"].keys())
+    else:
+        return f"La tabla '{tabla}' no existe en la base de datos."
+columnas_disponibles = list(base_datos["empleados"]["columnas"].keys())
+
+# Ejemplo: Obtener las columnas de la tabla "empleados"
+columnas_empleados = obtener_columnas("empleados")
+print(columnas_empleados)
+print(columnas_disponibles)
+
+gaa= ['id', 'nombre', 'edad', 'departamento_id']
+for g in gaa:
+    print(g)

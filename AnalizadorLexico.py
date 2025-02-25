@@ -427,7 +427,7 @@ def t_IDENTIFICADOR(t):
 
 def t_VALOR_CADENA(t):
     r"\".*?\" "
-    t.value = t.value[1:-1]
+    t.value = t.value[0:]
     return t
 
 

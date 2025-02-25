@@ -24,8 +24,8 @@ def p_alteraciones_multiple(t):
 # ALTER TABLE ADD COLUMN 'nombreColumna' 'tipoDato' 'reestriccion'
 def p_alteracion_add(t):
     """alteracion : AGREGAR opt_column lista_columna_crear"""
-    # t[0] = ("add_column", t[3])
-    t[0] = AgregarColumna(lista_columnas= t[3])
+    #t[0] = ("add_column", t[3])
+    columnas = [Columna(nombre=col[0], tipo_dato=col[1], restricciones=col[2]) for col in t[3]]
 
 # Regla para la opción COLUMN (puede estar o no)
 def p_opt_column(t):
@@ -60,5 +60,5 @@ def p_alteracion_rename(t):
 #    ALTER TABLE [table_name] CHANGE [old_column_name] [new_column_name] [column definition]
 def p_alteracion_change(t):
     """alteracion : CAMBIAR opt_column IDENTIFICADOR lista_columna_crear"""
-    t[0] = ("change_column", t[3], t[4])
+    # t[0] = ("change_column", t[3], t[4])
     t[0] = CambiarColumna(nombre_viejo= t[3], nueva_definicion= t[4])

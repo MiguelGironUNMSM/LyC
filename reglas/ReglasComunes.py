@@ -2,8 +2,8 @@ def p_lista_columna_crear(t):
     """lista_columna_crear : IDENTIFICADOR tipo_dato restricciones"""
     nombreColumna = t[1]
     tipoDato = t[2]
-    restricciones = list(t[3])
-    t[0] = ("columna", nombreColumna, tipoDato, restricciones)
+    restricciones = t[3] if len(t) > 3 else []
+    t[0] =  [nombreColumna, tipoDato, restricciones]
 
 # He eliminado "especificacion"
 def p_tipo_dato(t):
@@ -62,8 +62,11 @@ def p_referencia(t):
 def p_opt_condiciones(t):
     """opt_condiciones : condiciones
                        | empty"""
-    t[0] = t[1] if t[1] is not None else []
 
+    if t[1] is not None:
+        t[0] = f"{t[1]}"  
+    else:
+        t[0] = f""
 
 def p_condiciones(t):
     """condiciones : condiciones clausula
@@ -71,13 +74,13 @@ def p_condiciones(t):
     if len(t) == 3:
         t[0] = t[1] + [t[2]]
     else:
-        t[0] = [t[1]]
+        t[0] = f"{t[1]}"
 
 
 def p_clausula(t):
     """clausula : DONDE condicion
                 | ORDENAR_POR condicion_order"""
-    t[0] = (t[1], t[2])
+    t[0] = t[2]
 
 
 def p_condicion(t):
@@ -85,9 +88,9 @@ def p_condicion(t):
                  | condicion Y condicion
                  | condicion O condicion"""
     if len(t) == 4:
-        t[0] = (t[1], t[2], t[3])
+        t[0] = f"{t[1]} {t[2]} {t[3]}"
     else:
-        t[0] = (t[1], t[2], t[3], t[4])
+        t[0] = f"{t[1]} and {t[3]}"
 
 
 def p_comparador(t):
