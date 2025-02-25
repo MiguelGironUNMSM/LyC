@@ -16,8 +16,5 @@ class Actualizar_tabla(Instruccion):
         if (self.nombre_tabla not in base_datos):
             raise Exception(f"La tabla '{self.nombre_tabla}' no existe.")
         
-        for alteracion in self.alteraciones:
-            
-        
     def ejecutar():
         pass
