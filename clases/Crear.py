@@ -7,18 +7,6 @@ class Instruccion:
     def ejecutar(self, base_datos):
         raise NotImplementedError()
 
-# Base de datos simulada        
-base_de_datos = {
-    "empleados": {
-        "columnas": {"id": "INT", "nombre": "VARCHAR", "edad": "INT" },
-        "llave_primaria": "id",
-        "llaves_foraneas": {"departamento_id": "departamentos.id"}
-    },
-    "departamentos": {
-        "columnas": {"id": "INT", "nombre": "VARCHAR"},
-        "llave_primaria": "id"
-    }
-}
 
 class Crear(Instruccion):
     def __init__(self, nombre_tabla, columnas, llave_primaria=None, llaves_foraneas=None):
@@ -41,6 +29,10 @@ class Crear(Instruccion):
         if len(nombres_columnas) != len(self.columnas):
             raise Exception(f"Error semántico: Hay columnas duplicadas en la tabla '{self.nombre_tabla}'")
         
+        # Se verifica que solo exista una llave primaria
+        if sum(1 for col in self.columnas if "CLAVE PRIMARIA" in self.columnas[col]["restricciones"]) > 1:
+            raise Exception(f"Error semántico: la tabla '{self.nombre_tabla}' tiene más de una llave primaria.")
+        
         # Se verifica que la llave primaria (si es que hay), también se encuentre en las columnas
         if self.llave_primaria:
             if self.llave_primaria not in self.columnas:
@@ -58,7 +50,11 @@ class Crear(Instruccion):
             
             if ref_columna not in base_datos[ref_tabla]["columnas"]:
                 raise Exception(f"Error semántico: la columna referenciada '{ref_columna}' no existe en la tabla '{ref_tabla}'.")
-
+            
+            # Se valida que la llave foránea apunte a una llave primaria de la tabla que se está referenciando
+            if "CLAVE PRIMARIA" not in base_datos[ref_tabla]["columnas"][ref_columna]["restricciones"]:
+                raise Exception(f"Error semántico: la columna referenciada '{ref_columna}' en la tabla '{ref_tabla}' no es llave primaria.")
+        
     def ejecutar(self, base_datos):
         # Se ejecuta el análisis semántico
         self.analizar_semantica(base_datos)
@@ -77,16 +73,3 @@ class Crear(Instruccion):
         return sql
     
     
-nodo_crear = Crear(
-    nombre_tabla="empleado",
-    columnas={
-        "id": "INT",
-        "nombre": "VARCHAR",
-        "edad": "INT",
-        "departamento_id": "INT"
-    },
-    llave_primaria="id",
-    llaves_foraneas={"departamento_id": "departamentos.id"}
-)
-
-print(nodo_crear.ejecutar(base_de_datos))

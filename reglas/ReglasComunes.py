@@ -47,7 +47,7 @@ def p_restriccion(t):
                    | CLAVE_FORANEA referencia 
                    | AUTOINCREMENTAL
                    | NO_NULO"""
-    if t[1] == "CLAVE_FORANEA":
+    if t[1] == "CLAVE FORANEA":
         t[0] = (t[1], t[2])
     else:
         t[0] = t[1]
