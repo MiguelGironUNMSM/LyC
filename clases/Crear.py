@@ -8,44 +8,53 @@ class Crear(Instruccion):
         self.llaves_foraneas = llaves_foraneas if llaves_foraneas else {}
         
     def analizar_semantica(self, base_datos):
-        # Se verifica si la tabla ya existe
-        if self.nombre_tabla in base_datos:
-            raise Exception(f"Error semántico: la tabla '{self.nombre_tabla}' ya existe.")
+     # Se convierte la lista en un diccionario temporal para validar duplicados
+     columnas_dict = {}
+    
+     for nombre_columna, tipo_dato, restricciones in self.columnas:
+        if nombre_columna in columnas_dict:
+            raise Exception(f"Error semántico: la columna '{nombre_columna}' está duplicada en la tabla '{self.nombre_tabla}'.")
         
-        # Se verifica que se estén definiendo columnas
-        if not self.columnas:
-            raise Exception(f"Error semántico: la tabla '{self.nombre_tabla}' debe tener al menos una columna.")
+        columnas_dict[nombre_columna] = {
+            "tipo": tipo_dato,
+            "restricciones": restricciones
+        }
+
+     # Se verifica si la tabla ya existe
+     if self.nombre_tabla in base_datos:
+        raise Exception(f"Error semántico: la tabla '{self.nombre_tabla}' ya existe.")
+    
+     # Se verifica que se estén definiendo columnas
+     if not columnas_dict:
+        raise Exception(f"Error semántico: la tabla '{self.nombre_tabla}' debe tener al menos una columna.")
+    
+     # ✅ Ahora `self.columnas` es un diccionario generado desde la lista
+     self.columnas = columnas_dict  
+
+     # Se verifica que solo exista una llave primaria
+     if sum(1 for col in self.columnas if "CLAVE PRIMARIA" in self.columnas[col]["restricciones"]) > 1:
+        raise Exception(f"Error semántico: la tabla '{self.nombre_tabla}' tiene más de una llave primaria.")
+    
+     # Se verifica que la llave primaria (si hay) exista en las columnas
+     if self.llave_primaria and self.llave_primaria not in self.columnas:
+        raise Exception(f"Error semántico: la llave primaria '{self.llave_primaria}' no está en las columnas de la tabla '{self.nombre_tabla}'.")
+    
+     # Se validan las llaves foráneas
+     for col, ref in self.llaves_foraneas.items():
+        if col not in self.columnas:
+            raise Exception(f"Error semántico: la columna '{col}' definida como llave foránea no existe en la tabla {self.nombre_tabla}.")
         
-        # Se verifica la unicidad de nombres de columnas
-        nombres_columnas = set(self.columnas.keys())
-        if len(nombres_columnas) != len(self.columnas):
-            raise Exception(f"Error semántico: Hay columnas duplicadas en la tabla '{self.nombre_tabla}'")
+        ref_tabla, ref_columna = ref.split(".")
         
-        # Se verifica que solo exista una llave primaria
-        if sum(1 for col in self.columnas if "CLAVE PRIMARIA" in self.columnas[col]["restricciones"]) > 1:
-            raise Exception(f"Error semántico: la tabla '{self.nombre_tabla}' tiene más de una llave primaria.")
+        if ref_tabla not in base_datos:
+            raise Exception(f"Error semántico: la tabla referenciada '{ref_tabla}' no existe.")
         
-        # Se verifica que la llave primaria (si es que hay), también se encuentre en las columnas
-        if self.llave_primaria:
-            if self.llave_primaria not in self.columnas:
-                raise Exception(f"Error semántico:: la llave primaria '{self.llave_primaria}' no está en las columnas de la tabla '{self.nombre_tabla}.'")
-            
-        # Se validan las llaves foráneas (si es que existen)
-        for col, ref in self.llaves_foraneas.items():
-            if col not in self.columnas:
-                raise Exception(f"Error semántico: la columna '{col}' definida como llave foránea no existe en la tabla {self.nombre_tabla}")
-            
-            ref_tabla, ref_columna = ref.split(".")
-            
-            if ref_tabla not in base_datos:
-                raise Exception(f"Error semántico: la tabla referenciada '{ref_tabla}' no existe.")
-            
-            if ref_columna not in base_datos[ref_tabla]["columnas"]:
-                raise Exception(f"Error semántico: la columna referenciada '{ref_columna}' no existe en la tabla '{ref_tabla}'.")
-            
-            # Se valida que la llave foránea apunte a una llave primaria de la tabla que se está referenciando
-            if "CLAVE PRIMARIA" not in base_datos[ref_tabla]["columnas"][ref_columna]["restricciones"]:
-                raise Exception(f"Error semántico: la columna referenciada '{ref_columna}' en la tabla '{ref_tabla}' no es llave primaria.")
+        if ref_columna not in base_datos[ref_tabla]["columnas"]:
+            raise Exception(f"Error semántico: la columna referenciada '{ref_columna}' no existe en la tabla '{ref_tabla}'.")
+        
+        # Se valida que la llave foránea apunte a una llave primaria en la tabla referenciada
+        if "CLAVE PRIMARIA" not in base_datos[ref_tabla]["columnas"][ref_columna]["restricciones"]:
+            raise Exception(f"Error semántico: la columna referenciada '{ref_columna}' en la tabla '{ref_tabla}' no es llave primaria.")
         
     def ejecutar(self, base_datos):
         # Se ejecuta el análisis semántico
