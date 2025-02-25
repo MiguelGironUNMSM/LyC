@@ -86,6 +86,7 @@ tokens = [
     "NO_NULO",  # NOT NULL
     "CLAVE_PRIMARIA",  # PRIMARY KEY
     "CLAVE_FORANEA",  # FOREIGN KEY
+    "REFERENCIA",  # REFERENCES
     "VALOR_CADENA",  # CADENA entre comillas simples
     "VALOR_FLOTANTE",  # FLOTANTE
     "VALOR_BOOLEANO",  # BOOLEANO
@@ -208,6 +209,7 @@ t_NULO = r"NULO"
 t_ENTERO = r"ENTERO"
 t_TEXTO = r"TEXTO"
 t_CARACTER = r"CARACTER"
+t_REFERENCIA = r"REFERENCIA"
 
 # Identificadores / Claves
 # t_CLAVE = r'CLAVE (PRIMARIA|FORANEA)'
@@ -397,6 +399,7 @@ def t_IDENTIFICADOR(t):
         # Identificadores / Claves
         "CLAVE_PRIMARIA": "CLAVE_PRIMARIA",
         "CLAVE_FORANEA": "CLAVE_FORANEA",
+        "REFERENCIA": "REFERENCIA",
         # Palabras clave de Manejo de Procedimientos Almacenados
         "INICIO": "INICIO",
         "FIN": "FIN",

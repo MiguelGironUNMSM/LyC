@@ -13,25 +13,8 @@ def p_crear(t):
     columnas = {}
     llave_primaria = None
     llaves_foraneas = {}
-    
-    for columna in t[5]:
-        nombre_columna = columna[1] # Identificador de la columna
-        tipo_dato = columna[2] # Tipo de dato
-        restricciones = columna[3] # Lista de restricciones
-        
-        columnas[nombre_columna] = tipo_dato
 
-        for restriccion in restricciones:
-            if restriccion == "CLAVE_PRIMARIA":
-                if llave_primaria is not None:
-                    raise Exception(f"Error semántico: Más de una clave primaria en la tabla '{nombre_tabla}'")
-                llave_primaria = nombre_columna
-            elif restriccion.startswith("CLAVE_FORANEA"):
-                referencia = restriccion.split(":")[1]  # Extraer la referencia "tabla.columna"
-                llaves_foraneas[nombre_columna] = referencia
-
-    
-    t[0] = Crear(nombre_tabla, columnas, llave_primaria, llaves_foraneas)
+    t[0] = ("crear", t[3], t[5])
 
 def p_lista_columnas_crear(t):
     """lista_columnas_crear : lista_columnas_crear COMA lista_columna_crear

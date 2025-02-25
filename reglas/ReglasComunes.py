@@ -44,10 +44,14 @@ def p_restricciones(t):
 
 def p_restriccion(t):
     """restriccion : CLAVE_PRIMARIA
-                   | CLAVE_FORANEA
+                   | CLAVE_FORANEA referencia 
                    | AUTOINCREMENTAL
                    | NO_NULO"""
     t[0] = t[1]
+    
+def p_referencia(t):
+    """referencia : REFERENCIA IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER"""
+    t[0] = (t[1], t[3])
 
 
 # --- Reglas para cláusulas opcionales (p.ej. DONDE y ORDENAR_POR) ---

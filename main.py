@@ -6,9 +6,9 @@ from clases.Seleccion import Seleccion
 
 query = """
 CREAR TABLA mascotas (
-    id ENTERO CLAVE_PRIMARIA,
+    id ENTERO(10) CLAVE_PRIMARIA,
     nombre TEXTO(20),
-    dueño_id ENTERO CLAVE_FORANEA REFERENCIAS clientes(id)
+    dueno_id ENTERO(10) CLAVE_FORANEA REFERENCIA duenos(id) 
 )
 """
 
@@ -33,6 +33,3 @@ base_datos = {
 resultado_sintactico = analizar_sintaxis(query)
 print("\nResultado del analisis sintáctico:")
 print(resultado_sintactico)
-
-print("\nResultado del análisis semántico: ")
-print(resultado_sintactico.ejecutar(base_datos)) 
