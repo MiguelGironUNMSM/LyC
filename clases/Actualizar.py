@@ -12,7 +12,12 @@ class Actualizar_tabla(Instruccion):
         self.nombre_tabla = nombre_tabla # Nombre de la tabla a la que se le modificarán los datos
         self.alteraciones = alteraciones # Condiciones que se deben cumplir para modificar los datos de la tabla
         
-    def analizar_semantica():
-        pass
+    def analizar_semantica(self, base_datos):
+        if (self.nombre_tabla not in base_datos):
+            raise Exception(f"La tabla '{self.nombre_tabla}' no existe.")
+        
+        for alteracion in self.alteraciones:
+            
+        
     def ejecutar():
         pass

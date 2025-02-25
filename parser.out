@@ -107,35 +107,35 @@ Rule 49    empty -> <empty>
 Rule 50    eliminar_hasta_donde -> ELIMINAR PRIMEROS VALOR_NUMERO DESDE IDENTIFICADOR clausula
 Rule 51    floro -> DISTINTO
 Rule 52    floro -> empty
-Rule 53    lista_columnas_crear -> lista_columnas_crear COMA lista_columna_crear
-Rule 54    lista_columnas_crear -> lista_columna_crear
-Rule 55    lista_valores -> valor
-Rule 56    lista_valores -> lista_valores COMA valor
-Rule 57    instruccion -> seleccion
-Rule 58    instruccion -> insertar
-Rule 59    instruccion -> alterar
-Rule 60    instruccion -> actualizar
-Rule 61    instruccion -> eliminar
-Rule 62    instruccion -> soltar
-Rule 63    instruccion -> crear
-Rule 64    instruccion -> transaccion
-Rule 65    instruccion -> unir
-Rule 66    instruccion -> valor
-Rule 67    opt_column -> COLUMNA
-Rule 68    opt_column -> empty
-Rule 69    clausula -> DONDE IDENTIFICADOR comparador valor
-Rule 70    restricciones -> restricciones restriccion
-Rule 71    restricciones -> restriccion
-Rule 72    restricciones -> empty
-Rule 73    comparador -> IGUALDAD
-Rule 74    comparador -> MAYOR
-Rule 75    comparador -> MENOR
-Rule 76    comparador -> MAYOR_IGUAL
-Rule 77    comparador -> MENOR_IGUAL
-Rule 78    comparador -> DIFERENTE
-Rule 79    lista_columnas -> IDENTIFICADOR
-Rule 80    lista_columnas -> lista_columnas COMA IDENTIFICADOR
-Rule 81    lista_columnas -> TODO
+Rule 53    lista_valores -> valor
+Rule 54    lista_valores -> lista_valores COMA valor
+Rule 55    instruccion -> seleccion
+Rule 56    instruccion -> insertar
+Rule 57    instruccion -> alterar
+Rule 58    instruccion -> actualizar
+Rule 59    instruccion -> eliminar
+Rule 60    instruccion -> soltar
+Rule 61    instruccion -> crear
+Rule 62    instruccion -> transaccion
+Rule 63    instruccion -> unir
+Rule 64    instruccion -> valor
+Rule 65    opt_column -> COLUMNA
+Rule 66    opt_column -> empty
+Rule 67    clausula -> DONDE IDENTIFICADOR comparador valor
+Rule 68    restricciones -> restricciones restriccion
+Rule 69    restricciones -> restriccion
+Rule 70    restricciones -> empty
+Rule 71    comparador -> IGUALDAD
+Rule 72    comparador -> MAYOR
+Rule 73    comparador -> MENOR
+Rule 74    comparador -> MAYOR_IGUAL
+Rule 75    comparador -> MENOR_IGUAL
+Rule 76    comparador -> DIFERENTE
+Rule 77    lista_columnas -> IDENTIFICADOR
+Rule 78    lista_columnas -> lista_columnas COMA IDENTIFICADOR
+Rule 79    lista_columnas -> TODO
+Rule 80    lista_columnas_crear -> lista_columnas_crear COMA lista_columna_crear
+Rule 81    lista_columnas_crear -> lista_columna_crear
 Rule 82    alteracion -> SOLTAR opt_column IDENTIFICADOR
 Rule 83    valor -> VALOR_NUMERO
 Rule 84    valor -> VALOR_CADENA
@@ -176,8 +176,8 @@ CASO                 :
 CLAVE_FORANEA        : 88
 CLAVE_PRIMARIA       : 87
 COLOCAR              : 4
-COLUMNA              : 67
-COMA                 : 17 19 38 42 53 56 80
+COLUMNA              : 65
+COMA                 : 17 19 38 42 54 78 80
 COMENTARIO           : 
 COMILLAS_SIMPLES     : 
 COMO                 : 
@@ -192,10 +192,10 @@ DECIMAL              : 25
 DERECHO              : 31
 DESCENDENTE          : 100
 DESDE                : 9 35 39 44 50
-DIFERENTE            : 78
+DIFERENTE            : 76
 DISTINTO             : 51
 DIVISION             : 
-DONDE                : 69
+DONDE                : 67
 ELIMINAR             : 35 39 44 50
 ENTERO               : 20
 ENTONCES             : 
@@ -207,9 +207,9 @@ EXISTE               : 34
 FECHA                : 23
 FIN                  : 
 FLOTANTE             : 27
-IDENTIFICADOR        : 1 3 4 5 6 7 8 9 14 16 17 18 19 35 39 43 43 44 50 69 79 80 82 92 92 93 93 94 99 100 101
+IDENTIFICADOR        : 1 3 4 5 6 7 8 9 14 16 17 18 19 35 39 43 43 44 50 67 77 78 82 92 92 93 93 94 99 100 101
 IDENTIFICADOR_INVALIDO : 
-IGUALDAD             : 18 19 43 73
+IGUALDAD             : 18 19 43 71
 INICIAR_TRANSACCION  : 2
 INICIO               : 
 INSERTAR_EN          : 3
@@ -217,10 +217,10 @@ IZQUIERDO            : 30
 LIMITAR              : 
 MAS                  : 
 MAXIMO               : 
-MAYOR                : 74
-MAYOR_IGUAL          : 76
-MENOR                : 75
-MENOR_IGUAL          : 77
+MAYOR                : 72
+MAYOR_IGUAL          : 74
+MENOR                : 73
+MENOR_IGUAL          : 75
 MENOS                : 
 MEZCLAR              : 
 MIENTRAS             : 
@@ -260,7 +260,7 @@ SUMA                 :
 TABLA                : 5 6 7 14
 TENIENDO             : 
 TEXTO                : 26
-TODO                 : 81
+TODO                 : 79
 TODOS                : 
 UNIR                 : 8
 VALORES              : 3
@@ -273,64 +273,64 @@ error                :
 
 Nonterminals, with rules where they appear
 
-actualizar           : 60
+actualizar           : 58
 alteracion           : 36 42
 alteraciones         : 14 42
-alterar              : 59
+alterar              : 57
 clausula             : 39 50 97 98
-comparador           : 69
+comparador           : 67
 condicion            : 8
 condicion_order      : 
 condicional          : 7
 condiciones          : 95 97
-crear                : 63
-eliminar             : 61
+crear                : 61
+eliminar             : 59
 eliminar_donde       : 11
 eliminar_hasta_donde : 13
 eliminar_hasta_todo  : 12
 eliminar_todo        : 10
-empty                : 33 47 52 68 72 96
+empty                : 33 47 52 66 70 96
 especificacion       : 
 fila                 : 37 38
 floro                : 40 41
-insertar             : 58
+insertar             : 56
 instruccion          : 0
 lista_asignaciones   : 4 19
-lista_columna_crear  : 48 53 54 91 94
-lista_columnas       : 9 80
+lista_columna_crear  : 48 80 81 91 94
+lista_columnas       : 9 78
 lista_columnas_creadas : 3 17
-lista_columnas_crear : 5 53
+lista_columnas_crear : 5 80
 lista_filas          : 3 38
 lista_floro          : 9 40
-lista_valores        : 45 56
+lista_valores        : 45 54
 opt_column           : 48 82 91 92 94
 opt_condiciones      : 4 9
 referencia           : 88
-restriccion          : 70 71
-restricciones        : 1 70
-seleccion            : 57
-soltar               : 62
+restriccion          : 68 69
+restricciones        : 1 68
+seleccion            : 55
+soltar               : 60
 tipo_dato            : 1
 tipo_unir            : 8
-transaccion          : 64
-unir                 : 65
-valor                : 18 19 55 56 66 69
+transaccion          : 62
+unir                 : 63
+valor                : 18 19 53 54 64 67
 
 Parsing method: LALR
 
 state 0
 
     (0) S' -> . instruccion
-    (57) instruccion -> . seleccion
-    (58) instruccion -> . insertar
-    (59) instruccion -> . alterar
-    (60) instruccion -> . actualizar
-    (61) instruccion -> . eliminar
-    (62) instruccion -> . soltar
-    (63) instruccion -> . crear
-    (64) instruccion -> . transaccion
-    (65) instruccion -> . unir
-    (66) instruccion -> . valor
+    (55) instruccion -> . seleccion
+    (56) instruccion -> . insertar
+    (57) instruccion -> . alterar
+    (58) instruccion -> . actualizar
+    (59) instruccion -> . eliminar
+    (60) instruccion -> . soltar
+    (61) instruccion -> . crear
+    (62) instruccion -> . transaccion
+    (63) instruccion -> . unir
+    (64) instruccion -> . valor
     (9) seleccion -> . SELECCIONAR lista_floro lista_columnas DESDE IDENTIFICADOR opt_condiciones
     (3) insertar -> . INSERTAR_EN IDENTIFICADOR PARENTESIS_IZQ lista_columnas_creadas PARENTESIS_DER VALORES lista_filas
     (14) alterar -> . ALTERAR TABLA IDENTIFICADOR alteraciones
@@ -395,72 +395,72 @@ state 1
 
 state 2
 
-    (57) instruccion -> seleccion .
+    (55) instruccion -> seleccion .
 
-    $end            reduce using rule 57 (instruccion -> seleccion .)
+    $end            reduce using rule 55 (instruccion -> seleccion .)
 
 
 state 3
 
-    (58) instruccion -> insertar .
+    (56) instruccion -> insertar .
 
-    $end            reduce using rule 58 (instruccion -> insertar .)
+    $end            reduce using rule 56 (instruccion -> insertar .)
 
 
 state 4
 
-    (59) instruccion -> alterar .
+    (57) instruccion -> alterar .
 
-    $end            reduce using rule 59 (instruccion -> alterar .)
+    $end            reduce using rule 57 (instruccion -> alterar .)
 
 
 state 5
 
-    (60) instruccion -> actualizar .
+    (58) instruccion -> actualizar .
 
-    $end            reduce using rule 60 (instruccion -> actualizar .)
+    $end            reduce using rule 58 (instruccion -> actualizar .)
 
 
 state 6
 
-    (61) instruccion -> eliminar .
+    (59) instruccion -> eliminar .
 
-    $end            reduce using rule 61 (instruccion -> eliminar .)
+    $end            reduce using rule 59 (instruccion -> eliminar .)
 
 
 state 7
 
-    (62) instruccion -> soltar .
+    (60) instruccion -> soltar .
 
-    $end            reduce using rule 62 (instruccion -> soltar .)
+    $end            reduce using rule 60 (instruccion -> soltar .)
 
 
 state 8
 
-    (63) instruccion -> crear .
+    (61) instruccion -> crear .
 
-    $end            reduce using rule 63 (instruccion -> crear .)
+    $end            reduce using rule 61 (instruccion -> crear .)
 
 
 state 9
 
-    (64) instruccion -> transaccion .
+    (62) instruccion -> transaccion .
 
-    $end            reduce using rule 64 (instruccion -> transaccion .)
+    $end            reduce using rule 62 (instruccion -> transaccion .)
 
 
 state 10
 
-    (65) instruccion -> unir .
+    (63) instruccion -> unir .
 
-    $end            reduce using rule 65 (instruccion -> unir .)
+    $end            reduce using rule 63 (instruccion -> unir .)
 
 
 state 11
 
-    (66) instruccion -> valor .
+    (64) instruccion -> valor .
 
-    $end            reduce using rule 66 (instruccion -> valor .)
+    $end            reduce using rule 64 (instruccion -> valor .)
 
 
 state 12
@@ -642,9 +642,9 @@ state 31
 
     (9) seleccion -> SELECCIONAR lista_floro . lista_columnas DESDE IDENTIFICADOR opt_condiciones
     (40) lista_floro -> lista_floro . floro
-    (79) lista_columnas -> . IDENTIFICADOR
-    (80) lista_columnas -> . lista_columnas COMA IDENTIFICADOR
-    (81) lista_columnas -> . TODO
+    (77) lista_columnas -> . IDENTIFICADOR
+    (78) lista_columnas -> . lista_columnas COMA IDENTIFICADOR
+    (79) lista_columnas -> . TODO
     (51) floro -> . DISTINTO
     (52) floro -> . empty
     (49) empty -> .
@@ -788,7 +788,7 @@ state 47
 state 48
 
     (9) seleccion -> SELECCIONAR lista_floro lista_columnas . DESDE IDENTIFICADOR opt_condiciones
-    (80) lista_columnas -> lista_columnas . COMA IDENTIFICADOR
+    (78) lista_columnas -> lista_columnas . COMA IDENTIFICADOR
 
     DESDE           shift and go to state 60
     COMA            shift and go to state 61
@@ -796,10 +796,10 @@ state 48
 
 state 49
 
-    (79) lista_columnas -> IDENTIFICADOR .
+    (77) lista_columnas -> IDENTIFICADOR .
 
-    DESDE           reduce using rule 79 (lista_columnas -> IDENTIFICADOR .)
-    COMA            reduce using rule 79 (lista_columnas -> IDENTIFICADOR .)
+    DESDE           reduce using rule 77 (lista_columnas -> IDENTIFICADOR .)
+    COMA            reduce using rule 77 (lista_columnas -> IDENTIFICADOR .)
 
 
 state 50
@@ -813,10 +813,10 @@ state 50
 
 state 51
 
-    (81) lista_columnas -> TODO .
+    (79) lista_columnas -> TODO .
 
-    DESDE           reduce using rule 81 (lista_columnas -> TODO .)
-    COMA            reduce using rule 81 (lista_columnas -> TODO .)
+    DESDE           reduce using rule 79 (lista_columnas -> TODO .)
+    COMA            reduce using rule 79 (lista_columnas -> TODO .)
 
 
 state 52
@@ -888,7 +888,7 @@ state 58
 
     (35) eliminar_todo -> ELIMINAR DESDE IDENTIFICADOR .
     (39) eliminar_donde -> ELIMINAR DESDE IDENTIFICADOR . clausula
-    (69) clausula -> . DONDE IDENTIFICADOR comparador valor
+    (67) clausula -> . DONDE IDENTIFICADOR comparador valor
 
     $end            reduce using rule 35 (eliminar_todo -> ELIMINAR DESDE IDENTIFICADOR .)
     DONDE           shift and go to state 78
@@ -912,7 +912,7 @@ state 60
 
 state 61
 
-    (80) lista_columnas -> lista_columnas COMA . IDENTIFICADOR
+    (78) lista_columnas -> lista_columnas COMA . IDENTIFICADOR
 
     IDENTIFICADOR   shift and go to state 81
 
@@ -953,8 +953,8 @@ state 65
 state 66
 
     (48) alteracion -> AGREGAR . opt_column lista_columna_crear
-    (67) opt_column -> . COLUMNA
-    (68) opt_column -> . empty
+    (65) opt_column -> . COLUMNA
+    (66) opt_column -> . empty
     (49) empty -> .
 
     COLUMNA         shift and go to state 86
@@ -966,8 +966,8 @@ state 66
 state 67
 
     (82) alteracion -> SOLTAR . opt_column IDENTIFICADOR
-    (67) opt_column -> . COLUMNA
-    (68) opt_column -> . empty
+    (65) opt_column -> . COLUMNA
+    (66) opt_column -> . empty
     (49) empty -> .
 
     COLUMNA         shift and go to state 86
@@ -979,8 +979,8 @@ state 67
 state 68
 
     (91) alteracion -> MODIFICAR . opt_column lista_columna_crear
-    (67) opt_column -> . COLUMNA
-    (68) opt_column -> . empty
+    (65) opt_column -> . COLUMNA
+    (66) opt_column -> . empty
     (49) empty -> .
 
     COLUMNA         shift and go to state 86
@@ -992,8 +992,8 @@ state 68
 state 69
 
     (92) alteracion -> RENOMBRAR . opt_column IDENTIFICADOR A IDENTIFICADOR
-    (67) opt_column -> . COLUMNA
-    (68) opt_column -> . empty
+    (65) opt_column -> . COLUMNA
+    (66) opt_column -> . empty
     (49) empty -> .
 
     COLUMNA         shift and go to state 86
@@ -1005,8 +1005,8 @@ state 69
 state 70
 
     (94) alteracion -> CAMBIAR . opt_column IDENTIFICADOR lista_columna_crear
-    (67) opt_column -> . COLUMNA
-    (68) opt_column -> . empty
+    (65) opt_column -> . COLUMNA
+    (66) opt_column -> . empty
     (49) empty -> .
 
     COLUMNA         shift and go to state 86
@@ -1031,7 +1031,7 @@ state 72
     (97) condiciones -> . condiciones clausula
     (98) condiciones -> . clausula
     (49) empty -> .
-    (69) clausula -> . DONDE IDENTIFICADOR comparador valor
+    (67) clausula -> . DONDE IDENTIFICADOR comparador valor
 
     COMA            shift and go to state 94
     $end            reduce using rule 49 (empty -> .)
@@ -1059,8 +1059,8 @@ state 74
 state 75
 
     (5) crear -> CREAR TABLA IDENTIFICADOR PARENTESIS_IZQ . lista_columnas_crear PARENTESIS_DER
-    (53) lista_columnas_crear -> . lista_columnas_crear COMA lista_columna_crear
-    (54) lista_columnas_crear -> . lista_columna_crear
+    (80) lista_columnas_crear -> . lista_columnas_crear COMA lista_columna_crear
+    (81) lista_columnas_crear -> . lista_columna_crear
     (1) lista_columna_crear -> . IDENTIFICADOR tipo_dato restricciones
 
     IDENTIFICADOR   shift and go to state 99
@@ -1086,7 +1086,7 @@ state 77
 
 state 78
 
-    (69) clausula -> DONDE . IDENTIFICADOR comparador valor
+    (67) clausula -> DONDE . IDENTIFICADOR comparador valor
 
     IDENTIFICADOR   shift and go to state 104
 
@@ -1107,7 +1107,7 @@ state 80
     (97) condiciones -> . condiciones clausula
     (98) condiciones -> . clausula
     (49) empty -> .
-    (69) clausula -> . DONDE IDENTIFICADOR comparador valor
+    (67) clausula -> . DONDE IDENTIFICADOR comparador valor
 
     $end            reduce using rule 49 (empty -> .)
     DONDE           shift and go to state 78
@@ -1119,10 +1119,10 @@ state 80
 
 state 81
 
-    (80) lista_columnas -> lista_columnas COMA IDENTIFICADOR .
+    (78) lista_columnas -> lista_columnas COMA IDENTIFICADOR .
 
-    DESDE           reduce using rule 80 (lista_columnas -> lista_columnas COMA IDENTIFICADOR .)
-    COMA            reduce using rule 80 (lista_columnas -> lista_columnas COMA IDENTIFICADOR .)
+    DESDE           reduce using rule 78 (lista_columnas -> lista_columnas COMA IDENTIFICADOR .)
+    COMA            reduce using rule 78 (lista_columnas -> lista_columnas COMA IDENTIFICADOR .)
 
 
 state 82
@@ -1170,16 +1170,16 @@ state 85
 
 state 86
 
-    (67) opt_column -> COLUMNA .
+    (65) opt_column -> COLUMNA .
 
-    IDENTIFICADOR   reduce using rule 67 (opt_column -> COLUMNA .)
+    IDENTIFICADOR   reduce using rule 65 (opt_column -> COLUMNA .)
 
 
 state 87
 
-    (68) opt_column -> empty .
+    (66) opt_column -> empty .
 
-    IDENTIFICADOR   reduce using rule 68 (opt_column -> empty .)
+    IDENTIFICADOR   reduce using rule 66 (opt_column -> empty .)
 
 
 state 88
@@ -1245,7 +1245,7 @@ state 95
 
     (95) opt_condiciones -> condiciones .
     (97) condiciones -> condiciones . clausula
-    (69) clausula -> . DONDE IDENTIFICADOR comparador valor
+    (67) clausula -> . DONDE IDENTIFICADOR comparador valor
 
     $end            reduce using rule 95 (opt_condiciones -> condiciones .)
     DONDE           shift and go to state 78
@@ -1300,7 +1300,7 @@ state 99
 state 100
 
     (5) crear -> CREAR TABLA IDENTIFICADOR PARENTESIS_IZQ lista_columnas_crear . PARENTESIS_DER
-    (53) lista_columnas_crear -> lista_columnas_crear . COMA lista_columna_crear
+    (80) lista_columnas_crear -> lista_columnas_crear . COMA lista_columna_crear
 
     PARENTESIS_DER  shift and go to state 127
     COMA            shift and go to state 128
@@ -1308,10 +1308,10 @@ state 100
 
 state 101
 
-    (54) lista_columnas_crear -> lista_columna_crear .
+    (81) lista_columnas_crear -> lista_columna_crear .
 
-    PARENTESIS_DER  reduce using rule 54 (lista_columnas_crear -> lista_columna_crear .)
-    COMA            reduce using rule 54 (lista_columnas_crear -> lista_columna_crear .)
+    PARENTESIS_DER  reduce using rule 81 (lista_columnas_crear -> lista_columna_crear .)
+    COMA            reduce using rule 81 (lista_columnas_crear -> lista_columna_crear .)
 
 
 state 102
@@ -1330,13 +1330,13 @@ state 103
 
 state 104
 
-    (69) clausula -> DONDE IDENTIFICADOR . comparador valor
-    (73) comparador -> . IGUALDAD
-    (74) comparador -> . MAYOR
-    (75) comparador -> . MENOR
-    (76) comparador -> . MAYOR_IGUAL
-    (77) comparador -> . MENOR_IGUAL
-    (78) comparador -> . DIFERENTE
+    (67) clausula -> DONDE IDENTIFICADOR . comparador valor
+    (71) comparador -> . IGUALDAD
+    (72) comparador -> . MAYOR
+    (73) comparador -> . MENOR
+    (74) comparador -> . MAYOR_IGUAL
+    (75) comparador -> . MENOR_IGUAL
+    (76) comparador -> . DIFERENTE
 
     IGUALDAD        shift and go to state 131
     MAYOR           shift and go to state 132
@@ -1351,7 +1351,7 @@ state 105
 
     (44) eliminar_hasta_todo -> ELIMINAR PRIMEROS VALOR_NUMERO DESDE IDENTIFICADOR .
     (50) eliminar_hasta_donde -> ELIMINAR PRIMEROS VALOR_NUMERO DESDE IDENTIFICADOR . clausula
-    (69) clausula -> . DONDE IDENTIFICADOR comparador valor
+    (67) clausula -> . DONDE IDENTIFICADOR comparador valor
 
     $end            reduce using rule 44 (eliminar_hasta_todo -> ELIMINAR PRIMEROS VALOR_NUMERO DESDE IDENTIFICADOR .)
     DONDE           shift and go to state 78
@@ -1459,9 +1459,9 @@ state 117
 state 118
 
     (1) lista_columna_crear -> IDENTIFICADOR tipo_dato . restricciones
-    (70) restricciones -> . restricciones restriccion
-    (71) restricciones -> . restriccion
-    (72) restricciones -> . empty
+    (68) restricciones -> . restricciones restriccion
+    (69) restricciones -> . restriccion
+    (70) restricciones -> . empty
     (87) restriccion -> . CLAVE_PRIMARIA
     (88) restriccion -> . CLAVE_FORANEA referencia
     (89) restriccion -> . AUTOINCREMENTAL
@@ -1602,7 +1602,7 @@ state 127
 
 state 128
 
-    (53) lista_columnas_crear -> lista_columnas_crear COMA . lista_columna_crear
+    (80) lista_columnas_crear -> lista_columnas_crear COMA . lista_columna_crear
     (1) lista_columna_crear -> . IDENTIFICADOR tipo_dato restricciones
 
     IDENTIFICADOR   shift and go to state 99
@@ -1618,7 +1618,7 @@ state 129
 
 state 130
 
-    (69) clausula -> DONDE IDENTIFICADOR comparador . valor
+    (67) clausula -> DONDE IDENTIFICADOR comparador . valor
     (83) valor -> . VALOR_NUMERO
     (84) valor -> . VALOR_CADENA
     (85) valor -> . VALOR_BOOLEANO
@@ -1633,62 +1633,62 @@ state 130
 
 state 131
 
-    (73) comparador -> IGUALDAD .
+    (71) comparador -> IGUALDAD .
 
-    VALOR_NUMERO    reduce using rule 73 (comparador -> IGUALDAD .)
-    VALOR_CADENA    reduce using rule 73 (comparador -> IGUALDAD .)
-    VALOR_BOOLEANO  reduce using rule 73 (comparador -> IGUALDAD .)
-    VALOR_FLOTANTE  reduce using rule 73 (comparador -> IGUALDAD .)
+    VALOR_NUMERO    reduce using rule 71 (comparador -> IGUALDAD .)
+    VALOR_CADENA    reduce using rule 71 (comparador -> IGUALDAD .)
+    VALOR_BOOLEANO  reduce using rule 71 (comparador -> IGUALDAD .)
+    VALOR_FLOTANTE  reduce using rule 71 (comparador -> IGUALDAD .)
 
 
 state 132
 
-    (74) comparador -> MAYOR .
+    (72) comparador -> MAYOR .
 
-    VALOR_NUMERO    reduce using rule 74 (comparador -> MAYOR .)
-    VALOR_CADENA    reduce using rule 74 (comparador -> MAYOR .)
-    VALOR_BOOLEANO  reduce using rule 74 (comparador -> MAYOR .)
-    VALOR_FLOTANTE  reduce using rule 74 (comparador -> MAYOR .)
+    VALOR_NUMERO    reduce using rule 72 (comparador -> MAYOR .)
+    VALOR_CADENA    reduce using rule 72 (comparador -> MAYOR .)
+    VALOR_BOOLEANO  reduce using rule 72 (comparador -> MAYOR .)
+    VALOR_FLOTANTE  reduce using rule 72 (comparador -> MAYOR .)
 
 
 state 133
 
-    (75) comparador -> MENOR .
+    (73) comparador -> MENOR .
 
-    VALOR_NUMERO    reduce using rule 75 (comparador -> MENOR .)
-    VALOR_CADENA    reduce using rule 75 (comparador -> MENOR .)
-    VALOR_BOOLEANO  reduce using rule 75 (comparador -> MENOR .)
-    VALOR_FLOTANTE  reduce using rule 75 (comparador -> MENOR .)
+    VALOR_NUMERO    reduce using rule 73 (comparador -> MENOR .)
+    VALOR_CADENA    reduce using rule 73 (comparador -> MENOR .)
+    VALOR_BOOLEANO  reduce using rule 73 (comparador -> MENOR .)
+    VALOR_FLOTANTE  reduce using rule 73 (comparador -> MENOR .)
 
 
 state 134
 
-    (76) comparador -> MAYOR_IGUAL .
+    (74) comparador -> MAYOR_IGUAL .
 
-    VALOR_NUMERO    reduce using rule 76 (comparador -> MAYOR_IGUAL .)
-    VALOR_CADENA    reduce using rule 76 (comparador -> MAYOR_IGUAL .)
-    VALOR_BOOLEANO  reduce using rule 76 (comparador -> MAYOR_IGUAL .)
-    VALOR_FLOTANTE  reduce using rule 76 (comparador -> MAYOR_IGUAL .)
+    VALOR_NUMERO    reduce using rule 74 (comparador -> MAYOR_IGUAL .)
+    VALOR_CADENA    reduce using rule 74 (comparador -> MAYOR_IGUAL .)
+    VALOR_BOOLEANO  reduce using rule 74 (comparador -> MAYOR_IGUAL .)
+    VALOR_FLOTANTE  reduce using rule 74 (comparador -> MAYOR_IGUAL .)
 
 
 state 135
 
-    (77) comparador -> MENOR_IGUAL .
+    (75) comparador -> MENOR_IGUAL .
 
-    VALOR_NUMERO    reduce using rule 77 (comparador -> MENOR_IGUAL .)
-    VALOR_CADENA    reduce using rule 77 (comparador -> MENOR_IGUAL .)
-    VALOR_BOOLEANO  reduce using rule 77 (comparador -> MENOR_IGUAL .)
-    VALOR_FLOTANTE  reduce using rule 77 (comparador -> MENOR_IGUAL .)
+    VALOR_NUMERO    reduce using rule 75 (comparador -> MENOR_IGUAL .)
+    VALOR_CADENA    reduce using rule 75 (comparador -> MENOR_IGUAL .)
+    VALOR_BOOLEANO  reduce using rule 75 (comparador -> MENOR_IGUAL .)
+    VALOR_FLOTANTE  reduce using rule 75 (comparador -> MENOR_IGUAL .)
 
 
 state 136
 
-    (78) comparador -> DIFERENTE .
+    (76) comparador -> DIFERENTE .
 
-    VALOR_NUMERO    reduce using rule 78 (comparador -> DIFERENTE .)
-    VALOR_CADENA    reduce using rule 78 (comparador -> DIFERENTE .)
-    VALOR_BOOLEANO  reduce using rule 78 (comparador -> DIFERENTE .)
-    VALOR_FLOTANTE  reduce using rule 78 (comparador -> DIFERENTE .)
+    VALOR_NUMERO    reduce using rule 76 (comparador -> DIFERENTE .)
+    VALOR_CADENA    reduce using rule 76 (comparador -> DIFERENTE .)
+    VALOR_BOOLEANO  reduce using rule 76 (comparador -> DIFERENTE .)
+    VALOR_FLOTANTE  reduce using rule 76 (comparador -> DIFERENTE .)
 
 
 state 137
@@ -1701,8 +1701,8 @@ state 137
 state 138
 
     (45) fila -> PARENTESIS_IZQ . lista_valores PARENTESIS_DER
-    (55) lista_valores -> . valor
-    (56) lista_valores -> . lista_valores COMA valor
+    (53) lista_valores -> . valor
+    (54) lista_valores -> . lista_valores COMA valor
     (83) valor -> . VALOR_NUMERO
     (84) valor -> . VALOR_CADENA
     (85) valor -> . VALOR_BOOLEANO
@@ -1766,7 +1766,7 @@ state 143
 state 144
 
     (1) lista_columna_crear -> IDENTIFICADOR tipo_dato restricciones .
-    (70) restricciones -> restricciones . restriccion
+    (68) restricciones -> restricciones . restriccion
     (87) restriccion -> . CLAVE_PRIMARIA
     (88) restriccion -> . CLAVE_FORANEA referencia
     (89) restriccion -> . AUTOINCREMENTAL
@@ -1784,28 +1784,28 @@ state 144
 
 state 145
 
-    (71) restricciones -> restriccion .
+    (69) restricciones -> restriccion .
 
-    CLAVE_PRIMARIA  reduce using rule 71 (restricciones -> restriccion .)
-    CLAVE_FORANEA   reduce using rule 71 (restricciones -> restriccion .)
-    AUTOINCREMENTAL reduce using rule 71 (restricciones -> restriccion .)
-    NO_NULO         reduce using rule 71 (restricciones -> restriccion .)
-    PARENTESIS_DER  reduce using rule 71 (restricciones -> restriccion .)
-    COMA            reduce using rule 71 (restricciones -> restriccion .)
-    $end            reduce using rule 71 (restricciones -> restriccion .)
+    CLAVE_PRIMARIA  reduce using rule 69 (restricciones -> restriccion .)
+    CLAVE_FORANEA   reduce using rule 69 (restricciones -> restriccion .)
+    AUTOINCREMENTAL reduce using rule 69 (restricciones -> restriccion .)
+    NO_NULO         reduce using rule 69 (restricciones -> restriccion .)
+    PARENTESIS_DER  reduce using rule 69 (restricciones -> restriccion .)
+    COMA            reduce using rule 69 (restricciones -> restriccion .)
+    $end            reduce using rule 69 (restricciones -> restriccion .)
 
 
 state 146
 
-    (72) restricciones -> empty .
+    (70) restricciones -> empty .
 
-    CLAVE_PRIMARIA  reduce using rule 72 (restricciones -> empty .)
-    CLAVE_FORANEA   reduce using rule 72 (restricciones -> empty .)
-    AUTOINCREMENTAL reduce using rule 72 (restricciones -> empty .)
-    NO_NULO         reduce using rule 72 (restricciones -> empty .)
-    PARENTESIS_DER  reduce using rule 72 (restricciones -> empty .)
-    COMA            reduce using rule 72 (restricciones -> empty .)
-    $end            reduce using rule 72 (restricciones -> empty .)
+    CLAVE_PRIMARIA  reduce using rule 70 (restricciones -> empty .)
+    CLAVE_FORANEA   reduce using rule 70 (restricciones -> empty .)
+    AUTOINCREMENTAL reduce using rule 70 (restricciones -> empty .)
+    NO_NULO         reduce using rule 70 (restricciones -> empty .)
+    PARENTESIS_DER  reduce using rule 70 (restricciones -> empty .)
+    COMA            reduce using rule 70 (restricciones -> empty .)
+    $end            reduce using rule 70 (restricciones -> empty .)
 
 
 state 147
@@ -1858,10 +1858,10 @@ state 150
 
 state 151
 
-    (53) lista_columnas_crear -> lista_columnas_crear COMA lista_columna_crear .
+    (80) lista_columnas_crear -> lista_columnas_crear COMA lista_columna_crear .
 
-    PARENTESIS_DER  reduce using rule 53 (lista_columnas_crear -> lista_columnas_crear COMA lista_columna_crear .)
-    COMA            reduce using rule 53 (lista_columnas_crear -> lista_columnas_crear COMA lista_columna_crear .)
+    PARENTESIS_DER  reduce using rule 80 (lista_columnas_crear -> lista_columnas_crear COMA lista_columna_crear .)
+    COMA            reduce using rule 80 (lista_columnas_crear -> lista_columnas_crear COMA lista_columna_crear .)
 
 
 state 152
@@ -1873,16 +1873,16 @@ state 152
 
 state 153
 
-    (69) clausula -> DONDE IDENTIFICADOR comparador valor .
+    (67) clausula -> DONDE IDENTIFICADOR comparador valor .
 
-    $end            reduce using rule 69 (clausula -> DONDE IDENTIFICADOR comparador valor .)
-    DONDE           reduce using rule 69 (clausula -> DONDE IDENTIFICADOR comparador valor .)
+    $end            reduce using rule 67 (clausula -> DONDE IDENTIFICADOR comparador valor .)
+    DONDE           reduce using rule 67 (clausula -> DONDE IDENTIFICADOR comparador valor .)
 
 
 state 154
 
     (45) fila -> PARENTESIS_IZQ lista_valores . PARENTESIS_DER
-    (56) lista_valores -> lista_valores . COMA valor
+    (54) lista_valores -> lista_valores . COMA valor
 
     PARENTESIS_DER  shift and go to state 162
     COMA            shift and go to state 163
@@ -1890,10 +1890,10 @@ state 154
 
 state 155
 
-    (55) lista_valores -> valor .
+    (53) lista_valores -> valor .
 
-    PARENTESIS_DER  reduce using rule 55 (lista_valores -> valor .)
-    COMA            reduce using rule 55 (lista_valores -> valor .)
+    PARENTESIS_DER  reduce using rule 53 (lista_valores -> valor .)
+    COMA            reduce using rule 53 (lista_valores -> valor .)
 
 
 state 156
@@ -1924,15 +1924,15 @@ state 158
 
 state 159
 
-    (70) restricciones -> restricciones restriccion .
+    (68) restricciones -> restricciones restriccion .
 
-    CLAVE_PRIMARIA  reduce using rule 70 (restricciones -> restricciones restriccion .)
-    CLAVE_FORANEA   reduce using rule 70 (restricciones -> restricciones restriccion .)
-    AUTOINCREMENTAL reduce using rule 70 (restricciones -> restricciones restriccion .)
-    NO_NULO         reduce using rule 70 (restricciones -> restricciones restriccion .)
-    PARENTESIS_DER  reduce using rule 70 (restricciones -> restricciones restriccion .)
-    COMA            reduce using rule 70 (restricciones -> restricciones restriccion .)
-    $end            reduce using rule 70 (restricciones -> restricciones restriccion .)
+    CLAVE_PRIMARIA  reduce using rule 68 (restricciones -> restricciones restriccion .)
+    CLAVE_FORANEA   reduce using rule 68 (restricciones -> restricciones restriccion .)
+    AUTOINCREMENTAL reduce using rule 68 (restricciones -> restricciones restriccion .)
+    NO_NULO         reduce using rule 68 (restricciones -> restricciones restriccion .)
+    PARENTESIS_DER  reduce using rule 68 (restricciones -> restricciones restriccion .)
+    COMA            reduce using rule 68 (restricciones -> restricciones restriccion .)
+    $end            reduce using rule 68 (restricciones -> restricciones restriccion .)
 
 
 state 160
@@ -1965,7 +1965,7 @@ state 162
 
 state 163
 
-    (56) lista_valores -> lista_valores COMA . valor
+    (54) lista_valores -> lista_valores COMA . valor
     (83) valor -> . VALOR_NUMERO
     (84) valor -> . VALOR_CADENA
     (85) valor -> . VALOR_BOOLEANO
@@ -1995,10 +1995,10 @@ state 165
 
 state 166
 
-    (56) lista_valores -> lista_valores COMA valor .
+    (54) lista_valores -> lista_valores COMA valor .
 
-    PARENTESIS_DER  reduce using rule 56 (lista_valores -> lista_valores COMA valor .)
-    COMA            reduce using rule 56 (lista_valores -> lista_valores COMA valor .)
+    PARENTESIS_DER  reduce using rule 54 (lista_valores -> lista_valores COMA valor .)
+    COMA            reduce using rule 54 (lista_valores -> lista_valores COMA valor .)
 
 
 state 167

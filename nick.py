@@ -2,16 +2,11 @@ from AnalizadorLexico import analizar_lexico
 from AnalizadorSintactico import analizar_sintaxis
 from clases.Eliminar import Eliminar
 from clases.Soltar import Soltar
-from clases.Crear import Crear
 from clases.Seleccion import Seleccion
 
 
 query = """
-CREAR TABLA mascotas (
-    id ENTERO CLAVE PRIMARIA AUTOINCREMENTAL,
-    nombre TEXTO NO NULO ,
-    dueno_id ENTERO CLAVE FORANEA REFERENCIA empleados(id) 
-)
+SELECCIONAR TODO DESDE empleados
 """
 #ALTERAR TABLA empleados AGREGAR casa ENTERO CLAVE PRIMARIA 
 resultado_lexico = analizar_lexico(query)
