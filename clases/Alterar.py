@@ -109,6 +109,12 @@
 
 from AnalizadorSemantico import Instruccion
 
+class Columna:
+    def __init__(self, nombre, tipo_dato, restricciones):
+        self.nombre = nombre
+        self.tipo_dato = tipo_dato
+        self.restricciones = restricciones
+        
 class AlterarTabla(Instruccion):
     def __init__(self, nombre_tabla, alteraciones):
         self.nombre_tabla = nombre_tabla
@@ -128,9 +134,9 @@ class AlterarTabla(Instruccion):
 
     def ejecutar(self, base_datos):
         # Traducir a MySQL
-        sql_statements = []
+        sql_statements = f""
         for alteracion in self.alteraciones:
-            sql_statements.append(alteracion.ejecutar(base_datos, self.nombre_tabla))
+            sql_statements += f" {alteracion.ejecutar(base_datos, self.nombre_tabla)}"
         return sql_statements
 
 
@@ -145,40 +151,33 @@ class AgregarColumna(Instruccion):
         # Validar si la tabla tiene la columna
         if nombre_tabla not in base_datos:
             raise Exception(f"La tabla '{nombre_tabla}' no existe.")
-       
+        diccionario = {"TEXTO":"text(255)","ENTERO":"int","CADENA":"varchar(255)"}
         for col_def in self.lista_columnas:
             nombre_columna = col_def.nombre
             if nombre_columna in base_datos[nombre_tabla]["columnas"]:
                 raise Exception(f"La columna '{nombre_columna}' ya existe en la tabla '{nombre_tabla}'.")
             if col_def.tipo_dato not in ["ENTERO", "TEXTO", "FECHA", "DECIMAL", "BOOLEANO"]:
                 raise Exception(f"El tipo de dato '{col_def.tipo_dato}' no es válido para la columna '{nombre_columna}'.")
-            if not all(restriccion in ["NO NULO", "UNICO", "LLAVE PRIMARIA", "LLAVE FORANEA"] for restriccion in col_def.restricciones):
+            if not all(restriccion in ["NO NULO", "UNICO", "CLAVE PRIMARIA", "CLAVE FORANEA", "AUTOINCREMENTAl"] for restriccion in col_def.restricciones):
                 raise Exception(f"Las restricciones para '{nombre_columna}' no son válidas.")
-    
+            col_def.tipo_dato = diccionario.get(col_def.tipo_dato)
     def ejecutar(self, base_datos, nombre_tabla):
         # Generar la sentencia MySQL para agregar columnas
-        sql_statements = []
+        self.analizar_semantica(base_datos,nombre_tabla)
+        sql_statements = f""
         for col_def in self.lista_columnas:
             sql = f"ALTER TABLE {nombre_tabla} ADD COLUMN {col_def.nombre} {col_def.tipo_dato}"
-            if "NOT NULL" in col_def.restricciones:
+            if "NO NULO" in col_def.restricciones:
                 sql += " NOT NULL"
-            if "UNIQUE" in col_def.restricciones:
+            if "UNICO" in col_def.restricciones:
                 sql += " UNIQUE"
-            if "PRIMARY KEY" in col_def.restricciones:
+            if "CLAVE PRIMARIA" in col_def.restricciones:
                 sql += " PRIMARY KEY"
-            if "FOREIGN KEY" in col_def.restricciones:
+            if "CLAVE FORANEA" in col_def.restricciones:
                 # Aquí agregarías la lógica para claves foráneas si es necesario
                 pass
-            sql_statements.append(sql)
+            sql_statements += f"{sql}"
         return sql_statements
-
-
-class Columna:
-    def __init__(self, nombre, tipo_dato, restricciones):
-        self.nombre = nombre
-        self.tipo_dato = tipo_dato
-        self.restricciones = restricciones
-
 
 class SoltarColumna(Instruccion):
     def __init__(self, nombre_columna):
@@ -195,6 +194,7 @@ class SoltarColumna(Instruccion):
 
     def ejecutar(self, base_datos, nombre_tabla):
         # Generar la sentencia MySQL para soltar columna
+        self.analizar_semantica(base_datos,nombre_tabla)
         return f"ALTER TABLE {nombre_tabla} DROP COLUMN {self.nombre_columna}"
 
 
@@ -206,30 +206,33 @@ class ModificarColumna(Instruccion):
         return f"ModificarColumna(columnas={self.lista_columnas})"
 
     def analizar_semantica(self, base_datos, nombre_tabla):
+        diccionario = {"TEXTO":"text(255)","ENTERO":"int","CADENA":"varchar(255)"}
         if nombre_tabla not in base_datos:
             raise Exception(f"La tabla '{nombre_tabla}' no existe.")
         for col_def in self.lista_columnas:
             if col_def.nombre not in base_datos[nombre_tabla]["columnas"]:
                 raise Exception(f"La columna '{col_def.nombre}' no existe en la tabla '{nombre_tabla}'.")
-            if col_def.tipo_dato not in ["entero", "texto", "fecha", "decimal", "booleano"]:
+            if col_def.tipo_dato not in ["ENTERO", "TEXTO", "FECHA", "DECIMAL", "BOOLEANO"]:
                 raise Exception(f"El tipo de dato '{col_def.tipo_dato}' no es válido.")
-            if not all(restriccion in ["NOT NULL", "UNIQUE", "PRIMARY KEY", "FOREIGN KEY"] for restriccion in col_def.restricciones):
+            if not all(restriccion in ["NO NULO", "UNICO", "CLAVE PRIMARIA", "CLAVE FORANEA"] for restriccion in col_def.restricciones):
                 raise Exception(f"Las restricciones para la columna '{col_def.nombre}' no son válidas.")
+            col_def.tipo_dato = diccionario.get(col_def.tipo_dato)
     
     def ejecutar(self, base_datos, nombre_tabla):
-        sql_statements = []
+        self.analizar_semantica(base_datos, nombre_tabla)
+        sql_statements = f""
         for col_def in self.lista_columnas:
             sql = f"ALTER TABLE {nombre_tabla} MODIFY COLUMN {col_def.nombre} {col_def.tipo_dato}"
-            if "NOT NULL" in col_def.restricciones:
+            if "NO NULO" in col_def.restricciones:
                 sql += " NOT NULL"
-            if "UNIQUE" in col_def.restricciones:
+            if "UNICO" in col_def.restricciones:
                 sql += " UNIQUE"
-            if "PRIMARY KEY" in col_def.restricciones:
+            if "CLAVE PRIMARIA" in col_def.restricciones:
                 sql += " PRIMARY KEY"
-            if "FOREIGN KEY" in col_def.restricciones:
+            if "CLAVE FORANEA" in col_def.restricciones:
                 # Aquí agregarías la lógica para claves foráneas si es necesario
                 pass
-            sql_statements.append(sql)
+            sql_statements += sql
         return sql_statements
 
 
@@ -250,6 +253,7 @@ class RenombrarColumna(Instruccion):
             raise Exception(f"La columna '{self.nombre_nuevo}' ya existe en la tabla '{nombre_tabla}'.")
 
     def ejecutar(self, base_datos, nombre_tabla):
+        self.analizar_semantica(base_datos)
         return f"ALTER TABLE {nombre_tabla} RENAME COLUMN {self.nombre_viejo} TO {self.nombre_nuevo}"
 
 
@@ -274,6 +278,7 @@ class CambiarColumna(Instruccion):
             raise Exception(f"Las restricciones para la nueva columna no son válidas.")
     
     def ejecutar(self, base_datos, nombre_tabla):
+        self.analizar_semantica(base_datos)
         sql = f"ALTER TABLE {nombre_tabla} CHANGE COLUMN {self.nombre_viejo} {self.nueva_definicion['nombre']} {self.nueva_definicion['tipo_dato']}"
         if "NOT NULL" in self.nueva_definicion["restricciones"]:
             sql += " NOT NULL"
