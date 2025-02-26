@@ -23,18 +23,18 @@ for token in resultado_lexico:
 base_datos = {
     "empleados": {
         "columnas": {
-            "id": {"tipo": "entero", "restricciones": ["CLAVE PRIMARIA", "AUTOINCREMENTAL"]},
-            "nombre": {"tipo": "texto", "restricciones": ["NO NULO"]},
-            "edad": {"tipo": "entero", "restricciones": ["NO NULO"]},
-            "departamento_id": {"tipo": "entero", "restricciones": ["CLAVE FORANEA", "NO NULO"]}
+            "id": {"tipo": "entero", "restricciones": ["CLAVE PRIMARIA", "AUTOINCREMENTAL"], "datos" : [1, 2, 3]},
+            "nombre": {"tipo": "texto", "restricciones": ["NO NULO"], "datos" : ["Andre", "Juan", "Pedro"]},
+            "edad": {"tipo": "entero", "restricciones": ["NO NULO"], "datos" : [19, 25, 30]},
+            "departamento_id": {"tipo": "entero", "restricciones": ["CLAVE FORANEA", "NO NULO"], "datos" : [1, 2, 3]}
         },
         "llave_primaria": "id",
         "llaves_foraneas": {"departamento_id": "departamentos.id"}
     },
     "departamentos": {
         "columnas": {
-            "id": {"tipo": "entero", "restricciones": ["CLAVE PRIMARIA", "AUTOINCREMENTAL"]},
-            "nombre": {"tipo": "texto", "restricciones": ["NO NULO"]}
+            "id": {"tipo": "entero", "restricciones": ["CLAVE PRIMARIA", "AUTOINCREMENTAL"], "datos" : [1, 2, 3]},
+            "nombre": {"tipo": "texto", "restricciones": ["NO NULO"], "datos" : ["Finanzas", "Ventas", "Recursos Humanos"]}
         },
         "llave_primaria": "id"
     }
