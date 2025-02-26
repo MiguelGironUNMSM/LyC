@@ -6,7 +6,7 @@ from clases.Seleccion import *
 from clases.Actualizar import *
 
 query = """
-ACTUALIZAR empleados COLOCAR nombre = "Juan", edad = 25
+ACTUALIZAR empleados COLOCAR nombre = "Juan", edad = 25 
 """
 #ALTERAR TABLA empleados AGREGAR casa ENTERO CLAVE PRIMARIA 
 resultado_lexico = analizar_lexico(query)
@@ -37,5 +37,6 @@ base_datos = {
 
 resultado_sintactico = analizar_sintaxis(query)
 print("\nResultado del analisis sintáctico:")
-print(resultado_sintactico)
+print(type(resultado_sintactico))
 print(resultado_sintactico.ejecutar(base_datos))
+

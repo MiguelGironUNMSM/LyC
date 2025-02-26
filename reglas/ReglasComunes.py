@@ -3,7 +3,7 @@ def p_lista_columna_crear(t):
     nombreColumna = t[1]
     tipoDato = t[2]
     restricciones = t[3] if len(t) > 3 else []
-    t[0] =  (nombreColumna, tipoDato, restricciones)
+    t[0] =  [(nombreColumna, tipoDato, restricciones)]
 
 # He eliminado "especificacion"
 def p_tipo_dato(t):
@@ -72,7 +72,7 @@ def p_condiciones(t):
     """condiciones : condiciones clausula
                    | clausula"""
     if len(t) == 3:
-        t[0] = t[1] + [t[2]]
+        t[0] = f"{t[1]}, {t[2]}"
     else:
         t[0] = f"{t[1]}"
 
