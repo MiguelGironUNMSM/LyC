@@ -7,6 +7,9 @@ class Crear(Instruccion):
         self.llave_primaria = llave_primaria
         self.llaves_foraneas = llaves_foraneas if llaves_foraneas else {}
         
+    def __str__(self):
+        return f"Crear({self.nombre_tabla}, {self.columnas}, PK={self.llave_primaria}, FK={self.llaves_foraneas})"
+                
     def analizar_semantica(self, base_datos):
      # Se convierte la lista en un diccionario temporal para validar duplicados
      columnas_dict = {}
@@ -28,7 +31,7 @@ class Crear(Instruccion):
      if not columnas_dict:
         raise Exception(f"Error semántico: la tabla '{self.nombre_tabla}' debe tener al menos una columna.")
     
-     # ✅ Ahora `self.columnas` es un diccionario generado desde la lista
+     # self.columnas como un diccionario generado desde la lista 
      self.columnas = columnas_dict  
 
      # Se verifica que solo exista una llave primaria
@@ -38,6 +41,11 @@ class Crear(Instruccion):
      # Se verifica que la llave primaria (si hay) exista en las columnas
      if self.llave_primaria and self.llave_primaria not in self.columnas:
         raise Exception(f"Error semántico: la llave primaria '{self.llave_primaria}' no está en las columnas de la tabla '{self.nombre_tabla}'.")
+    
+     # Se valida que si un dato es una llave foránea, no puede ser autoincremental
+     for col, ref in self.llaves_foraneas.items():
+        if "AUTOINCREMENTAL" in self.columnas[col]["restricciones"]:
+            raise Exception(f"Error semántico: la columna '{col}' no puede ser autoincremental y llave foránea al mismo tiempo.")
     
      # Se validan las llaves foráneas
      for col, ref in self.llaves_foraneas.items():
@@ -57,20 +65,55 @@ class Crear(Instruccion):
             raise Exception(f"Error semántico: la columna referenciada '{ref_columna}' en la tabla '{ref_tabla}' no es llave primaria.")
         
     def ejecutar(self, base_datos):
-        # Se ejecuta el análisis semántico
-        self.analizar_semantica(base_datos)
+     # Se ejecuta el análisis semántico
+     self.analizar_semantica(base_datos)
+
+     # Se construye la consulta SQL en formato de texto
+     columnas_sql = []
+
+     for nombre_col, atributos in self.columnas.items():
+        if atributos["tipo"] == "ENTERO":
+            tipo_dato = "INT"
+        elif atributos["tipo"] == "TEXTO":
+            tipo_dato = "TEXT"
+        elif atributos["tipo"] == "CADENA":
+            tipo_dato = "VARCHAR(255)"
+        elif atributos["tipo"] == "FECHA":
+            tipo_dato = "DATE"
+        elif atributos["tipo"] == "DECIMAL":
+            tipo_dato = "DECIMAL"
+        elif atributos["tipo"] == "BOOLEANO":
+            tipo_dato = "BOOLEAN"
+        elif atributos["tipo"] == "CARACTER":
+            tipo_dato = "CHAR"
+        elif atributos["tipo"] == "FLOTANTE":
+            tipo_dato = "FLOAT"
+        else:
+            raise Exception(f"Error semántico: tipo de dato '{atributos['tipo']}' no válido.")
         
-        # Se construye la consulta SQL en formato de texto
-        columnas_sql = [f"{col} {tipo}" for col, tipo in self.columnas.items()]
+        restricciones = []
         
-        if self.llave_primaria:
-            columnas_sql.append(f"PRIMARY KEY ({self.llave_primaria})")
-        
-        for col, ref, in self.llaves_foraneas.items():
-            ref_tabla, ref_columna = ref.split(".")
-            columnas_sql.append(f"FOREIGN KEY ({col}) REFERENCES {ref_tabla}({ref_columna})")
-        
-        sql = f"CREATE TABLE {self.nombre_tabla} (\n      " + ",\n        ".join(columnas_sql) + "\n);"
-        return sql
+        for restriccion in atributos["restricciones"]:
+         if "AUTOINCREMENTAL" == restriccion:
+            restricciones.append("AUTO_INCREMENT")
+         elif "NO NULO" == restriccion:
+            restricciones.append("NOT NULL")
+         elif "CLAVE PRIMARIA" == restriccion:
+             pass
+         elif "CLAVE FORANEA" == restriccion:
+            restricciones.append("FOREIGN KEY")
+
+        restriccion_sql = " ".join(restricciones) if restricciones else ""
+        columnas_sql.append(f"{nombre_col} {tipo_dato} {restriccion_sql}".strip())
+
+     if self.llave_primaria:
+        columnas_sql.append(f"PRIMARY KEY ({self.llave_primaria})")
+
+     for col, ref in self.llaves_foraneas.items():
+        ref_tabla, ref_columna = ref.split(".")
+        columnas_sql.append(f"FOREIGN KEY ({col}) REFERENCES {ref_tabla}({ref_columna})")
+
+     sql = f"CREATE TABLE {self.nombre_tabla} (\n    " + ",\n    ".join(columnas_sql) + "\n);"
+     return sql
     
     
