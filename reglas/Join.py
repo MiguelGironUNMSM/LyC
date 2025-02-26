@@ -18,10 +18,14 @@ def p_tipo_unir(t):
 # Regla para la condición del JOIN
 # Ejemplo: tabla1.id = tabla2.id
 def p_condicion(t):
-    """condicion : IDENTIFICADOR IGUALDAD IDENTIFICADOR"""
+    """condicion : especificacion IGUALDAD especificacion"""
     t[0] = (t[1], "=", t[3])
 
 # Regla para manejar `empty`, que representa un valor opcional
 def p_empty(t):
     """empty :"""
     t[0] = None
+
+def p_especificacion(t):
+    """especificacion : IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER"""
+    t[0] = (t[3], "from", t[1])

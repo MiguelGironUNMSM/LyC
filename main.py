@@ -7,7 +7,11 @@ from clases.Seleccion import Seleccion
 
 
 query = """
-ELIMINAR DESDE empleados DONDE nombre = "Mantari" Y edad = "causam"
+CREAR TABLA mascotas (
+    id ENTERO CLAVE PRIMARIA AUTOINCREMENTAL,
+    nombre TEXTO NO NULO ,
+    dueno_id ENTERO CLAVE FORANEA REFERENCIA empleados(id) 
+)
 """
 #ALTERAR TABLA empleados AGREGAR casa ENTERO CLAVE PRIMARIA 
 resultado_lexico = analizar_lexico(query)
