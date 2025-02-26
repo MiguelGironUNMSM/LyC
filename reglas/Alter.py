@@ -48,7 +48,8 @@ def p_alteracion_modificar(t):
     """alteracion : MODIFICAR opt_column lista_columna_crear"""
     # t[3] es el nombre de la columna, t[4] la nueva definición (por ejemplo, nuevo tipo)
     # t[0] = ("modify_column", t[3])
-    t[0] = ModificarColumna(lista_columnas= t[3])
+    columnas = [Columna(nombre=col[0], tipo_dato=col[1], restricciones=col[2]) for col in t[3]]
+    t[0] = ModificarColumna(lista_columnas= columnas)
 
 # 4. Renombrar una columna:
 #    ALTER TABLE [table_name] RENAME COLUMN [OldName] TO [NewName];
