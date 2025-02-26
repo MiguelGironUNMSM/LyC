@@ -4,9 +4,11 @@ from clases.Eliminar import *
 from clases.Soltar import *
 from clases.Seleccion import *
 from clases.Actualizar import *
+from clases.Alterar import *
 
 query = """
 ACTUALIZAR empleados COLOCAR nombre = "Juan", edad = 25 
+DONDE id = 1
 """
 #ALTERAR TABLA empleados AGREGAR casa ENTERO CLAVE PRIMARIA 
 resultado_lexico = analizar_lexico(query)

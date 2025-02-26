@@ -16,7 +16,10 @@ class Actualizar(Instruccion):
     def analizar_semantica(self, base_datos):
         if (self.nombre_tabla not in base_datos):
             raise Exception(f"La tabla '{self.nombre_tabla}' no existe.")
-        print("paso x acas")
+        
+        
+        
+
     def ejecutar(self, base_datos):
         self.analizar_semantica(base_datos)
         
@@ -24,7 +27,7 @@ class Actualizar(Instruccion):
         sql = f"UPDATE {self.nombre_tabla} SET {self.asignacion}"
         
         # Agregar condiciones si existen
-        if self.condicionales is True:
+        if self.condicionales:
             sql += f" WHERE {self.condicionales}"
         return sql
     
