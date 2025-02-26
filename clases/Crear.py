@@ -8,7 +8,7 @@ class Crear(Instruccion):
         self.llaves_foraneas = llaves_foraneas if llaves_foraneas else {}
         
     def __str__(self):
-        return f"Crear({self.nombre_tabla}, {self.columnas}, PK={self.llave_primaria}, FK={self.llaves_foraneas})"
+        return f"Crear({self.nombre_tabla}, {self.columnas}, CPrincipal={self.llave_primaria}, CForanea={self.llaves_foraneas})"
                 
     def analizar_semantica(self, base_datos):
      # Se convierte la lista en un diccionario temporal para validar duplicados

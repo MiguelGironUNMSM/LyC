@@ -4,14 +4,14 @@ from clases.Eliminar import Eliminar
 from clases.Soltar import Soltar
 from clases.Crear import Crear
 from clases.Seleccion import Seleccion
+from clases.Insertar import Insertar
+
+
+
 
 
 query = """
-CREAR TABLA mascotas (
-    id ENTERO CLAVE PRIMARIA AUTOINCREMENTAL,
-    nombre TEXTO NO NULO ,
-    dueno_id ENTERO CLAVE FORANEA REFERENCIA empleados(id) 
-)
+INSERTAR EN empleados (nombre, edad, departamento_id) VALORES ("Andre", 30, 1)
 """
 #ALTERAR TABLA empleados AGREGAR casa ENTERO CLAVE PRIMARIA 
 resultado_lexico = analizar_lexico(query)
@@ -43,4 +43,6 @@ base_datos = {
 resultado_sintactico = analizar_sintaxis(query)
 print("\nResultado del analisis sintáctico:")
 print(resultado_sintactico)
+
+print("\nResultado del análisis semántico:")
 print(resultado_sintactico.ejecutar(base_datos))
