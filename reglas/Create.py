@@ -8,11 +8,10 @@ def p_crear(t):
     llave_primaria = None
     llaves_foraneas = {}
 
-    for columna in t[5]:
-        nombre_columna = columna[0]
-        tipo_dato = columna[1]
-        restricciones = columna[2]
-
+    for sublista in t[5]:
+        columna = sublista[0]
+        nombre_columna, tipo_dato, restricciones  = columna
+         
         columnas_lista.append((nombre_columna, tipo_dato, restricciones))  
 
         if "CLAVE PRIMARIA" in restricciones:
