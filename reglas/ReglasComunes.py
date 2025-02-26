@@ -107,7 +107,8 @@ def p_valor(t):
     """valor : VALOR_NUMERO
              | VALOR_CADENA
              | VALOR_BOOLEANO
-             | VALOR_FLOTANTE"""
+             | VALOR_FLOTANTE
+             """
     t[0] = t[1]
 
 
