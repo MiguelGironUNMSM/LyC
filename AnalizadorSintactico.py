@@ -55,4 +55,11 @@ parser = yacc.yacc(start='instruccion')
 def analizar_sintaxis(consulta):
     return parser.parse(consulta)
 
+resultado = analizar_sintaxis(
+    """SELECCIONAR nombre DESDE empleados DONDE salario > 5000"""
+)
+
+print("Resultado de la consulta:")
+print(resultado)
+
 

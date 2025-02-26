@@ -7,11 +7,7 @@ from clases.Seleccion import Seleccion
 
 
 query = """
-CREAR TABLA mascotas (
-    id ENTERO CLAVE PRIMARIA AUTOINCREMENTAL,
-    nombre TEXTO NO NULO ,
-    dueno_id ENTERO CLAVE FORANEA REFERENCIA empleados(id) 
-)
+SELECCIONAR nombre, id DESDE empleados DONDE id = 5 UNIR departamentos CON empleados(departamento_id) = departamentos(id)
 """
 #ALTERAR TABLA empleados AGREGAR casa ENTERO CLAVE PRIMARIA 
 resultado_lexico = analizar_lexico(query)
