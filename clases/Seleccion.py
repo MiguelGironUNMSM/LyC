@@ -24,14 +24,28 @@ class Seleccion(Instruccion):
                 raise Exception(f"Error: La columna '{self.columnas}' no existe en '{self.tabla}'.")
             
         
-        # Si hay JOIN, verificamos la tabla unida y su condición
+         # Si hay JOIN, verificamos la tabla unida y su condición
         if self.unir:
             _, tipo, tabla_unida, condicion = self.unir
 
+            # Verificar si la tabla del JOIN existe
             if tabla_unida not in base_datos:
                 raise Exception(f"Error: La tabla '{tabla_unida}' no existe para el JOIN.")
 
-            # Aquí podrías analizar las condiciones del JOIN también
+            # Regla semántica: No permitir JOIN con la misma tabla del SELECT
+            if self.tabla == tabla_unida:
+                raise Exception(f"Error: No puedes hacer un JOIN con la misma tabla '{self.tabla}'.")
+
+            # Verificar que las columnas de la condición existen
+            (col1, _, tabla1), operador, (col2, _, tabla2) = condicion
+            
+            if set([tabla1, tabla2]) != set([self.tabla, tabla_unida]):
+                raise Exception(f"Error: La condición del JOIN debe involucrar solo '{self.tabla}' y '{tabla_unida}', pero usa '{tabla1}' y '{tabla2}'.")
+            
+            if col1 not in base_datos.get(tabla1, {}).get("columnas", {}):
+                raise Exception(f"Error: La columna '{col1}' no existe en la tabla '{tabla1}'.")
+            if col2 not in base_datos.get(tabla2, {}).get("columnas", {}):
+                raise Exception(f"Error: La columna '{col2}' no existe en la tabla '{tabla2}'.")
         
 
     def ejecutar(self, base_datos):
