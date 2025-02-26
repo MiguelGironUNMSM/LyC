@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'instruccion':([0,],[1,]),'seleccion':([0,],[2,]),'insertar':([0,],[3,]),'alterar':([0,],[4,]),'actualizar':([0,],[5,]),'eliminar':([0,],[6,]),'soltar':([0,],[7,]),'crear':([0,],[8,]),'transaccion':([0,],[9,]),'unir':([0,],[10,]),'valor':([0,92,130,138,143,163,],[11,115,153,155,158,166,]),'eliminar_todo':([0,],[16,]),'eliminar_donde':([0,],[17,]),'eliminar_hasta_todo':([0,],[18,]),'eliminar_hasta_donde':([0,],[19,]),'lista_floro':([12,],[31,]),'floro':([12,31,],[32,50,]),'empty':([12,25,31,66,67,68,69,70,72,80,118,],[34,45,34,87,87,87,87,87,96,96,146,]),'tipo_unir':([25,],[40,]),'lista_columnas':([31,],[48,]),'lista_columnas_creadas':([52,],[63,]),'alteraciones':([53,84,],[64,109,]),'alteracion':([53,84,],[65,65,]),'lista_asignaciones':([54,],[72,]),'condicional':([55,],[73,]),'clausula':([58,72,80,95,105,],[77,97,97,117,137,]),'opt_column':([66,67,68,69,70,],[85,88,89,90,91,]),'opt_condiciones':([72,80,],[93,106,]),'condiciones':([72,80,],[95,95,]),'lista_columnas_crear':([75,],[100,]),'lista_columna_crear':([75,85,89,114,128,],[101,110,112,142,151,]),'condicion':([76,],[103,]),'tipo_dato':([99,],[118,]),'comparador':([104,],[130,]),'lista_filas':([107,],[139,]),'fila':([107,156,],[140,164,]),'restricciones':([118,],[144,]),'restriccion':([118,144,],[145,159,]),'lista_valores':([138,],[154,]),'referencia':([148,],[160,]),}
+_lr_goto_items = {'instruccion':([0,],[1,]),'seleccion':([0,],[2,]),'insertar':([0,],[3,]),'alterar':([0,],[4,]),'actualizar':([0,],[5,]),'eliminar':([0,],[6,]),'soltar':([0,],[7,]),'crear':([0,],[8,]),'transaccion':([0,],[9,]),'unir':([0,],[10,]),'valor':([0,93,131,140,163,],[11,116,154,156,166,]),'eliminar_todo':([0,],[16,]),'eliminar_donde':([0,],[17,]),'eliminar_hasta_todo':([0,],[18,]),'eliminar_hasta_donde':([0,],[19,]),'lista_floro':([12,],[31,]),'floro':([12,31,],[32,50,]),'empty':([12,25,31,66,67,68,69,70,81,94,119,],[34,45,34,88,88,88,88,88,106,106,147,]),'tipo_unir':([25,],[40,]),'lista_columnas':([31,],[48,]),'lista_columnas_creadas':([52,],[63,]),'alteraciones':([53,85,],[64,110,]),'alteracion':([53,85,],[65,65,]),'lista_asignaciones':([54,],[72,]),'asignacion':([54,95,],[73,118,]),'condicional':([55,],[74,]),'clausula':([58,81,94,103,105,],[78,107,107,138,139,]),'opt_column':([66,67,68,69,70,],[86,89,90,91,92,]),'lista_columnas_crear':([76,],[98,]),'lista_columna_crear':([76,86,90,115,129,],[99,111,113,144,152,]),'condicion':([77,],[101,]),'opt_condiciones':([81,94,],[104,117,]),'condiciones':([81,94,],[105,105,]),'tipo_dato':([97,],[119,]),'comparador':([102,],[131,]),'lista_filas':([108,],[141,]),'fila':([108,157,],[142,164,]),'restricciones':([119,],[145,]),'restriccion':([119,145,],[146,159,]),'lista_valores':([140,],[155,]),'referencia':([149,],[160,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -30,12 +30,13 @@ _lr_productions = [
   ('lista_columna_crear -> IDENTIFICADOR tipo_dato restricciones','lista_columna_crear',3,'p_lista_columna_crear','ReglasComunes.py',2),
   ('transaccion -> INICIAR_TRANSACCION','transaccion',1,'p_transaccion_iniciar','Transaction.py',2),
   ('insertar -> INSERTAR_EN IDENTIFICADOR PARENTESIS_IZQ lista_columnas_creadas PARENTESIS_DER VALORES lista_filas','insertar',7,'p_insertar','Insert.py',3),
-  ('actualizar -> ACTUALIZAR IDENTIFICADOR COLOCAR lista_asignaciones opt_condiciones','actualizar',5,'p_actualizar','Update.py',3),
   ('crear -> CREAR TABLA IDENTIFICADOR PARENTESIS_IZQ lista_columnas_crear PARENTESIS_DER','crear',6,'p_crear','Create.py',4),
   ('soltar -> SOLTAR TABLA IDENTIFICADOR','soltar',3,'p_soltar','DropTable.py',4),
   ('soltar -> SOLTAR TABLA IDENTIFICADOR condicional','soltar',4,'p_soltar','DropTable.py',5),
   ('unir -> UNIR tipo_unir IDENTIFICADOR CON condicion','unir',5,'p_unir','Join.py',4),
   ('seleccion -> SELECCIONAR lista_floro lista_columnas DESDE IDENTIFICADOR opt_condiciones','seleccion',6,'p_seleccion','Select.py',4),
+  ('actualizar -> ACTUALIZAR IDENTIFICADOR COLOCAR lista_asignaciones DONDE opt_condiciones','actualizar',6,'p_actualizar','Update.py',4),
+  ('actualizar -> ACTUALIZAR IDENTIFICADOR COLOCAR lista_asignaciones','actualizar',4,'p_actualizar','Update.py',5),
   ('eliminar -> eliminar_todo','eliminar',1,'p_eliminar','Delete.py',5),
   ('eliminar -> eliminar_donde','eliminar',1,'p_eliminar','Delete.py',6),
   ('eliminar -> eliminar_hasta_todo','eliminar',1,'p_eliminar','Delete.py',7),
@@ -44,8 +45,6 @@ _lr_productions = [
   ('transaccion -> CONFIRMAR','transaccion',1,'p_transaccion_confirmar','Transaction.py',6),
   ('lista_columnas_creadas -> IDENTIFICADOR','lista_columnas_creadas',1,'p_lista_columnas_creadas','Insert.py',8),
   ('lista_columnas_creadas -> lista_columnas_creadas COMA IDENTIFICADOR','lista_columnas_creadas',3,'p_lista_columnas_creadas','Insert.py',9),
-  ('lista_asignaciones -> IDENTIFICADOR IGUALDAD valor','lista_asignaciones',3,'p_lista_asignaciones','Update.py',8),
-  ('lista_asignaciones -> lista_asignaciones COMA IDENTIFICADOR IGUALDAD valor','lista_asignaciones',5,'p_lista_asignaciones','Update.py',9),
   ('tipo_dato -> ENTERO','tipo_dato',1,'p_tipo_dato','ReglasComunes.py',10),
   ('tipo_dato -> CADENA','tipo_dato',1,'p_tipo_dato','ReglasComunes.py',11),
   ('tipo_dato -> CARACTER','tipo_dato',1,'p_tipo_dato','ReglasComunes.py',12),
@@ -63,6 +62,8 @@ _lr_productions = [
   ('condicional -> SI EXISTE','condicional',2,'p_condicional','DropTable.py',12),
   ('eliminar_todo -> ELIMINAR DESDE IDENTIFICADOR','eliminar_todo',3,'p_eliminar_todo','Delete.py',13),
   ('alteraciones -> alteracion','alteraciones',1,'p_alteraciones_single','Alter.py',14),
+  ('lista_asignaciones -> asignacion','lista_asignaciones',1,'p_lista_asignaciones','Update.py',14),
+  ('lista_asignaciones -> lista_asignaciones COMA asignacion','lista_asignaciones',3,'p_lista_asignaciones','Update.py',15),
   ('lista_filas -> fila','lista_filas',1,'p_lista_filas','Insert.py',16),
   ('lista_filas -> lista_filas COMA fila','lista_filas',3,'p_lista_filas','Insert.py',17),
   ('eliminar_donde -> ELIMINAR DESDE IDENTIFICADOR clausula','eliminar_donde',4,'p_eliminar_donde','Delete.py',17),
@@ -71,6 +72,7 @@ _lr_productions = [
   ('alteraciones -> alteracion COMA alteraciones','alteraciones',3,'p_alteraciones_multiple','Alter.py',19),
   ('condicion -> IDENTIFICADOR IGUALDAD IDENTIFICADOR','condicion',3,'p_condicion','Join.py',21),
   ('eliminar_hasta_todo -> ELIMINAR PRIMEROS VALOR_NUMERO DESDE IDENTIFICADOR','eliminar_hasta_todo',5,'p_eliminar_hasta_todo','Delete.py',22),
+  ('asignacion -> IDENTIFICADOR IGUALDAD valor','asignacion',3,'p_asignacion','Update.py',22),
   ('fila -> PARENTESIS_IZQ lista_valores PARENTESIS_DER','fila',3,'p_fila','Insert.py',24),
   ('especificacion -> PARENTESIS_IZQ VALOR_NUMERO PARENTESIS_DER','especificacion',3,'p_especificacion','ReglasComunes.py',25),
   ('especificacion -> empty','especificacion',1,'p_especificacion','ReglasComunes.py',26),

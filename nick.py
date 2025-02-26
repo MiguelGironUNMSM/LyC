@@ -3,10 +3,10 @@ from AnalizadorSintactico import analizar_sintaxis
 from clases.Eliminar import *
 from clases.Soltar import *
 from clases.Seleccion import *
-
+from clases.Actualizar import *
 
 query = """
-SELECCIONAR TODO DESDE empleados
+ACTUALIZAR empleados COLOCAR nombre = "Juan", edad = 25 
 """
 #ALTERAR TABLA empleados AGREGAR casa ENTERO CLAVE PRIMARIA 
 resultado_lexico = analizar_lexico(query)
@@ -37,5 +37,6 @@ base_datos = {
 
 resultado_sintactico = analizar_sintaxis(query)
 print("\nResultado del analisis sintáctico:")
-print(resultado_sintactico)
+print(type(resultado_sintactico))
 print(resultado_sintactico.ejecutar(base_datos))
+

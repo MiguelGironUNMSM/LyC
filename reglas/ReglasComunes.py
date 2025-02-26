@@ -72,7 +72,7 @@ def p_condiciones(t):
     """condiciones : condiciones clausula
                    | clausula"""
     if len(t) == 3:
-        t[0] = t[1] + [t[2]]
+        t[0] = f"{t[1]}, {t[2]}"
     else:
         t[0] = f"{t[1]}"
 
