@@ -27,7 +27,18 @@ class Insertar(Instruccion):
                 raise Exception(f"Error semántico: no se pueden insertar valores en columnas autoincrementales.")
         # Se validan los tipos de datos
         for valor, col in zip(self.valores, self.columnas):
+            restricciones = base_datos[self.nombre_tabla]["columnas"][col].get("restricciones", [])
             base_datos_tipo = base_datos[self.nombre_tabla]["columnas"][col]["tipo"].upper()
+            
+            # Validar NO NULO
+            if "NO NULO" in restricciones and (valor is None or valor == ""):
+                raise Exception(f"Error semántico: La columna '{col}' no puede ser nula.")
+            
+            # Validar clave primaria (unicidad)
+            if "CLAVE PRIMARIA" in restricciones:
+                if valor in base_datos[self.nombre_tabla]["columnas"][col]["datos"]:
+                    raise Exception(f"Error semántico: El valor '{valor}' ya existe como clave primaria en '{col}'.")
+            
             if base_datos_tipo == "ENTERO":
                 try:
                     int(valor)
