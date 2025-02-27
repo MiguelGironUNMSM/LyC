@@ -7,7 +7,7 @@ from clases.Actualizar import *
 from clases.Alterar import *
 
 query = """
-SOLTAR TABLA SI EXISTE empleados, departamentos
+INSERTAR EN empleados (nombre, edad, departamento_id) VALORES ("Andre", 30, 1)
 """
 #ALTERAR TABLA empleados AGREGAR casa ENTERO CLAVE PRIMARIA 
 resultado_lexico = analizar_lexico(query)
