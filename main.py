@@ -7,7 +7,7 @@ from clases.Seleccion import Seleccion
 
 
 query = """
-SELECCIONAR nombre, id DESDE empleados DONDE id = 5 UNIR departamentos CON empleados(departamento_id) = departamentos(id)
+SELECCIONAR nombre, id DESDE empleados DONDE id = 5 UNIR COMPLETO departamentos CON empleados(departamento_id) = departamentos(id)
 """
 #ALTERAR TABLA empleados AGREGAR casa ENTERO CLAVE PRIMARIA 
 resultado_lexico = analizar_lexico(query)
