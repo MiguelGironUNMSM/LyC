@@ -108,6 +108,7 @@ def p_valor(t):
              | VALOR_CADENA
              | VALOR_BOOLEANO
              | VALOR_FLOTANTE
+             | empty
              """
     t[0] = t[1]
 
@@ -123,5 +124,6 @@ def p_condicion_order(t):
 
 
 def p_empty(t):
-    "empty :"
+    """empty : NULO
+    |"""
     t[0] = None

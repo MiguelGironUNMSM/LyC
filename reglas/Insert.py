@@ -32,7 +32,9 @@ def p_fila(t):
 
 def p_lista_valores(t):
     """lista_valores : valor
-    | lista_valores COMA valor"""
+    | lista_valores COMA valor
+    | lista_valores COMA NULO
+    |"""
     if len(t) == 2:
         t[0] = [t[1]]
     else:

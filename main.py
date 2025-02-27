@@ -11,7 +11,7 @@ from clases.Insertar import Insertar
 #SELECCIONAR nombre, id DESDE empleados DONDE id = 5 UNIR COMPLETO departamentos CON empleados(departamento_id) = departamentos(id)
 
 query = """
-INSERTAR EN empleados (nombre, edad, departamento_id) VALORES ("Andre", 30, 1)
+INSERTAR EN empleados (nombre, edad, departamento_id) VALORES ("Andre", 30, 3)
 """
 #ALTERAR TABLA empleados AGREGAR casa ENTERO CLAVE PRIMARIA 
 resultado_lexico = analizar_lexico(query)
@@ -23,7 +23,7 @@ for token in resultado_lexico:
 base_datos = {
     "empleados": {
         "columnas": {
-            "id": {"tipo": "entero", "restricciones": ["CLAVE PRIMARIA", "AUTOINCREMENTAL"], "datos" : [1, 2, 3]},
+            "id": {"tipo": "entero", "restricciones": ["CLAVE PRIMARIA"], "datos" : [1, 2, 3]},
             "nombre": {"tipo": "texto", "restricciones": ["NO NULO"], "datos" : ["Andre", "Juan", "Pedro"]},
             "edad": {"tipo": "entero", "restricciones": ["NO NULO"], "datos" : [19, 25, 30]},
             "departamento_id": {"tipo": "entero", "restricciones": ["CLAVE FORANEA", "NO NULO"], "datos" : [1, 2, 3]}
