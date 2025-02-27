@@ -46,7 +46,7 @@ class AgregarColumna(Instruccion):
         # Validar si la tabla tiene la columna
         if nombre_tabla not in base_datos:
             raise Exception(f"La tabla '{nombre_tabla}' no existe.")
-        diccionario = {"TEXTO":"text(255)","ENTERO":"int","CADENA":"varchar(255)"}
+        diccionario = {"TEXTO":"text(255)","ENTERO":"int","CADENA":"varchar(255)","DECIMAL":"decimal(10,2)","BOOLEANO":"boolean"}
         for col_def in self.lista_columnas:
             nombre_columna = col_def.nombre
             if nombre_columna in base_datos[nombre_tabla]["columnas"]:
@@ -101,7 +101,7 @@ class ModificarColumna(Instruccion):
         return f"ModificarColumna(columnas={self.lista_columnas})"
 
     def analizar_semantica(self, base_datos, nombre_tabla):
-        diccionario = {"TEXTO":"text(255)","ENTERO":"int","CADENA":"varchar(255)"}
+        diccionario = {"TEXTO":"text(255)","ENTERO":"int","CADENA":"varchar(255)","DECIMAL":"decimal(10,2)","BOOLEANO":"boolean"}
         if nombre_tabla not in base_datos:
             raise Exception(f"La tabla '{nombre_tabla}' no existe.")
         for col_def in self.lista_columnas:
@@ -171,7 +171,7 @@ class CambiarColumna(Instruccion):
         return f"CambiarColumna(viejo='{self.nombre_viejo}', nueva_def='{self.nueva_definicion}')"
 
     def analizar_semantica(self, base_datos, nombre_tabla):
-        diccionario = {"TEXTO":"text(255)","ENTERO":"int","CADENA":"varchar(255)"}
+        diccionario = {"TEXTO":"text(255)","ENTERO":"int","CADENA":"varchar(255)","DECIMAL":"decimal(10,2)","BOOLEANO":"boolean"}
         if nombre_tabla not in base_datos:
             raise Exception(f"La tabla '{nombre_tabla}' no existe.")
         if self.nombre_viejo not in base_datos[nombre_tabla]["columnas"]:
