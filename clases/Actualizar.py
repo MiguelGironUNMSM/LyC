@@ -17,9 +17,6 @@ class Actualizar(Instruccion):
         if (self.nombre_tabla not in base_datos):
             raise Exception(f"La tabla '{self.nombre_tabla}' no existe.")
         
-        
-        
-
     def ejecutar(self, base_datos):
         self.analizar_semantica(base_datos)
         
