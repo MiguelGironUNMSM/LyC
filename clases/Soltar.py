@@ -1,18 +1,29 @@
 from AnalizadorSemantico import Instruccion
 
 class Soltar(Instruccion):
-    def __init__(self,tabla,condicional=None):
+    def __init__(self,tabla):
         self.tabla = tabla
-        self.condicional = condicional
     def analizar_semantica(self, base_datos):
-        if self.tabla not in base_datos:
-            raise Exception(f"Error: La tabla'{self.tabla} no existe")
+        for t in self.tabla:
+            if t not in base_datos:
+                raise Exception(f"Error: La tabla '{t}' no existe.")
         
     def ejecutar(self, base_datos):
         self.analizar_semantica(base_datos)
-
-        sql = f"DROP TABLE {self.tabla}"
-        if self.condicional:
-            sql += f" IF EXIST"
+        tablas_sql = ", ".join(self.tabla)
+        sql = f"DROP TABLE {tablas_sql}"
         return sql
         
+class soltar_condicional(Instruccion):
+    def __init__(self, tabla):
+        self.tabla = tabla
+    def analizar_semantica(self, base_datos):
+        for t in self.tabla:
+            if t not in base_datos:
+                raise Exception(f"Error: La tabla '{t}' no existe.")
+        
+    def ejecutar(self, base_datos):
+        self.analizar_semantica(base_datos)
+        tablas_sql = ", ".join(self.tabla)
+        sql = f"DROP TABLE IF EXISTS {tablas_sql}"
+        return sql

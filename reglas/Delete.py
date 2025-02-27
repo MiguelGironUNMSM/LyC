@@ -29,8 +29,20 @@ def p_eliminar_hasta_donde(t):
     t[0] = Eliminar(tabla=t[5], clausula=t[6], limite=t[3])  
 
 def p_clausula(t):
-    """clausula : DONDE IDENTIFICADOR comparador valor"""
-    t[0] = f"{t[2]} {t[3]} {t[4]}" 
+    """clausula : DONDE condicioncita"""
+    t[0] = t[2]
+def p_condicioncita(t):
+    """condicioncita : IDENTIFICADOR comparador valor
+                    | condicioncita Y condicioncita
+                    | condicioncita O condicioncita"""
+    if len(t) == 4:
+        if t[2].upper() == "Y":
+            t[2] = "AND"
+        elif t[2].upper() == "O":
+            t[2] = "OR"
+        t[0] = f"{t[1]} {t[2]} {t[3]}"
+    else:
+        t[0] = f"{t[1]} {t[2]} {t[3]}" 
     
 def p_comparador(t):
     """comparador : IGUALDAD

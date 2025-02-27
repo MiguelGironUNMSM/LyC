@@ -165,7 +165,7 @@ t_MAYOR = r">"
 t_MENOR = r"<"
 t_MAYOR_IGUAL = r">="
 t_MENOR_IGUAL = r"<="
-t_IGUALDAD = r"="
+t_IGUALDAD = r"\="
 t_DIFERENTE = r"!="
 t_ENTRE = r"ENTRE"
 t_A = r"A"
@@ -426,20 +426,18 @@ def t_IDENTIFICADOR(t):
 
 
 def t_VALOR_CADENA(t):
-    r"\".*?\" "
-    t.value = t.value[0:]
+    r'(["\'])(?:\\.|[^\\\1])*\''
     return t
 
 
 def t_VALOR_FLOTANTE(t):
     r"\d+\.\d+"
-    t.value = float(t.value)
     return t
 
 
 def t_VALOR_NUMERO(t):
     r"\d+"
-    t.value = int(t.value)
+    
     return t
 
 
@@ -459,7 +457,7 @@ def t_SALTO_DE_LINEA(t):
 
 
 def t_IDENTIFICADOR_INVALIDO(t):
-    r"[^a-zA-Z_\s\(-]+[a-zA-Z0-9_]*[a-zA-Z]+"
+    r"[^=a-zA-Z_\s\(-]+[a-zA-Z0-9_]*[a-zA-Z]+"
     print(f"Identificador inválido: {t.value}")
     t.lexer.skip(1)
 

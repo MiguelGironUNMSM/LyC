@@ -4,10 +4,14 @@ from clases.Eliminar import Eliminar
 from clases.Soltar import Soltar
 from clases.Crear import Crear
 from clases.Seleccion import Seleccion
+from clases.Insertar import Insertar
 
+
+
+#SELECCIONAR nombre, id DESDE empleados DONDE id = 5 UNIR COMPLETO departamentos CON empleados(departamento_id) = departamentos(id)
 
 query = """
-SELECCIONAR nombre, id DESDE empleados DONDE id = 5 UNIR COMPLETO departamentos CON empleados(departamento_id) = departamentos(id)
+INSERTAR EN empleados (nombre, edad, departamento_id) VALORES ("Andre", 30, 1)
 """
 #ALTERAR TABLA empleados AGREGAR casa ENTERO CLAVE PRIMARIA 
 resultado_lexico = analizar_lexico(query)
@@ -19,18 +23,18 @@ for token in resultado_lexico:
 base_datos = {
     "empleados": {
         "columnas": {
-            "id": {"tipo": "entero", "restricciones": ["CLAVE PRIMARIA", "AUTOINCREMENTAL"]},
-            "nombre": {"tipo": "texto", "restricciones": ["NO NULO"]},
-            "edad": {"tipo": "entero", "restricciones": ["NO NULO"]},
-            "departamento_id": {"tipo": "entero", "restricciones": ["CLAVE FORANEA", "NO NULO"]}
+            "id": {"tipo": "entero", "restricciones": ["CLAVE PRIMARIA", "AUTOINCREMENTAL"], "datos" : [1, 2, 3]},
+            "nombre": {"tipo": "texto", "restricciones": ["NO NULO"], "datos" : ["Andre", "Juan", "Pedro"]},
+            "edad": {"tipo": "entero", "restricciones": ["NO NULO"], "datos" : [19, 25, 30]},
+            "departamento_id": {"tipo": "entero", "restricciones": ["CLAVE FORANEA", "NO NULO"], "datos" : [1, 2, 3]}
         },
         "llave_primaria": "id",
         "llaves_foraneas": {"departamento_id": "departamentos.id"}
     },
     "departamentos": {
         "columnas": {
-            "id": {"tipo": "entero", "restricciones": ["CLAVE PRIMARIA", "AUTOINCREMENTAL"]},
-            "nombre": {"tipo": "texto", "restricciones": ["NO NULO"]}
+            "id": {"tipo": "entero", "restricciones": ["CLAVE PRIMARIA", "AUTOINCREMENTAL"], "datos" : [1, 2, 3]},
+            "nombre": {"tipo": "texto", "restricciones": ["NO NULO"], "datos" : ["Finanzas", "Ventas", "Recursos Humanos"]}
         },
         "llave_primaria": "id"
     }
@@ -39,4 +43,6 @@ base_datos = {
 resultado_sintactico = analizar_sintaxis(query)
 print("\nResultado del analisis sintáctico:")
 print(resultado_sintactico)
+
+print("\nResultado del análisis semántico:")
 print(resultado_sintactico.ejecutar(base_datos))

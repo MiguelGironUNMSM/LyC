@@ -32,7 +32,7 @@ def p_alteracion_add(t):
 def p_opt_column(t):
     """opt_column : COLUMNA
                   | empty"""
-    t[0] = t[1] if t[1] is not None else None
+    t[0] = f"{t[1]}" if f"{t[1]}" is not None else None
 
 
 # 2. Eliminar una columna (con o sin la palabra COLUMN):
@@ -63,4 +63,4 @@ def p_alteracion_rename(t):
 def p_alteracion_change(t):
     """alteracion : CAMBIAR opt_column IDENTIFICADOR lista_columna_crear"""
     # t[0] = ("change_column", t[3], t[4])
-    t[0] = CambiarColumna(nombre_viejo= t[3], nueva_definicion= t[4][0])
+    t[0] = CambiarColumna(nombre_viejo= t[3], nueva_definicion= t[4])

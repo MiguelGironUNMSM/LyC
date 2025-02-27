@@ -1,12 +1,11 @@
 from clases.Actualizar import *
 
 def p_actualizar(t):
-    """actualizar : ACTUALIZAR IDENTIFICADOR COLOCAR lista_asignaciones DONDE opt_condiciones
+    """actualizar : ACTUALIZAR IDENTIFICADOR COLOCAR lista_asignaciones opt_condiciones
                   | ACTUALIZAR IDENTIFICADOR COLOCAR lista_asignaciones
     """
     if len(t) == 6:
-        print(f"DEBUG: Condiciones -> {t[6]} ({type(t[6])})")
-        t[0] = Actualizar(nombre_tabla=t[2], asignacion=t[4], condicionales=t[6])  
+        t[0] = Actualizar(nombre_tabla=t[2], asignacion=t[4], condicionales=t[5])  
     else:
         t[0] = Actualizar(nombre_tabla=t[2], asignacion=t[4])
 
@@ -22,3 +21,4 @@ def p_lista_asignaciones(t):
 def p_asignacion(t):
     """asignacion : IDENTIFICADOR IGUALDAD valor"""
     t[0] = f"{t[1]} {t[2]} {t[3]}"
+    

@@ -4,9 +4,10 @@ from clases.Eliminar import *
 from clases.Soltar import *
 from clases.Seleccion import *
 from clases.Actualizar import *
+from clases.Alterar import *
 
 query = """
-ACTUALIZAR empleados COLOCAR nombre = "Juan", edad = 25 
+SOLTAR TABLA SI EXISTE empleados, departamentos
 """
 #ALTERAR TABLA empleados AGREGAR casa ENTERO CLAVE PRIMARIA 
 resultado_lexico = analizar_lexico(query)
@@ -36,7 +37,7 @@ base_datos = {
 }
 
 resultado_sintactico = analizar_sintaxis(query)
-print("\nResultado del analisis sintáctico:")
+print("\nResultado del analisis sintactico:")
 print(type(resultado_sintactico))
 print(resultado_sintactico.ejecutar(base_datos))
 

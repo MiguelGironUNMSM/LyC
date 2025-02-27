@@ -33,7 +33,6 @@ Unused terminals:
     NO
     NO_ES_NULO
     NULO
-    O
     OBTENER
     ORDENAR_POR
     PARA
@@ -50,7 +49,6 @@ Unused terminals:
     SUMA
     TENIENDO
     TODOS
-    Y
 
 Grammar
 
@@ -106,10 +104,10 @@ Rule 48    fila -> PARENTESIS_IZQ lista_valores PARENTESIS_DER
 Rule 49    alteracion -> AGREGAR opt_column lista_columna_crear
 Rule 50    empty -> <empty>
 Rule 51    eliminar_hasta_donde -> ELIMINAR PRIMEROS VALOR_NUMERO DESDE IDENTIFICADOR clausula
-Rule 52    lista_valores -> valor
-Rule 53    lista_valores -> lista_valores COMA valor
-Rule 54    lista_columnas_crear -> lista_columnas_crear COMA lista_columna_crear
-Rule 55    lista_columnas_crear -> lista_columna_crear
+Rule 52    lista_columnas_crear -> lista_columnas_crear COMA lista_columna_crear
+Rule 53    lista_columnas_crear -> lista_columna_crear
+Rule 54    lista_valores -> valor
+Rule 55    lista_valores -> lista_valores COMA valor
 Rule 56    floro -> DISTINTO
 Rule 57    floro -> empty
 Rule 58    especificacion -> IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER
@@ -123,41 +121,44 @@ Rule 65    instruccion -> crear
 Rule 66    instruccion -> transaccion
 Rule 67    instruccion -> unir
 Rule 68    instruccion -> valor
-Rule 69    clausula -> DONDE IDENTIFICADOR comparador valor
+Rule 69    clausula -> DONDE condicioncita
 Rule 70    opt_column -> COLUMNA
 Rule 71    opt_column -> empty
 Rule 72    restricciones -> restricciones restriccion
 Rule 73    restricciones -> restriccion
 Rule 74    restricciones -> empty
-Rule 75    comparador -> IGUALDAD
-Rule 76    comparador -> MAYOR
-Rule 77    comparador -> MENOR
-Rule 78    comparador -> MAYOR_IGUAL
-Rule 79    comparador -> MENOR_IGUAL
-Rule 80    comparador -> DIFERENTE
-Rule 81    lista_columnas -> IDENTIFICADOR
-Rule 82    lista_columnas -> lista_columnas COMA IDENTIFICADOR
-Rule 83    lista_columnas -> TODO
-Rule 84    alteracion -> SOLTAR opt_column IDENTIFICADOR
-Rule 85    valor -> VALOR_NUMERO
-Rule 86    valor -> VALOR_CADENA
-Rule 87    valor -> VALOR_BOOLEANO
-Rule 88    valor -> VALOR_FLOTANTE
-Rule 89    restriccion -> CLAVE_PRIMARIA
-Rule 90    restriccion -> CLAVE_FORANEA referencia
-Rule 91    restriccion -> AUTOINCREMENTAL
-Rule 92    restriccion -> NO_NULO
-Rule 93    alteracion -> MODIFICAR opt_column lista_columna_crear
-Rule 94    referencia -> REFERENCIA IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER
-Rule 95    alteracion -> RENOMBRAR opt_column IDENTIFICADOR A IDENTIFICADOR
-Rule 96    opt_condiciones -> condiciones
-Rule 97    opt_condiciones -> empty
-Rule 98    alteracion -> CAMBIAR opt_column IDENTIFICADOR lista_columna_crear
-Rule 99    condiciones -> condiciones clausula
-Rule 100   condiciones -> clausula
-Rule 101   condicion_order -> IDENTIFICADOR ASCENDENTE
-Rule 102   condicion_order -> IDENTIFICADOR DESCENDENTE
-Rule 103   condicion_order -> IDENTIFICADOR
+Rule 75    condicioncita -> IDENTIFICADOR comparador valor
+Rule 76    condicioncita -> condicioncita Y condicioncita
+Rule 77    condicioncita -> condicioncita O condicioncita
+Rule 78    lista_columnas -> IDENTIFICADOR
+Rule 79    lista_columnas -> lista_columnas COMA IDENTIFICADOR
+Rule 80    lista_columnas -> TODO
+Rule 81    alteracion -> SOLTAR opt_column IDENTIFICADOR
+Rule 82    restriccion -> CLAVE_PRIMARIA
+Rule 83    restriccion -> CLAVE_FORANEA referencia
+Rule 84    restriccion -> AUTOINCREMENTAL
+Rule 85    restriccion -> NO_NULO
+Rule 86    alteracion -> MODIFICAR opt_column lista_columna_crear
+Rule 87    comparador -> IGUALDAD
+Rule 88    comparador -> MAYOR
+Rule 89    comparador -> MENOR
+Rule 90    comparador -> MAYOR_IGUAL
+Rule 91    comparador -> MENOR_IGUAL
+Rule 92    comparador -> DIFERENTE
+Rule 93    referencia -> REFERENCIA IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER
+Rule 94    alteracion -> RENOMBRAR opt_column IDENTIFICADOR A IDENTIFICADOR
+Rule 95    valor -> VALOR_NUMERO
+Rule 96    valor -> VALOR_CADENA
+Rule 97    valor -> VALOR_BOOLEANO
+Rule 98    valor -> VALOR_FLOTANTE
+Rule 99    opt_condiciones -> condiciones
+Rule 100   opt_condiciones -> empty
+Rule 101   alteracion -> CAMBIAR opt_column IDENTIFICADOR lista_columna_crear
+Rule 102   condiciones -> condiciones clausula
+Rule 103   condiciones -> clausula
+Rule 104   condicion_order -> IDENTIFICADOR ASCENDENTE
+Rule 105   condicion_order -> IDENTIFICADOR DESCENDENTE
+Rule 106   condicion_order -> IDENTIFICADOR
 
 Terminals, with rules where they appear
 
@@ -168,18 +169,18 @@ AGRUPAR_POR          :
 ALGUNO               : 
 ALGUNOS              : 
 ALTERAR              : 16
-ASCENDENTE           : 101
-AUTOINCREMENTAL      : 91
+ASCENDENTE           : 104
+AUTOINCREMENTAL      : 84
 BOOLEANO             : 24
 CADENA               : 21
-CAMBIAR              : 98
+CAMBIAR              : 101
 CARACTER             : 22
 CASO                 : 
-CLAVE_FORANEA        : 90
-CLAVE_PRIMARIA       : 89
+CLAVE_FORANEA        : 83
+CLAVE_PRIMARIA       : 82
 COLOCAR              : 10 11
 COLUMNA              : 70
-COMA                 : 19 38 40 42 53 54 82
+COMA                 : 19 38 40 42 52 55 79
 COMENTARIO           : 
 COMILLAS_SIMPLES     : 
 COMO                 : 
@@ -192,9 +193,9 @@ CREAR                : 4
 CUALQUIERA           : 
 DECIMAL              : 25
 DERECHO              : 31
-DESCENDENTE          : 102
+DESCENDENTE          : 105
 DESDE                : 8 9 35 41 46 51
-DIFERENTE            : 80
+DIFERENTE            : 92
 DISTINTO             : 56
 DIVISION             : 
 DONDE                : 10 69
@@ -209,9 +210,9 @@ EXISTE               : 34
 FECHA                : 23
 FIN                  : 
 FLOTANTE             : 27
-IDENTIFICADOR        : 1 3 4 5 6 7 8 9 10 11 16 18 19 35 41 46 47 51 58 58 69 81 82 84 94 94 95 95 98 101 102 103
+IDENTIFICADOR        : 1 3 4 5 6 7 8 9 10 11 16 18 19 35 41 46 47 51 58 58 75 78 79 81 93 93 94 94 101 104 105 106
 IDENTIFICADOR_INVALIDO : 
-IGUALDAD             : 45 47 75
+IGUALDAD             : 45 47 87
 INICIAR_TRANSACCION  : 2
 INICIO               : 
 INSERTAR_EN          : 3
@@ -219,28 +220,28 @@ IZQUIERDO            : 30
 LIMITAR              : 
 MAS                  : 
 MAXIMO               : 
-MAYOR                : 76
-MAYOR_IGUAL          : 78
-MENOR                : 77
-MENOR_IGUAL          : 79
+MAYOR                : 88
+MAYOR_IGUAL          : 90
+MENOR                : 89
+MENOR_IGUAL          : 91
 MENOS                : 
 MEZCLAR              : 
 MIENTRAS             : 
 MINIMO               : 
-MODIFICAR            : 93
+MODIFICAR            : 86
 MODULO               : 
 MULTIPLICACION       : 
 NO                   : 
 NORMAL               : 29
 NO_ES_NULO           : 
-NO_NULO              : 92
+NO_NULO              : 85
 NULO                 : 
-O                    : 
+O                    : 77
 OBTENER              : 
 ORDENAR_POR          : 
 PARA                 : 
-PARENTESIS_DER       : 3 4 48 58 94
-PARENTESIS_IZQ       : 3 4 48 58 94
+PARENTESIS_DER       : 3 4 48 58 93
+PARENTESIS_IZQ       : 3 4 48 58 93
 PRIMEROS             : 46 51
 PROMEDIO             : 
 PUNTO                : 
@@ -257,20 +258,20 @@ SELECCIONAR          : 8 9
 SI                   : 34
 SIMILAR_A            : 
 SINO                 : 
-SOLTAR               : 5 6 84
+SOLTAR               : 5 6 81
 SUMA                 : 
 TABLA                : 4 5 6 16
 TENIENDO             : 
 TEXTO                : 26
-TODO                 : 83
+TODO                 : 80
 TODOS                : 
 UNIR                 : 7
 VALORES              : 3
-VALOR_BOOLEANO       : 87
-VALOR_CADENA         : 86
-VALOR_FLOTANTE       : 88
-VALOR_NUMERO         : 46 51 85
-Y                    : 
+VALOR_BOOLEANO       : 97
+VALOR_CADENA         : 96
+VALOR_FLOTANTE       : 98
+VALOR_NUMERO         : 46 51 95
+Y                    : 76
 error                : 
 
 Nonterminals, with rules where they appear
@@ -280,35 +281,36 @@ alteracion           : 36 42
 alteraciones         : 16 42
 alterar              : 61
 asignacion           : 37 38
-clausula             : 41 51 99 100
-comparador           : 69
+clausula             : 41 51 102 103
+comparador           : 75
 condicion            : 7
 condicion_order      : 
 condicional          : 6
-condiciones          : 96 99
+condicioncita        : 69 76 76 77 77
+condiciones          : 99 102
 crear                : 65
 eliminar             : 63
 eliminar_donde       : 13
 eliminar_hasta_donde : 15
 eliminar_hasta_todo  : 14
 eliminar_todo        : 12
-empty                : 33 57 71 74 97
+empty                : 33 57 71 74 100
 especificacion       : 45 45
 fila                 : 39 40
 floro                : 43 44
 insertar             : 60
 instruccion          : 0
 lista_asignaciones   : 10 11 38
-lista_columna_crear  : 49 54 55 93 98
-lista_columnas       : 8 9 82
+lista_columna_crear  : 49 52 53 86 101
+lista_columnas       : 8 9 79
 lista_columnas_creadas : 3 19
-lista_columnas_crear : 4 54
+lista_columnas_crear : 4 52
 lista_filas          : 3 40
 lista_floro          : 8 9 43
-lista_valores        : 48 53
-opt_column           : 49 84 93 95 98
+lista_valores        : 48 55
+opt_column           : 49 81 86 94 101
 opt_condiciones      : 8 9 10
-referencia           : 90
+referencia           : 83
 restriccion          : 72 73
 restricciones        : 1 72
 seleccion            : 59
@@ -317,7 +319,7 @@ tipo_dato            : 1
 tipo_unir            : 7
 transaccion          : 66
 unir                 : 9 67
-valor                : 47 52 53 68 69
+valor                : 47 54 55 68 75
 
 Parsing method: LALR
 
@@ -351,10 +353,10 @@ state 0
     (17) transaccion -> . CONFIRMAR
     (28) transaccion -> . REVERTIR
     (7) unir -> . UNIR tipo_unir IDENTIFICADOR CON condicion
-    (85) valor -> . VALOR_NUMERO
-    (86) valor -> . VALOR_CADENA
-    (87) valor -> . VALOR_BOOLEANO
-    (88) valor -> . VALOR_FLOTANTE
+    (95) valor -> . VALOR_NUMERO
+    (96) valor -> . VALOR_CADENA
+    (97) valor -> . VALOR_BOOLEANO
+    (98) valor -> . VALOR_FLOTANTE
     (35) eliminar_todo -> . ELIMINAR DESDE IDENTIFICADOR
     (41) eliminar_donde -> . ELIMINAR DESDE IDENTIFICADOR clausula
     (46) eliminar_hasta_todo -> . ELIMINAR PRIMEROS VALOR_NUMERO DESDE IDENTIFICADOR
@@ -596,46 +598,54 @@ state 25
 
 state 26
 
-    (85) valor -> VALOR_NUMERO .
+    (95) valor -> VALOR_NUMERO .
 
-    $end            reduce using rule 85 (valor -> VALOR_NUMERO .)
-    DONDE           reduce using rule 85 (valor -> VALOR_NUMERO .)
-    COMA            reduce using rule 85 (valor -> VALOR_NUMERO .)
-    UNIR            reduce using rule 85 (valor -> VALOR_NUMERO .)
-    PARENTESIS_DER  reduce using rule 85 (valor -> VALOR_NUMERO .)
+    $end            reduce using rule 95 (valor -> VALOR_NUMERO .)
+    DONDE           reduce using rule 95 (valor -> VALOR_NUMERO .)
+    COMA            reduce using rule 95 (valor -> VALOR_NUMERO .)
+    Y               reduce using rule 95 (valor -> VALOR_NUMERO .)
+    O               reduce using rule 95 (valor -> VALOR_NUMERO .)
+    UNIR            reduce using rule 95 (valor -> VALOR_NUMERO .)
+    PARENTESIS_DER  reduce using rule 95 (valor -> VALOR_NUMERO .)
 
 
 state 27
 
-    (86) valor -> VALOR_CADENA .
+    (96) valor -> VALOR_CADENA .
 
-    $end            reduce using rule 86 (valor -> VALOR_CADENA .)
-    DONDE           reduce using rule 86 (valor -> VALOR_CADENA .)
-    COMA            reduce using rule 86 (valor -> VALOR_CADENA .)
-    UNIR            reduce using rule 86 (valor -> VALOR_CADENA .)
-    PARENTESIS_DER  reduce using rule 86 (valor -> VALOR_CADENA .)
+    $end            reduce using rule 96 (valor -> VALOR_CADENA .)
+    DONDE           reduce using rule 96 (valor -> VALOR_CADENA .)
+    COMA            reduce using rule 96 (valor -> VALOR_CADENA .)
+    Y               reduce using rule 96 (valor -> VALOR_CADENA .)
+    O               reduce using rule 96 (valor -> VALOR_CADENA .)
+    UNIR            reduce using rule 96 (valor -> VALOR_CADENA .)
+    PARENTESIS_DER  reduce using rule 96 (valor -> VALOR_CADENA .)
 
 
 state 28
 
-    (87) valor -> VALOR_BOOLEANO .
+    (97) valor -> VALOR_BOOLEANO .
 
-    $end            reduce using rule 87 (valor -> VALOR_BOOLEANO .)
-    DONDE           reduce using rule 87 (valor -> VALOR_BOOLEANO .)
-    COMA            reduce using rule 87 (valor -> VALOR_BOOLEANO .)
-    UNIR            reduce using rule 87 (valor -> VALOR_BOOLEANO .)
-    PARENTESIS_DER  reduce using rule 87 (valor -> VALOR_BOOLEANO .)
+    $end            reduce using rule 97 (valor -> VALOR_BOOLEANO .)
+    DONDE           reduce using rule 97 (valor -> VALOR_BOOLEANO .)
+    COMA            reduce using rule 97 (valor -> VALOR_BOOLEANO .)
+    Y               reduce using rule 97 (valor -> VALOR_BOOLEANO .)
+    O               reduce using rule 97 (valor -> VALOR_BOOLEANO .)
+    UNIR            reduce using rule 97 (valor -> VALOR_BOOLEANO .)
+    PARENTESIS_DER  reduce using rule 97 (valor -> VALOR_BOOLEANO .)
 
 
 state 29
 
-    (88) valor -> VALOR_FLOTANTE .
+    (98) valor -> VALOR_FLOTANTE .
 
-    $end            reduce using rule 88 (valor -> VALOR_FLOTANTE .)
-    DONDE           reduce using rule 88 (valor -> VALOR_FLOTANTE .)
-    COMA            reduce using rule 88 (valor -> VALOR_FLOTANTE .)
-    UNIR            reduce using rule 88 (valor -> VALOR_FLOTANTE .)
-    PARENTESIS_DER  reduce using rule 88 (valor -> VALOR_FLOTANTE .)
+    $end            reduce using rule 98 (valor -> VALOR_FLOTANTE .)
+    DONDE           reduce using rule 98 (valor -> VALOR_FLOTANTE .)
+    COMA            reduce using rule 98 (valor -> VALOR_FLOTANTE .)
+    Y               reduce using rule 98 (valor -> VALOR_FLOTANTE .)
+    O               reduce using rule 98 (valor -> VALOR_FLOTANTE .)
+    UNIR            reduce using rule 98 (valor -> VALOR_FLOTANTE .)
+    PARENTESIS_DER  reduce using rule 98 (valor -> VALOR_FLOTANTE .)
 
 
 state 30
@@ -654,9 +664,9 @@ state 31
     (8) seleccion -> SELECCIONAR lista_floro . lista_columnas DESDE IDENTIFICADOR opt_condiciones
     (9) seleccion -> SELECCIONAR lista_floro . lista_columnas DESDE IDENTIFICADOR opt_condiciones unir
     (43) lista_floro -> lista_floro . floro
-    (81) lista_columnas -> . IDENTIFICADOR
-    (82) lista_columnas -> . lista_columnas COMA IDENTIFICADOR
-    (83) lista_columnas -> . TODO
+    (78) lista_columnas -> . IDENTIFICADOR
+    (79) lista_columnas -> . lista_columnas COMA IDENTIFICADOR
+    (80) lista_columnas -> . TODO
     (56) floro -> . DISTINTO
     (57) floro -> . empty
     (50) empty -> .
@@ -802,7 +812,7 @@ state 48
 
     (8) seleccion -> SELECCIONAR lista_floro lista_columnas . DESDE IDENTIFICADOR opt_condiciones
     (9) seleccion -> SELECCIONAR lista_floro lista_columnas . DESDE IDENTIFICADOR opt_condiciones unir
-    (82) lista_columnas -> lista_columnas . COMA IDENTIFICADOR
+    (79) lista_columnas -> lista_columnas . COMA IDENTIFICADOR
 
     DESDE           shift and go to state 60
     COMA            shift and go to state 61
@@ -810,10 +820,10 @@ state 48
 
 state 49
 
-    (81) lista_columnas -> IDENTIFICADOR .
+    (78) lista_columnas -> IDENTIFICADOR .
 
-    DESDE           reduce using rule 81 (lista_columnas -> IDENTIFICADOR .)
-    COMA            reduce using rule 81 (lista_columnas -> IDENTIFICADOR .)
+    DESDE           reduce using rule 78 (lista_columnas -> IDENTIFICADOR .)
+    COMA            reduce using rule 78 (lista_columnas -> IDENTIFICADOR .)
 
 
 state 50
@@ -827,10 +837,10 @@ state 50
 
 state 51
 
-    (83) lista_columnas -> TODO .
+    (80) lista_columnas -> TODO .
 
-    DESDE           reduce using rule 83 (lista_columnas -> TODO .)
-    COMA            reduce using rule 83 (lista_columnas -> TODO .)
+    DESDE           reduce using rule 80 (lista_columnas -> TODO .)
+    COMA            reduce using rule 80 (lista_columnas -> TODO .)
 
 
 state 52
@@ -849,10 +859,10 @@ state 53
     (36) alteraciones -> . alteracion
     (42) alteraciones -> . alteracion COMA alteraciones
     (49) alteracion -> . AGREGAR opt_column lista_columna_crear
-    (84) alteracion -> . SOLTAR opt_column IDENTIFICADOR
-    (93) alteracion -> . MODIFICAR opt_column lista_columna_crear
-    (95) alteracion -> . RENOMBRAR opt_column IDENTIFICADOR A IDENTIFICADOR
-    (98) alteracion -> . CAMBIAR opt_column IDENTIFICADOR lista_columna_crear
+    (81) alteracion -> . SOLTAR opt_column IDENTIFICADOR
+    (86) alteracion -> . MODIFICAR opt_column lista_columna_crear
+    (94) alteracion -> . RENOMBRAR opt_column IDENTIFICADOR A IDENTIFICADOR
+    (101) alteracion -> . CAMBIAR opt_column IDENTIFICADOR lista_columna_crear
 
     AGREGAR         shift and go to state 66
     SOLTAR          shift and go to state 67
@@ -905,7 +915,7 @@ state 58
 
     (35) eliminar_todo -> ELIMINAR DESDE IDENTIFICADOR .
     (41) eliminar_donde -> ELIMINAR DESDE IDENTIFICADOR . clausula
-    (69) clausula -> . DONDE IDENTIFICADOR comparador valor
+    (69) clausula -> . DONDE condicioncita
 
     $end            reduce using rule 35 (eliminar_todo -> ELIMINAR DESDE IDENTIFICADOR .)
     DONDE           shift and go to state 79
@@ -930,7 +940,7 @@ state 60
 
 state 61
 
-    (82) lista_columnas -> lista_columnas COMA . IDENTIFICADOR
+    (79) lista_columnas -> lista_columnas COMA . IDENTIFICADOR
 
     IDENTIFICADOR   shift and go to state 82
 
@@ -983,7 +993,7 @@ state 66
 
 state 67
 
-    (84) alteracion -> SOLTAR . opt_column IDENTIFICADOR
+    (81) alteracion -> SOLTAR . opt_column IDENTIFICADOR
     (70) opt_column -> . COLUMNA
     (71) opt_column -> . empty
     (50) empty -> .
@@ -996,7 +1006,7 @@ state 67
 
 state 68
 
-    (93) alteracion -> MODIFICAR . opt_column lista_columna_crear
+    (86) alteracion -> MODIFICAR . opt_column lista_columna_crear
     (70) opt_column -> . COLUMNA
     (71) opt_column -> . empty
     (50) empty -> .
@@ -1009,7 +1019,7 @@ state 68
 
 state 69
 
-    (95) alteracion -> RENOMBRAR . opt_column IDENTIFICADOR A IDENTIFICADOR
+    (94) alteracion -> RENOMBRAR . opt_column IDENTIFICADOR A IDENTIFICADOR
     (70) opt_column -> . COLUMNA
     (71) opt_column -> . empty
     (50) empty -> .
@@ -1022,7 +1032,7 @@ state 69
 
 state 70
 
-    (98) alteracion -> CAMBIAR . opt_column IDENTIFICADOR lista_columna_crear
+    (101) alteracion -> CAMBIAR . opt_column IDENTIFICADOR lista_columna_crear
     (70) opt_column -> . COLUMNA
     (71) opt_column -> . empty
     (50) empty -> .
@@ -1077,8 +1087,8 @@ state 75
 state 76
 
     (4) crear -> CREAR TABLA IDENTIFICADOR PARENTESIS_IZQ . lista_columnas_crear PARENTESIS_DER
-    (54) lista_columnas_crear -> . lista_columnas_crear COMA lista_columna_crear
-    (55) lista_columnas_crear -> . lista_columna_crear
+    (52) lista_columnas_crear -> . lista_columnas_crear COMA lista_columna_crear
+    (53) lista_columnas_crear -> . lista_columna_crear
     (1) lista_columna_crear -> . IDENTIFICADOR tipo_dato restricciones
 
     IDENTIFICADOR   shift and go to state 97
@@ -1106,59 +1116,63 @@ state 78
 
 state 79
 
-    (69) clausula -> DONDE . IDENTIFICADOR comparador valor
+    (69) clausula -> DONDE . condicioncita
+    (75) condicioncita -> . IDENTIFICADOR comparador valor
+    (76) condicioncita -> . condicioncita Y condicioncita
+    (77) condicioncita -> . condicioncita O condicioncita
 
-    IDENTIFICADOR   shift and go to state 103
+    IDENTIFICADOR   shift and go to state 104
 
+    condicioncita                  shift and go to state 103
 
 state 80
 
     (46) eliminar_hasta_todo -> ELIMINAR PRIMEROS VALOR_NUMERO DESDE . IDENTIFICADOR
     (51) eliminar_hasta_donde -> ELIMINAR PRIMEROS VALOR_NUMERO DESDE . IDENTIFICADOR clausula
 
-    IDENTIFICADOR   shift and go to state 104
+    IDENTIFICADOR   shift and go to state 103
 
 
 state 81
 
     (8) seleccion -> SELECCIONAR lista_floro lista_columnas DESDE IDENTIFICADOR . opt_condiciones
     (9) seleccion -> SELECCIONAR lista_floro lista_columnas DESDE IDENTIFICADOR . opt_condiciones unir
-    (96) opt_condiciones -> . condiciones
-    (97) opt_condiciones -> . empty
-    (99) condiciones -> . condiciones clausula
-    (100) condiciones -> . clausula
+    (99) opt_condiciones -> . condiciones
+    (100) opt_condiciones -> . empty
+    (102) condiciones -> . condiciones clausula
+    (103) condiciones -> . clausula
     (50) empty -> .
-    (69) clausula -> . DONDE IDENTIFICADOR comparador valor
+    (69) clausula -> . DONDE condicioncita
 
     UNIR            reduce using rule 50 (empty -> .)
     $end            reduce using rule 50 (empty -> .)
     DONDE           shift and go to state 79
 
-    opt_condiciones                shift and go to state 105
-    condiciones                    shift and go to state 106
-    empty                          shift and go to state 107
-    clausula                       shift and go to state 108
+    opt_condiciones                shift and go to state 106
+    condiciones                    shift and go to state 107
+    empty                          shift and go to state 108
+    clausula                       shift and go to state 109
 
 state 82
 
-    (82) lista_columnas -> lista_columnas COMA IDENTIFICADOR .
+    (79) lista_columnas -> lista_columnas COMA IDENTIFICADOR .
 
-    DESDE           reduce using rule 82 (lista_columnas -> lista_columnas COMA IDENTIFICADOR .)
-    COMA            reduce using rule 82 (lista_columnas -> lista_columnas COMA IDENTIFICADOR .)
+    DESDE           reduce using rule 79 (lista_columnas -> lista_columnas COMA IDENTIFICADOR .)
+    COMA            reduce using rule 79 (lista_columnas -> lista_columnas COMA IDENTIFICADOR .)
 
 
 state 83
 
     (3) insertar -> INSERTAR_EN IDENTIFICADOR PARENTESIS_IZQ lista_columnas_creadas PARENTESIS_DER . VALORES lista_filas
 
-    VALORES         shift and go to state 109
+    VALORES         shift and go to state 110
 
 
 state 84
 
     (19) lista_columnas_creadas -> lista_columnas_creadas COMA . IDENTIFICADOR
 
-    IDENTIFICADOR   shift and go to state 110
+    IDENTIFICADOR   shift and go to state 111
 
 
 state 85
@@ -1167,10 +1181,10 @@ state 85
     (36) alteraciones -> . alteracion
     (42) alteraciones -> . alteracion COMA alteraciones
     (49) alteracion -> . AGREGAR opt_column lista_columna_crear
-    (84) alteracion -> . SOLTAR opt_column IDENTIFICADOR
-    (93) alteracion -> . MODIFICAR opt_column lista_columna_crear
-    (95) alteracion -> . RENOMBRAR opt_column IDENTIFICADOR A IDENTIFICADOR
-    (98) alteracion -> . CAMBIAR opt_column IDENTIFICADOR lista_columna_crear
+    (81) alteracion -> . SOLTAR opt_column IDENTIFICADOR
+    (86) alteracion -> . MODIFICAR opt_column lista_columna_crear
+    (94) alteracion -> . RENOMBRAR opt_column IDENTIFICADOR A IDENTIFICADOR
+    (101) alteracion -> . CAMBIAR opt_column IDENTIFICADOR lista_columna_crear
 
     AGREGAR         shift and go to state 66
     SOLTAR          shift and go to state 67
@@ -1179,7 +1193,7 @@ state 85
     CAMBIAR         shift and go to state 70
 
     alteracion                     shift and go to state 65
-    alteraciones                   shift and go to state 111
+    alteraciones                   shift and go to state 112
 
 state 86
 
@@ -1188,7 +1202,7 @@ state 86
 
     IDENTIFICADOR   shift and go to state 97
 
-    lista_columna_crear            shift and go to state 112
+    lista_columna_crear            shift and go to state 113
 
 state 87
 
@@ -1206,66 +1220,66 @@ state 88
 
 state 89
 
-    (84) alteracion -> SOLTAR opt_column . IDENTIFICADOR
+    (81) alteracion -> SOLTAR opt_column . IDENTIFICADOR
 
-    IDENTIFICADOR   shift and go to state 113
+    IDENTIFICADOR   shift and go to state 114
 
 
 state 90
 
-    (93) alteracion -> MODIFICAR opt_column . lista_columna_crear
+    (86) alteracion -> MODIFICAR opt_column . lista_columna_crear
     (1) lista_columna_crear -> . IDENTIFICADOR tipo_dato restricciones
 
     IDENTIFICADOR   shift and go to state 97
 
-    lista_columna_crear            shift and go to state 114
+    lista_columna_crear            shift and go to state 115
 
 state 91
 
-    (95) alteracion -> RENOMBRAR opt_column . IDENTIFICADOR A IDENTIFICADOR
+    (94) alteracion -> RENOMBRAR opt_column . IDENTIFICADOR A IDENTIFICADOR
 
-    IDENTIFICADOR   shift and go to state 115
+    IDENTIFICADOR   shift and go to state 116
 
 
 state 92
 
-    (98) alteracion -> CAMBIAR opt_column . IDENTIFICADOR lista_columna_crear
+    (101) alteracion -> CAMBIAR opt_column . IDENTIFICADOR lista_columna_crear
 
-    IDENTIFICADOR   shift and go to state 116
+    IDENTIFICADOR   shift and go to state 117
 
 
 state 93
 
     (47) asignacion -> IDENTIFICADOR IGUALDAD . valor
-    (85) valor -> . VALOR_NUMERO
-    (86) valor -> . VALOR_CADENA
-    (87) valor -> . VALOR_BOOLEANO
-    (88) valor -> . VALOR_FLOTANTE
+    (95) valor -> . VALOR_NUMERO
+    (96) valor -> . VALOR_CADENA
+    (97) valor -> . VALOR_BOOLEANO
+    (98) valor -> . VALOR_FLOTANTE
 
     VALOR_NUMERO    shift and go to state 26
     VALOR_CADENA    shift and go to state 27
     VALOR_BOOLEANO  shift and go to state 28
     VALOR_FLOTANTE  shift and go to state 29
 
-    valor                          shift and go to state 117
+    valor                          shift and go to state 118
 
 state 94
 
     (10) actualizar -> ACTUALIZAR IDENTIFICADOR COLOCAR lista_asignaciones DONDE . opt_condiciones
-    (96) opt_condiciones -> . condiciones
-    (97) opt_condiciones -> . empty
-    (99) condiciones -> . condiciones clausula
-    (100) condiciones -> . clausula
+    (99) opt_condiciones -> . condiciones
+    (100) opt_condiciones -> . empty
+    (102) condiciones -> . condiciones clausula
+    (103) condiciones -> . clausula
     (50) empty -> .
-    (69) clausula -> . DONDE IDENTIFICADOR comparador valor
+    (69) clausula -> . DONDE condicioncita
 
     $end            reduce using rule 50 (empty -> .)
     DONDE           shift and go to state 79
 
-    opt_condiciones                shift and go to state 118
-    condiciones                    shift and go to state 106
-    empty                          shift and go to state 107
-    clausula                       shift and go to state 108
+    opt_condiciones                shift and go to state 119
+    condiciones                    shift and go to state 107
+    empty                          shift and go to state 108
+    clausula                       shift and go to state 109
 
 state 95
 
@@ -1274,7 +1288,7 @@ state 95
 
     IDENTIFICADOR   shift and go to state 71
 
-    asignacion                     shift and go to state 119
+    asignacion                     shift and go to state 120
 
 state 96
 
@@ -1295,39 +1309,39 @@ state 97
     (26) tipo_dato -> . TEXTO
     (27) tipo_dato -> . FLOTANTE
 
-    ENTERO          shift and go to state 121
-    CADENA          shift and go to state 122
-    CARACTER        shift and go to state 123
-    FECHA           shift and go to state 124
-    BOOLEANO        shift and go to state 125
-    DECIMAL         shift and go to state 126
-    TEXTO           shift and go to state 127
-    FLOTANTE        shift and go to state 128
+    ENTERO          shift and go to state 122
+    CADENA          shift and go to state 123
+    CARACTER        shift and go to state 124
+    FECHA           shift and go to state 125
+    BOOLEANO        shift and go to state 126
+    DECIMAL         shift and go to state 127
+    TEXTO           shift and go to state 128
+    FLOTANTE        shift and go to state 129
 
-    tipo_dato                      shift and go to state 120
+    tipo_dato                      shift and go to state 121
 
 state 98
 
     (4) crear -> CREAR TABLA IDENTIFICADOR PARENTESIS_IZQ lista_columnas_crear . PARENTESIS_DER
-    (54) lista_columnas_crear -> lista_columnas_crear . COMA lista_columna_crear
+    (52) lista_columnas_crear -> lista_columnas_crear . COMA lista_columna_crear
 
-    PARENTESIS_DER  shift and go to state 129
-    COMA            shift and go to state 130
+    PARENTESIS_DER  shift and go to state 130
+    COMA            shift and go to state 131
 
 
 state 99
 
-    (55) lista_columnas_crear -> lista_columna_crear .
+    (53) lista_columnas_crear -> lista_columna_crear .
 
-    PARENTESIS_DER  reduce using rule 55 (lista_columnas_crear -> lista_columna_crear .)
-    COMA            reduce using rule 55 (lista_columnas_crear -> lista_columna_crear .)
+    PARENTESIS_DER  reduce using rule 53 (lista_columnas_crear -> lista_columna_crear .)
+    COMA            reduce using rule 53 (lista_columnas_crear -> lista_columna_crear .)
 
 
 state 100
 
     (58) especificacion -> IDENTIFICADOR . PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER
 
-    PARENTESIS_IZQ  shift and go to state 131
+    PARENTESIS_IZQ  shift and go to state 132
 
 
 state 101
@@ -1341,40 +1355,54 @@ state 102
 
     (45) condicion -> especificacion . IGUALDAD especificacion
 
-    IGUALDAD        shift and go to state 132
+    IGUALDAD        shift and go to state 133
 
 
 state 103
 
-    (69) clausula -> DONDE IDENTIFICADOR . comparador valor
-    (75) comparador -> . IGUALDAD
-    (76) comparador -> . MAYOR
-    (77) comparador -> . MENOR
-    (78) comparador -> . MAYOR_IGUAL
-    (79) comparador -> . MENOR_IGUAL
-    (80) comparador -> . DIFERENTE
+    (69) clausula -> DONDE condicioncita .
+    (76) condicioncita -> condicioncita . Y condicioncita
+    (77) condicioncita -> condicioncita . O condicioncita
 
-    IGUALDAD        shift and go to state 134
-    MAYOR           shift and go to state 135
-    MENOR           shift and go to state 136
-    MAYOR_IGUAL     shift and go to state 137
-    MENOR_IGUAL     shift and go to state 138
-    DIFERENTE       shift and go to state 139
+    $end            reduce using rule 69 (clausula -> DONDE condicioncita .)
+    DONDE           reduce using rule 69 (clausula -> DONDE condicioncita .)
+    UNIR            reduce using rule 69 (clausula -> DONDE condicioncita .)
+    Y               shift and go to state 134
+    O               shift and go to state 135
 
     comparador                     shift and go to state 133
 
 state 104
 
+    (75) condicioncita -> IDENTIFICADOR . comparador valor
+    (87) comparador -> . IGUALDAD
+    (88) comparador -> . MAYOR
+    (89) comparador -> . MENOR
+    (90) comparador -> . MAYOR_IGUAL
+    (91) comparador -> . MENOR_IGUAL
+    (92) comparador -> . DIFERENTE
+
+    IGUALDAD        shift and go to state 137
+    MAYOR           shift and go to state 138
+    MENOR           shift and go to state 139
+    MAYOR_IGUAL     shift and go to state 140
+    MENOR_IGUAL     shift and go to state 141
+    DIFERENTE       shift and go to state 142
+
+    comparador                     shift and go to state 136
+
+state 105
+
     (46) eliminar_hasta_todo -> ELIMINAR PRIMEROS VALOR_NUMERO DESDE IDENTIFICADOR .
     (51) eliminar_hasta_donde -> ELIMINAR PRIMEROS VALOR_NUMERO DESDE IDENTIFICADOR . clausula
-    (69) clausula -> . DONDE IDENTIFICADOR comparador valor
+    (69) clausula -> . DONDE condicioncita
 
     $end            reduce using rule 46 (eliminar_hasta_todo -> ELIMINAR PRIMEROS VALOR_NUMERO DESDE IDENTIFICADOR .)
     DONDE           shift and go to state 79
 
-    clausula                       shift and go to state 140
+    clausula                       shift and go to state 143
 
-state 105
+state 106
 
     (8) seleccion -> SELECCIONAR lista_floro lista_columnas DESDE IDENTIFICADOR opt_condiciones .
     (9) seleccion -> SELECCIONAR lista_floro lista_columnas DESDE IDENTIFICADOR opt_condiciones . unir
@@ -1383,50 +1411,50 @@ state 105
     $end            reduce using rule 8 (seleccion -> SELECCIONAR lista_floro lista_columnas DESDE IDENTIFICADOR opt_condiciones .)
     UNIR            shift and go to state 25
 
-    unir                           shift and go to state 141
-
-state 106
-
-    (96) opt_condiciones -> condiciones .
-    (99) condiciones -> condiciones . clausula
-    (69) clausula -> . DONDE IDENTIFICADOR comparador valor
-
-    UNIR            reduce using rule 96 (opt_condiciones -> condiciones .)
-    $end            reduce using rule 96 (opt_condiciones -> condiciones .)
-    DONDE           shift and go to state 79
-
-    clausula                       shift and go to state 142
+    unir                           shift and go to state 144
 
 state 107
 
-    (97) opt_condiciones -> empty .
+    (99) opt_condiciones -> condiciones .
+    (102) condiciones -> condiciones . clausula
+    (69) clausula -> . DONDE condicioncita
 
-    UNIR            reduce using rule 97 (opt_condiciones -> empty .)
-    $end            reduce using rule 97 (opt_condiciones -> empty .)
+    UNIR            reduce using rule 99 (opt_condiciones -> condiciones .)
+    $end            reduce using rule 99 (opt_condiciones -> condiciones .)
+    DONDE           shift and go to state 79
 
+    clausula                       shift and go to state 145
 
 state 108
 
-    (100) condiciones -> clausula .
+    (100) opt_condiciones -> empty .
 
-    DONDE           reduce using rule 100 (condiciones -> clausula .)
-    UNIR            reduce using rule 100 (condiciones -> clausula .)
-    $end            reduce using rule 100 (condiciones -> clausula .)
+    UNIR            reduce using rule 100 (opt_condiciones -> empty .)
+    $end            reduce using rule 100 (opt_condiciones -> empty .)
 
 
 state 109
+
+    (103) condiciones -> clausula .
+
+    DONDE           reduce using rule 103 (condiciones -> clausula .)
+    UNIR            reduce using rule 103 (condiciones -> clausula .)
+    $end            reduce using rule 103 (condiciones -> clausula .)
+
+
+state 110
 
     (3) insertar -> INSERTAR_EN IDENTIFICADOR PARENTESIS_IZQ lista_columnas_creadas PARENTESIS_DER VALORES . lista_filas
     (39) lista_filas -> . fila
     (40) lista_filas -> . lista_filas COMA fila
     (48) fila -> . PARENTESIS_IZQ lista_valores PARENTESIS_DER
 
-    PARENTESIS_IZQ  shift and go to state 143
+    PARENTESIS_IZQ  shift and go to state 146
 
-    lista_filas                    shift and go to state 144
-    fila                           shift and go to state 145
+    lista_filas                    shift and go to state 147
+    fila                           shift and go to state 148
 
-state 110
+state 111
 
     (19) lista_columnas_creadas -> lista_columnas_creadas COMA IDENTIFICADOR .
 
@@ -1434,14 +1462,14 @@ state 110
     COMA            reduce using rule 19 (lista_columnas_creadas -> lista_columnas_creadas COMA IDENTIFICADOR .)
 
 
-state 111
+state 112
 
     (42) alteraciones -> alteracion COMA alteraciones .
 
     $end            reduce using rule 42 (alteraciones -> alteracion COMA alteraciones .)
 
 
-state 112
+state 113
 
     (49) alteracion -> AGREGAR opt_column lista_columna_crear .
 
@@ -1449,39 +1477,40 @@ state 112
     $end            reduce using rule 49 (alteracion -> AGREGAR opt_column lista_columna_crear .)
 
 
-state 113
-
-    (84) alteracion -> SOLTAR opt_column IDENTIFICADOR .
-
-    COMA            reduce using rule 84 (alteracion -> SOLTAR opt_column IDENTIFICADOR .)
-    $end            reduce using rule 84 (alteracion -> SOLTAR opt_column IDENTIFICADOR .)
-
-
 state 114
 
-    (93) alteracion -> MODIFICAR opt_column lista_columna_crear .
+    (81) alteracion -> SOLTAR opt_column IDENTIFICADOR .
 
-    COMA            reduce using rule 93 (alteracion -> MODIFICAR opt_column lista_columna_crear .)
-    $end            reduce using rule 93 (alteracion -> MODIFICAR opt_column lista_columna_crear .)
+    COMA            reduce using rule 81 (alteracion -> SOLTAR opt_column IDENTIFICADOR .)
+    $end            reduce using rule 81 (alteracion -> SOLTAR opt_column IDENTIFICADOR .)
 
 
 state 115
 
-    (95) alteracion -> RENOMBRAR opt_column IDENTIFICADOR . A IDENTIFICADOR
+    (86) alteracion -> MODIFICAR opt_column lista_columna_crear .
 
-    A               shift and go to state 146
+    COMA            reduce using rule 86 (alteracion -> MODIFICAR opt_column lista_columna_crear .)
+    $end            reduce using rule 86 (alteracion -> MODIFICAR opt_column lista_columna_crear .)
 
 
 state 116
 
-    (98) alteracion -> CAMBIAR opt_column IDENTIFICADOR . lista_columna_crear
-    (1) lista_columna_crear -> . IDENTIFICADOR tipo_dato restricciones
+    (94) alteracion -> RENOMBRAR opt_column IDENTIFICADOR . A IDENTIFICADOR
 
-    IDENTIFICADOR   shift and go to state 97
+    A               shift and go to state 149
 
     lista_columna_crear            shift and go to state 147
 
 state 117
+
+    (101) alteracion -> CAMBIAR opt_column IDENTIFICADOR . lista_columna_crear
+    (1) lista_columna_crear -> . IDENTIFICADOR tipo_dato restricciones
+
+    IDENTIFICADOR   shift and go to state 97
+
+    lista_columna_crear            shift and go to state 150
+
+state 118
 
     (47) asignacion -> IDENTIFICADOR IGUALDAD valor .
 
@@ -1490,14 +1519,14 @@ state 117
     $end            reduce using rule 47 (asignacion -> IDENTIFICADOR IGUALDAD valor .)
 
 
-state 118
+state 119
 
     (10) actualizar -> ACTUALIZAR IDENTIFICADOR COLOCAR lista_asignaciones DONDE opt_condiciones .
 
     $end            reduce using rule 10 (actualizar -> ACTUALIZAR IDENTIFICADOR COLOCAR lista_asignaciones DONDE opt_condiciones .)
 
 
-state 119
+state 120
 
     (38) lista_asignaciones -> lista_asignaciones COMA asignacion .
 
@@ -1506,26 +1535,26 @@ state 119
     $end            reduce using rule 38 (lista_asignaciones -> lista_asignaciones COMA asignacion .)
 
 
-state 120
+state 121
 
     (1) lista_columna_crear -> IDENTIFICADOR tipo_dato . restricciones
     (72) restricciones -> . restricciones restriccion
     (73) restricciones -> . restriccion
     (74) restricciones -> . empty
-    (89) restriccion -> . CLAVE_PRIMARIA
-    (90) restriccion -> . CLAVE_FORANEA referencia
-    (91) restriccion -> . AUTOINCREMENTAL
-    (92) restriccion -> . NO_NULO
+    (82) restriccion -> . CLAVE_PRIMARIA
+    (83) restriccion -> . CLAVE_FORANEA referencia
+    (84) restriccion -> . AUTOINCREMENTAL
+    (85) restriccion -> . NO_NULO
     (50) empty -> .
 
   ! shift/reduce conflict for CLAVE_PRIMARIA resolved as shift
   ! shift/reduce conflict for CLAVE_FORANEA resolved as shift
   ! shift/reduce conflict for AUTOINCREMENTAL resolved as shift
   ! shift/reduce conflict for NO_NULO resolved as shift
-    CLAVE_PRIMARIA  shift and go to state 151
-    CLAVE_FORANEA   shift and go to state 152
-    AUTOINCREMENTAL shift and go to state 153
-    NO_NULO         shift and go to state 154
+    CLAVE_PRIMARIA  shift and go to state 154
+    CLAVE_FORANEA   shift and go to state 155
+    AUTOINCREMENTAL shift and go to state 156
+    NO_NULO         shift and go to state 157
     PARENTESIS_DER  reduce using rule 50 (empty -> .)
     COMA            reduce using rule 50 (empty -> .)
     $end            reduce using rule 50 (empty -> .)
@@ -1535,11 +1564,11 @@ state 120
   ! AUTOINCREMENTAL [ reduce using rule 50 (empty -> .) ]
   ! NO_NULO         [ reduce using rule 50 (empty -> .) ]
 
-    restricciones                  shift and go to state 148
-    restriccion                    shift and go to state 149
-    empty                          shift and go to state 150
+    restricciones                  shift and go to state 151
+    restriccion                    shift and go to state 152
+    empty                          shift and go to state 153
 
-state 121
+state 122
 
     (20) tipo_dato -> ENTERO .
 
@@ -1552,7 +1581,7 @@ state 121
     $end            reduce using rule 20 (tipo_dato -> ENTERO .)
 
 
-state 122
+state 123
 
     (21) tipo_dato -> CADENA .
 
@@ -1565,7 +1594,7 @@ state 122
     $end            reduce using rule 21 (tipo_dato -> CADENA .)
 
 
-state 123
+state 124
 
     (22) tipo_dato -> CARACTER .
 
@@ -1578,7 +1607,7 @@ state 123
     $end            reduce using rule 22 (tipo_dato -> CARACTER .)
 
 
-state 124
+state 125
 
     (23) tipo_dato -> FECHA .
 
@@ -1591,7 +1620,7 @@ state 124
     $end            reduce using rule 23 (tipo_dato -> FECHA .)
 
 
-state 125
+state 126
 
     (24) tipo_dato -> BOOLEANO .
 
@@ -1604,7 +1633,7 @@ state 125
     $end            reduce using rule 24 (tipo_dato -> BOOLEANO .)
 
 
-state 126
+state 127
 
     (25) tipo_dato -> DECIMAL .
 
@@ -1617,7 +1646,7 @@ state 126
     $end            reduce using rule 25 (tipo_dato -> DECIMAL .)
 
 
-state 127
+state 128
 
     (26) tipo_dato -> TEXTO .
 
@@ -1630,7 +1659,7 @@ state 127
     $end            reduce using rule 26 (tipo_dato -> TEXTO .)
 
 
-state 128
+state 129
 
     (27) tipo_dato -> FLOTANTE .
 
@@ -1643,164 +1672,186 @@ state 128
     $end            reduce using rule 27 (tipo_dato -> FLOTANTE .)
 
 
-state 129
+state 130
 
     (4) crear -> CREAR TABLA IDENTIFICADOR PARENTESIS_IZQ lista_columnas_crear PARENTESIS_DER .
 
     $end            reduce using rule 4 (crear -> CREAR TABLA IDENTIFICADOR PARENTESIS_IZQ lista_columnas_crear PARENTESIS_DER .)
 
 
-state 130
+state 131
 
-    (54) lista_columnas_crear -> lista_columnas_crear COMA . lista_columna_crear
+    (52) lista_columnas_crear -> lista_columnas_crear COMA . lista_columna_crear
     (1) lista_columna_crear -> . IDENTIFICADOR tipo_dato restricciones
 
     IDENTIFICADOR   shift and go to state 97
 
-    lista_columna_crear            shift and go to state 155
+    lista_columna_crear            shift and go to state 158
 
-state 131
+state 133
 
     (58) especificacion -> IDENTIFICADOR PARENTESIS_IZQ . IDENTIFICADOR PARENTESIS_DER
 
-    IDENTIFICADOR   shift and go to state 156
+    IDENTIFICADOR   shift and go to state 159
 
 
-state 132
+state 133
 
     (45) condicion -> especificacion IGUALDAD . especificacion
     (58) especificacion -> . IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER
 
     IDENTIFICADOR   shift and go to state 100
 
-    especificacion                 shift and go to state 157
+    especificacion                 shift and go to state 160
 
-state 133
+state 134
 
-    (69) clausula -> DONDE IDENTIFICADOR comparador . valor
-    (85) valor -> . VALOR_NUMERO
-    (86) valor -> . VALOR_CADENA
-    (87) valor -> . VALOR_BOOLEANO
-    (88) valor -> . VALOR_FLOTANTE
+    (76) condicioncita -> condicioncita Y . condicioncita
+    (75) condicioncita -> . IDENTIFICADOR comparador valor
+    (76) condicioncita -> . condicioncita Y condicioncita
+    (77) condicioncita -> . condicioncita O condicioncita
+
+    IDENTIFICADOR   shift and go to state 104
+
+    condicioncita                  shift and go to state 161
+
+state 135
+
+    (77) condicioncita -> condicioncita O . condicioncita
+    (75) condicioncita -> . IDENTIFICADOR comparador valor
+    (76) condicioncita -> . condicioncita Y condicioncita
+    (77) condicioncita -> . condicioncita O condicioncita
+
+    IDENTIFICADOR   shift and go to state 104
+
+    condicioncita                  shift and go to state 162
+
+state 136
+
+    (75) condicioncita -> IDENTIFICADOR comparador . valor
+    (95) valor -> . VALOR_NUMERO
+    (96) valor -> . VALOR_CADENA
+    (97) valor -> . VALOR_BOOLEANO
+    (98) valor -> . VALOR_FLOTANTE
 
     VALOR_NUMERO    shift and go to state 26
     VALOR_CADENA    shift and go to state 27
     VALOR_BOOLEANO  shift and go to state 28
     VALOR_FLOTANTE  shift and go to state 29
 
-    valor                          shift and go to state 158
-
-state 134
-
-    (75) comparador -> IGUALDAD .
-
-    VALOR_NUMERO    reduce using rule 75 (comparador -> IGUALDAD .)
-    VALOR_CADENA    reduce using rule 75 (comparador -> IGUALDAD .)
-    VALOR_BOOLEANO  reduce using rule 75 (comparador -> IGUALDAD .)
-    VALOR_FLOTANTE  reduce using rule 75 (comparador -> IGUALDAD .)
-
-
-state 135
-
-    (76) comparador -> MAYOR .
-
-    VALOR_NUMERO    reduce using rule 76 (comparador -> MAYOR .)
-    VALOR_CADENA    reduce using rule 76 (comparador -> MAYOR .)
-    VALOR_BOOLEANO  reduce using rule 76 (comparador -> MAYOR .)
-    VALOR_FLOTANTE  reduce using rule 76 (comparador -> MAYOR .)
-
-
-state 136
-
-    (77) comparador -> MENOR .
-
-    VALOR_NUMERO    reduce using rule 77 (comparador -> MENOR .)
-    VALOR_CADENA    reduce using rule 77 (comparador -> MENOR .)
-    VALOR_BOOLEANO  reduce using rule 77 (comparador -> MENOR .)
-    VALOR_FLOTANTE  reduce using rule 77 (comparador -> MENOR .)
-
+    valor                          shift and go to state 163
 
 state 137
 
-    (78) comparador -> MAYOR_IGUAL .
+    (87) comparador -> IGUALDAD .
 
-    VALOR_NUMERO    reduce using rule 78 (comparador -> MAYOR_IGUAL .)
-    VALOR_CADENA    reduce using rule 78 (comparador -> MAYOR_IGUAL .)
-    VALOR_BOOLEANO  reduce using rule 78 (comparador -> MAYOR_IGUAL .)
-    VALOR_FLOTANTE  reduce using rule 78 (comparador -> MAYOR_IGUAL .)
+    VALOR_NUMERO    reduce using rule 87 (comparador -> IGUALDAD .)
+    VALOR_CADENA    reduce using rule 87 (comparador -> IGUALDAD .)
+    VALOR_BOOLEANO  reduce using rule 87 (comparador -> IGUALDAD .)
+    VALOR_FLOTANTE  reduce using rule 87 (comparador -> IGUALDAD .)
 
 
 state 138
 
-    (79) comparador -> MENOR_IGUAL .
+    (88) comparador -> MAYOR .
 
-    VALOR_NUMERO    reduce using rule 79 (comparador -> MENOR_IGUAL .)
-    VALOR_CADENA    reduce using rule 79 (comparador -> MENOR_IGUAL .)
-    VALOR_BOOLEANO  reduce using rule 79 (comparador -> MENOR_IGUAL .)
-    VALOR_FLOTANTE  reduce using rule 79 (comparador -> MENOR_IGUAL .)
+    VALOR_NUMERO    reduce using rule 88 (comparador -> MAYOR .)
+    VALOR_CADENA    reduce using rule 88 (comparador -> MAYOR .)
+    VALOR_BOOLEANO  reduce using rule 88 (comparador -> MAYOR .)
+    VALOR_FLOTANTE  reduce using rule 88 (comparador -> MAYOR .)
 
 
 state 139
 
-    (80) comparador -> DIFERENTE .
+    (89) comparador -> MENOR .
 
-    VALOR_NUMERO    reduce using rule 80 (comparador -> DIFERENTE .)
-    VALOR_CADENA    reduce using rule 80 (comparador -> DIFERENTE .)
-    VALOR_BOOLEANO  reduce using rule 80 (comparador -> DIFERENTE .)
-    VALOR_FLOTANTE  reduce using rule 80 (comparador -> DIFERENTE .)
+    VALOR_NUMERO    reduce using rule 89 (comparador -> MENOR .)
+    VALOR_CADENA    reduce using rule 89 (comparador -> MENOR .)
+    VALOR_BOOLEANO  reduce using rule 89 (comparador -> MENOR .)
+    VALOR_FLOTANTE  reduce using rule 89 (comparador -> MENOR .)
 
 
 state 140
+
+    (90) comparador -> MAYOR_IGUAL .
+
+    VALOR_NUMERO    reduce using rule 90 (comparador -> MAYOR_IGUAL .)
+    VALOR_CADENA    reduce using rule 90 (comparador -> MAYOR_IGUAL .)
+    VALOR_BOOLEANO  reduce using rule 90 (comparador -> MAYOR_IGUAL .)
+    VALOR_FLOTANTE  reduce using rule 90 (comparador -> MAYOR_IGUAL .)
+
+
+state 141
+
+    (91) comparador -> MENOR_IGUAL .
+
+    VALOR_NUMERO    reduce using rule 91 (comparador -> MENOR_IGUAL .)
+    VALOR_CADENA    reduce using rule 91 (comparador -> MENOR_IGUAL .)
+    VALOR_BOOLEANO  reduce using rule 91 (comparador -> MENOR_IGUAL .)
+    VALOR_FLOTANTE  reduce using rule 91 (comparador -> MENOR_IGUAL .)
+
+
+state 142
+
+    (92) comparador -> DIFERENTE .
+
+    VALOR_NUMERO    reduce using rule 92 (comparador -> DIFERENTE .)
+    VALOR_CADENA    reduce using rule 92 (comparador -> DIFERENTE .)
+    VALOR_BOOLEANO  reduce using rule 92 (comparador -> DIFERENTE .)
+    VALOR_FLOTANTE  reduce using rule 92 (comparador -> DIFERENTE .)
+
+
+state 143
 
     (51) eliminar_hasta_donde -> ELIMINAR PRIMEROS VALOR_NUMERO DESDE IDENTIFICADOR clausula .
 
     $end            reduce using rule 51 (eliminar_hasta_donde -> ELIMINAR PRIMEROS VALOR_NUMERO DESDE IDENTIFICADOR clausula .)
 
 
-state 141
+state 144
 
     (9) seleccion -> SELECCIONAR lista_floro lista_columnas DESDE IDENTIFICADOR opt_condiciones unir .
 
     $end            reduce using rule 9 (seleccion -> SELECCIONAR lista_floro lista_columnas DESDE IDENTIFICADOR opt_condiciones unir .)
 
 
-state 142
+state 145
 
-    (99) condiciones -> condiciones clausula .
+    (102) condiciones -> condiciones clausula .
 
-    DONDE           reduce using rule 99 (condiciones -> condiciones clausula .)
-    UNIR            reduce using rule 99 (condiciones -> condiciones clausula .)
-    $end            reduce using rule 99 (condiciones -> condiciones clausula .)
+    DONDE           reduce using rule 102 (condiciones -> condiciones clausula .)
+    UNIR            reduce using rule 102 (condiciones -> condiciones clausula .)
+    $end            reduce using rule 102 (condiciones -> condiciones clausula .)
 
 
-state 143
+state 146
 
     (48) fila -> PARENTESIS_IZQ . lista_valores PARENTESIS_DER
-    (52) lista_valores -> . valor
-    (53) lista_valores -> . lista_valores COMA valor
-    (85) valor -> . VALOR_NUMERO
-    (86) valor -> . VALOR_CADENA
-    (87) valor -> . VALOR_BOOLEANO
-    (88) valor -> . VALOR_FLOTANTE
+    (54) lista_valores -> . valor
+    (55) lista_valores -> . lista_valores COMA valor
+    (95) valor -> . VALOR_NUMERO
+    (96) valor -> . VALOR_CADENA
+    (97) valor -> . VALOR_BOOLEANO
+    (98) valor -> . VALOR_FLOTANTE
 
     VALOR_NUMERO    shift and go to state 26
     VALOR_CADENA    shift and go to state 27
     VALOR_BOOLEANO  shift and go to state 28
     VALOR_FLOTANTE  shift and go to state 29
 
-    lista_valores                  shift and go to state 159
-    valor                          shift and go to state 160
+    lista_valores                  shift and go to state 164
+    valor                          shift and go to state 165
 
-state 144
+state 147
 
     (3) insertar -> INSERTAR_EN IDENTIFICADOR PARENTESIS_IZQ lista_columnas_creadas PARENTESIS_DER VALORES lista_filas .
     (40) lista_filas -> lista_filas . COMA fila
 
     $end            reduce using rule 3 (insertar -> INSERTAR_EN IDENTIFICADOR PARENTESIS_IZQ lista_columnas_creadas PARENTESIS_DER VALORES lista_filas .)
-    COMA            shift and go to state 161
+    COMA            shift and go to state 166
 
 
-state 145
+state 148
 
     (39) lista_filas -> fila .
 
@@ -1808,41 +1859,41 @@ state 145
     $end            reduce using rule 39 (lista_filas -> fila .)
 
 
-state 146
+state 149
 
-    (95) alteracion -> RENOMBRAR opt_column IDENTIFICADOR A . IDENTIFICADOR
+    (94) alteracion -> RENOMBRAR opt_column IDENTIFICADOR A . IDENTIFICADOR
 
-    IDENTIFICADOR   shift and go to state 162
-
-
-state 147
-
-    (98) alteracion -> CAMBIAR opt_column IDENTIFICADOR lista_columna_crear .
-
-    COMA            reduce using rule 98 (alteracion -> CAMBIAR opt_column IDENTIFICADOR lista_columna_crear .)
-    $end            reduce using rule 98 (alteracion -> CAMBIAR opt_column IDENTIFICADOR lista_columna_crear .)
+    IDENTIFICADOR   shift and go to state 167
 
 
-state 148
+state 150
+
+    (101) alteracion -> CAMBIAR opt_column IDENTIFICADOR lista_columna_crear .
+
+    COMA            reduce using rule 101 (alteracion -> CAMBIAR opt_column IDENTIFICADOR lista_columna_crear .)
+    $end            reduce using rule 101 (alteracion -> CAMBIAR opt_column IDENTIFICADOR lista_columna_crear .)
+
+
+state 151
 
     (1) lista_columna_crear -> IDENTIFICADOR tipo_dato restricciones .
     (72) restricciones -> restricciones . restriccion
-    (89) restriccion -> . CLAVE_PRIMARIA
-    (90) restriccion -> . CLAVE_FORANEA referencia
-    (91) restriccion -> . AUTOINCREMENTAL
-    (92) restriccion -> . NO_NULO
+    (82) restriccion -> . CLAVE_PRIMARIA
+    (83) restriccion -> . CLAVE_FORANEA referencia
+    (84) restriccion -> . AUTOINCREMENTAL
+    (85) restriccion -> . NO_NULO
 
     PARENTESIS_DER  reduce using rule 1 (lista_columna_crear -> IDENTIFICADOR tipo_dato restricciones .)
     COMA            reduce using rule 1 (lista_columna_crear -> IDENTIFICADOR tipo_dato restricciones .)
     $end            reduce using rule 1 (lista_columna_crear -> IDENTIFICADOR tipo_dato restricciones .)
-    CLAVE_PRIMARIA  shift and go to state 151
-    CLAVE_FORANEA   shift and go to state 152
-    AUTOINCREMENTAL shift and go to state 153
-    NO_NULO         shift and go to state 154
+    CLAVE_PRIMARIA  shift and go to state 154
+    CLAVE_FORANEA   shift and go to state 155
+    AUTOINCREMENTAL shift and go to state 156
+    NO_NULO         shift and go to state 157
 
-    restriccion                    shift and go to state 163
+    restriccion                    shift and go to state 168
 
-state 149
+state 152
 
     (73) restricciones -> restriccion .
 
@@ -1855,7 +1906,7 @@ state 149
     $end            reduce using rule 73 (restricciones -> restriccion .)
 
 
-state 150
+state 153
 
     (74) restricciones -> empty .
 
@@ -1868,120 +1919,154 @@ state 150
     $end            reduce using rule 74 (restricciones -> empty .)
 
 
-state 151
-
-    (89) restriccion -> CLAVE_PRIMARIA .
-
-    CLAVE_PRIMARIA  reduce using rule 89 (restriccion -> CLAVE_PRIMARIA .)
-    CLAVE_FORANEA   reduce using rule 89 (restriccion -> CLAVE_PRIMARIA .)
-    AUTOINCREMENTAL reduce using rule 89 (restriccion -> CLAVE_PRIMARIA .)
-    NO_NULO         reduce using rule 89 (restriccion -> CLAVE_PRIMARIA .)
-    PARENTESIS_DER  reduce using rule 89 (restriccion -> CLAVE_PRIMARIA .)
-    COMA            reduce using rule 89 (restriccion -> CLAVE_PRIMARIA .)
-    $end            reduce using rule 89 (restriccion -> CLAVE_PRIMARIA .)
-
-
-state 152
-
-    (90) restriccion -> CLAVE_FORANEA . referencia
-    (94) referencia -> . REFERENCIA IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER
-
-    REFERENCIA      shift and go to state 165
-
-    referencia                     shift and go to state 164
-
-state 153
-
-    (91) restriccion -> AUTOINCREMENTAL .
-
-    CLAVE_PRIMARIA  reduce using rule 91 (restriccion -> AUTOINCREMENTAL .)
-    CLAVE_FORANEA   reduce using rule 91 (restriccion -> AUTOINCREMENTAL .)
-    AUTOINCREMENTAL reduce using rule 91 (restriccion -> AUTOINCREMENTAL .)
-    NO_NULO         reduce using rule 91 (restriccion -> AUTOINCREMENTAL .)
-    PARENTESIS_DER  reduce using rule 91 (restriccion -> AUTOINCREMENTAL .)
-    COMA            reduce using rule 91 (restriccion -> AUTOINCREMENTAL .)
-    $end            reduce using rule 91 (restriccion -> AUTOINCREMENTAL .)
-
-
 state 154
 
-    (92) restriccion -> NO_NULO .
+    (82) restriccion -> CLAVE_PRIMARIA .
 
-    CLAVE_PRIMARIA  reduce using rule 92 (restriccion -> NO_NULO .)
-    CLAVE_FORANEA   reduce using rule 92 (restriccion -> NO_NULO .)
-    AUTOINCREMENTAL reduce using rule 92 (restriccion -> NO_NULO .)
-    NO_NULO         reduce using rule 92 (restriccion -> NO_NULO .)
-    PARENTESIS_DER  reduce using rule 92 (restriccion -> NO_NULO .)
-    COMA            reduce using rule 92 (restriccion -> NO_NULO .)
-    $end            reduce using rule 92 (restriccion -> NO_NULO .)
+    CLAVE_PRIMARIA  reduce using rule 82 (restriccion -> CLAVE_PRIMARIA .)
+    CLAVE_FORANEA   reduce using rule 82 (restriccion -> CLAVE_PRIMARIA .)
+    AUTOINCREMENTAL reduce using rule 82 (restriccion -> CLAVE_PRIMARIA .)
+    NO_NULO         reduce using rule 82 (restriccion -> CLAVE_PRIMARIA .)
+    PARENTESIS_DER  reduce using rule 82 (restriccion -> CLAVE_PRIMARIA .)
+    COMA            reduce using rule 82 (restriccion -> CLAVE_PRIMARIA .)
+    $end            reduce using rule 82 (restriccion -> CLAVE_PRIMARIA .)
 
 
 state 155
 
-    (54) lista_columnas_crear -> lista_columnas_crear COMA lista_columna_crear .
+    (83) restriccion -> CLAVE_FORANEA . referencia
+    (93) referencia -> . REFERENCIA IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER
 
-    PARENTESIS_DER  reduce using rule 54 (lista_columnas_crear -> lista_columnas_crear COMA lista_columna_crear .)
-    COMA            reduce using rule 54 (lista_columnas_crear -> lista_columnas_crear COMA lista_columna_crear .)
+    REFERENCIA      shift and go to state 170
 
+    referencia                     shift and go to state 169
 
 state 156
 
-    (58) especificacion -> IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR . PARENTESIS_DER
+    (84) restriccion -> AUTOINCREMENTAL .
 
-    PARENTESIS_DER  shift and go to state 166
+    CLAVE_PRIMARIA  reduce using rule 84 (restriccion -> AUTOINCREMENTAL .)
+    CLAVE_FORANEA   reduce using rule 84 (restriccion -> AUTOINCREMENTAL .)
+    AUTOINCREMENTAL reduce using rule 84 (restriccion -> AUTOINCREMENTAL .)
+    NO_NULO         reduce using rule 84 (restriccion -> AUTOINCREMENTAL .)
+    PARENTESIS_DER  reduce using rule 84 (restriccion -> AUTOINCREMENTAL .)
+    COMA            reduce using rule 84 (restriccion -> AUTOINCREMENTAL .)
+    $end            reduce using rule 84 (restriccion -> AUTOINCREMENTAL .)
 
 
 state 157
+
+    (85) restriccion -> NO_NULO .
+
+    CLAVE_PRIMARIA  reduce using rule 85 (restriccion -> NO_NULO .)
+    CLAVE_FORANEA   reduce using rule 85 (restriccion -> NO_NULO .)
+    AUTOINCREMENTAL reduce using rule 85 (restriccion -> NO_NULO .)
+    NO_NULO         reduce using rule 85 (restriccion -> NO_NULO .)
+    PARENTESIS_DER  reduce using rule 85 (restriccion -> NO_NULO .)
+    COMA            reduce using rule 85 (restriccion -> NO_NULO .)
+    $end            reduce using rule 85 (restriccion -> NO_NULO .)
+
+
+state 158
+
+    (52) lista_columnas_crear -> lista_columnas_crear COMA lista_columna_crear .
+
+    PARENTESIS_DER  reduce using rule 52 (lista_columnas_crear -> lista_columnas_crear COMA lista_columna_crear .)
+    COMA            reduce using rule 52 (lista_columnas_crear -> lista_columnas_crear COMA lista_columna_crear .)
+
+
+state 159
+
+    (58) especificacion -> IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR . PARENTESIS_DER
+
+    PARENTESIS_DER  shift and go to state 171
+
+
+state 160
 
     (45) condicion -> especificacion IGUALDAD especificacion .
 
     $end            reduce using rule 45 (condicion -> especificacion IGUALDAD especificacion .)
 
 
-state 158
+state 161
 
-    (69) clausula -> DONDE IDENTIFICADOR comparador valor .
+    (76) condicioncita -> condicioncita Y condicioncita .
+    (76) condicioncita -> condicioncita . Y condicioncita
+    (77) condicioncita -> condicioncita . O condicioncita
 
-    $end            reduce using rule 69 (clausula -> DONDE IDENTIFICADOR comparador valor .)
-    DONDE           reduce using rule 69 (clausula -> DONDE IDENTIFICADOR comparador valor .)
-    UNIR            reduce using rule 69 (clausula -> DONDE IDENTIFICADOR comparador valor .)
+    Y               reduce using rule 76 (condicioncita -> condicioncita Y condicioncita .)
+    O               reduce using rule 76 (condicioncita -> condicioncita Y condicioncita .)
+    $end            reduce using rule 76 (condicioncita -> condicioncita Y condicioncita .)
+    DONDE           reduce using rule 76 (condicioncita -> condicioncita Y condicioncita .)
+    UNIR            reduce using rule 76 (condicioncita -> condicioncita Y condicioncita .)
+
+  ! Y               [ shift and go to state 134 ]
+  ! O               [ shift and go to state 135 ]
 
 
-state 159
+state 162
+
+    (77) condicioncita -> condicioncita O condicioncita .
+    (76) condicioncita -> condicioncita . Y condicioncita
+    (77) condicioncita -> condicioncita . O condicioncita
+
+    Y               reduce using rule 77 (condicioncita -> condicioncita O condicioncita .)
+    O               reduce using rule 77 (condicioncita -> condicioncita O condicioncita .)
+    $end            reduce using rule 77 (condicioncita -> condicioncita O condicioncita .)
+    DONDE           reduce using rule 77 (condicioncita -> condicioncita O condicioncita .)
+    UNIR            reduce using rule 77 (condicioncita -> condicioncita O condicioncita .)
+
+  ! Y               [ shift and go to state 134 ]
+  ! O               [ shift and go to state 135 ]
+
+
+state 163
+
+    (75) condicioncita -> IDENTIFICADOR comparador valor .
+
+    Y               reduce using rule 75 (condicioncita -> IDENTIFICADOR comparador valor .)
+    O               reduce using rule 75 (condicioncita -> IDENTIFICADOR comparador valor .)
+    $end            reduce using rule 75 (condicioncita -> IDENTIFICADOR comparador valor .)
+    DONDE           reduce using rule 75 (condicioncita -> IDENTIFICADOR comparador valor .)
+    UNIR            reduce using rule 75 (condicioncita -> IDENTIFICADOR comparador valor .)
+
+
+state 164
 
     (48) fila -> PARENTESIS_IZQ lista_valores . PARENTESIS_DER
-    (53) lista_valores -> lista_valores . COMA valor
+    (55) lista_valores -> lista_valores . COMA valor
 
-    PARENTESIS_DER  shift and go to state 167
-    COMA            shift and go to state 168
-
-
-state 160
-
-    (52) lista_valores -> valor .
-
-    PARENTESIS_DER  reduce using rule 52 (lista_valores -> valor .)
-    COMA            reduce using rule 52 (lista_valores -> valor .)
+    PARENTESIS_DER  shift and go to state 172
+    COMA            shift and go to state 173
 
 
-state 161
+state 165
+
+    (54) lista_valores -> valor .
+
+    PARENTESIS_DER  reduce using rule 54 (lista_valores -> valor .)
+    COMA            reduce using rule 54 (lista_valores -> valor .)
+
+
+state 166
 
     (40) lista_filas -> lista_filas COMA . fila
     (48) fila -> . PARENTESIS_IZQ lista_valores PARENTESIS_DER
 
-    PARENTESIS_IZQ  shift and go to state 143
+    PARENTESIS_IZQ  shift and go to state 146
 
-    fila                           shift and go to state 169
+    fila                           shift and go to state 174
 
-state 162
+state 167
 
-    (95) alteracion -> RENOMBRAR opt_column IDENTIFICADOR A IDENTIFICADOR .
+    (94) alteracion -> RENOMBRAR opt_column IDENTIFICADOR A IDENTIFICADOR .
 
-    COMA            reduce using rule 95 (alteracion -> RENOMBRAR opt_column IDENTIFICADOR A IDENTIFICADOR .)
-    $end            reduce using rule 95 (alteracion -> RENOMBRAR opt_column IDENTIFICADOR A IDENTIFICADOR .)
+    COMA            reduce using rule 94 (alteracion -> RENOMBRAR opt_column IDENTIFICADOR A IDENTIFICADOR .)
+    $end            reduce using rule 94 (alteracion -> RENOMBRAR opt_column IDENTIFICADOR A IDENTIFICADOR .)
 
 
-state 163
+state 168
 
     (72) restricciones -> restricciones restriccion .
 
@@ -1994,27 +2079,27 @@ state 163
     $end            reduce using rule 72 (restricciones -> restricciones restriccion .)
 
 
-state 164
+state 169
 
-    (90) restriccion -> CLAVE_FORANEA referencia .
+    (83) restriccion -> CLAVE_FORANEA referencia .
 
-    CLAVE_PRIMARIA  reduce using rule 90 (restriccion -> CLAVE_FORANEA referencia .)
-    CLAVE_FORANEA   reduce using rule 90 (restriccion -> CLAVE_FORANEA referencia .)
-    AUTOINCREMENTAL reduce using rule 90 (restriccion -> CLAVE_FORANEA referencia .)
-    NO_NULO         reduce using rule 90 (restriccion -> CLAVE_FORANEA referencia .)
-    PARENTESIS_DER  reduce using rule 90 (restriccion -> CLAVE_FORANEA referencia .)
-    COMA            reduce using rule 90 (restriccion -> CLAVE_FORANEA referencia .)
-    $end            reduce using rule 90 (restriccion -> CLAVE_FORANEA referencia .)
-
-
-state 165
-
-    (94) referencia -> REFERENCIA . IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER
-
-    IDENTIFICADOR   shift and go to state 170
+    CLAVE_PRIMARIA  reduce using rule 83 (restriccion -> CLAVE_FORANEA referencia .)
+    CLAVE_FORANEA   reduce using rule 83 (restriccion -> CLAVE_FORANEA referencia .)
+    AUTOINCREMENTAL reduce using rule 83 (restriccion -> CLAVE_FORANEA referencia .)
+    NO_NULO         reduce using rule 83 (restriccion -> CLAVE_FORANEA referencia .)
+    PARENTESIS_DER  reduce using rule 83 (restriccion -> CLAVE_FORANEA referencia .)
+    COMA            reduce using rule 83 (restriccion -> CLAVE_FORANEA referencia .)
+    $end            reduce using rule 83 (restriccion -> CLAVE_FORANEA referencia .)
 
 
-state 166
+state 170
+
+    (93) referencia -> REFERENCIA . IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER
+
+    IDENTIFICADOR   shift and go to state 175
+
+
+state 171
 
     (58) especificacion -> IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER .
 
@@ -2022,7 +2107,7 @@ state 166
     $end            reduce using rule 58 (especificacion -> IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER .)
 
 
-state 167
+state 172
 
     (48) fila -> PARENTESIS_IZQ lista_valores PARENTESIS_DER .
 
@@ -2030,22 +2115,22 @@ state 167
     $end            reduce using rule 48 (fila -> PARENTESIS_IZQ lista_valores PARENTESIS_DER .)
 
 
-state 168
+state 173
 
-    (53) lista_valores -> lista_valores COMA . valor
-    (85) valor -> . VALOR_NUMERO
-    (86) valor -> . VALOR_CADENA
-    (87) valor -> . VALOR_BOOLEANO
-    (88) valor -> . VALOR_FLOTANTE
+    (55) lista_valores -> lista_valores COMA . valor
+    (95) valor -> . VALOR_NUMERO
+    (96) valor -> . VALOR_CADENA
+    (97) valor -> . VALOR_BOOLEANO
+    (98) valor -> . VALOR_FLOTANTE
 
     VALOR_NUMERO    shift and go to state 26
     VALOR_CADENA    shift and go to state 27
     VALOR_BOOLEANO  shift and go to state 28
     VALOR_FLOTANTE  shift and go to state 29
 
-    valor                          shift and go to state 171
+    valor                          shift and go to state 176
 
-state 169
+state 174
 
     (40) lista_filas -> lista_filas COMA fila .
 
@@ -2053,46 +2138,46 @@ state 169
     $end            reduce using rule 40 (lista_filas -> lista_filas COMA fila .)
 
 
-state 170
-
-    (94) referencia -> REFERENCIA IDENTIFICADOR . PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER
-
-    PARENTESIS_IZQ  shift and go to state 172
-
-
-state 171
+state 175
 
     (53) lista_valores -> lista_valores COMA valor .
 
-    PARENTESIS_DER  reduce using rule 53 (lista_valores -> lista_valores COMA valor .)
-    COMA            reduce using rule 53 (lista_valores -> lista_valores COMA valor .)
+    PARENTESIS_IZQ  shift and go to state 177
 
 
-state 172
+state 176
 
-    (94) referencia -> REFERENCIA IDENTIFICADOR PARENTESIS_IZQ . IDENTIFICADOR PARENTESIS_DER
+    (55) lista_valores -> lista_valores COMA valor .
 
-    IDENTIFICADOR   shift and go to state 173
+    PARENTESIS_DER  reduce using rule 55 (lista_valores -> lista_valores COMA valor .)
+    COMA            reduce using rule 55 (lista_valores -> lista_valores COMA valor .)
 
 
-state 173
+state 177
 
     (94) referencia -> REFERENCIA IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR . PARENTESIS_DER
 
-    PARENTESIS_DER  shift and go to state 174
+    IDENTIFICADOR   shift and go to state 178
 
 
-state 174
+state 178
 
     (94) referencia -> REFERENCIA IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER .
 
-    CLAVE_PRIMARIA  reduce using rule 94 (referencia -> REFERENCIA IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER .)
-    CLAVE_FORANEA   reduce using rule 94 (referencia -> REFERENCIA IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER .)
-    AUTOINCREMENTAL reduce using rule 94 (referencia -> REFERENCIA IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER .)
-    NO_NULO         reduce using rule 94 (referencia -> REFERENCIA IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER .)
-    PARENTESIS_DER  reduce using rule 94 (referencia -> REFERENCIA IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER .)
-    COMA            reduce using rule 94 (referencia -> REFERENCIA IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER .)
-    $end            reduce using rule 94 (referencia -> REFERENCIA IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER .)
+    PARENTESIS_DER  shift and go to state 179
+
+
+state 179
+
+    (93) referencia -> REFERENCIA IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER .
+
+    CLAVE_PRIMARIA  reduce using rule 93 (referencia -> REFERENCIA IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER .)
+    CLAVE_FORANEA   reduce using rule 93 (referencia -> REFERENCIA IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER .)
+    AUTOINCREMENTAL reduce using rule 93 (referencia -> REFERENCIA IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER .)
+    NO_NULO         reduce using rule 93 (referencia -> REFERENCIA IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER .)
+    PARENTESIS_DER  reduce using rule 93 (referencia -> REFERENCIA IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER .)
+    COMA            reduce using rule 93 (referencia -> REFERENCIA IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER .)
+    $end            reduce using rule 93 (referencia -> REFERENCIA IDENTIFICADOR PARENTESIS_IZQ IDENTIFICADOR PARENTESIS_DER .)
 
 WARNING: 
 WARNING: Conflicts:
@@ -2101,7 +2186,7 @@ WARNING: shift/reduce conflict for DISTINTO in state 12 resolved as shift
 WARNING: shift/reduce conflict for IDENTIFICADOR in state 31 resolved as shift
 WARNING: shift/reduce conflict for TODO in state 31 resolved as shift
 WARNING: shift/reduce conflict for DISTINTO in state 31 resolved as shift
-WARNING: shift/reduce conflict for CLAVE_PRIMARIA in state 120 resolved as shift
-WARNING: shift/reduce conflict for CLAVE_FORANEA in state 120 resolved as shift
-WARNING: shift/reduce conflict for AUTOINCREMENTAL in state 120 resolved as shift
-WARNING: shift/reduce conflict for NO_NULO in state 120 resolved as shift
+WARNING: shift/reduce conflict for CLAVE_PRIMARIA in state 121 resolved as shift
+WARNING: shift/reduce conflict for CLAVE_FORANEA in state 121 resolved as shift
+WARNING: shift/reduce conflict for AUTOINCREMENTAL in state 121 resolved as shift
+WARNING: shift/reduce conflict for NO_NULO in state 121 resolved as shift
