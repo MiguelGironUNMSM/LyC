@@ -7,7 +7,7 @@ from clases.Actualizar import *
 from clases.Alterar import *
 
 query = """
-SELECCIONAR TODO DESDE empleados DONDE nombre='ty'
+ALTERAR TABLA empleados CAMBIAR COLUMNA nombre nombre_completo TEXTO NO NULO
 """
 #ALTERAR TABLA empleados AGREGAR casa ENTERO CLAVE PRIMARIA 
 resultado_lexico = analizar_lexico(query)

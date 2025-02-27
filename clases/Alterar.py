@@ -148,40 +148,53 @@ class RenombrarColumna(Instruccion):
             raise Exception(f"La columna '{self.nombre_nuevo}' ya existe en la tabla '{nombre_tabla}'.")
 
     def ejecutar(self, base_datos, nombre_tabla):
-        self.analizar_semantica(base_datos)
+        self.analizar_semantica(base_datos, nombre_tabla)
         return f"ALTER TABLE {nombre_tabla} RENAME COLUMN {self.nombre_viejo} TO {self.nombre_nuevo}"
 
 
 class CambiarColumna(Instruccion):
     def __init__(self, nombre_viejo, nueva_definicion):
         self.nombre_viejo = nombre_viejo
-        self.nueva_definicion = nueva_definicion
+        if isinstance(nueva_definicion, list) and len(nueva_definicion) > 0:
+            # Extraer la primera tupla de la lista
+            columna_info = nueva_definicion[0]
+            self.nueva_definicion = {
+                "nombre": columna_info[0],
+                "tipo_dato": columna_info[1],
+                "restricciones": columna_info[2]
+            }
+        else:
+            # Caso de error, inicializar con valores por defecto
+            self.nueva_definicion = {"nombre": "", "tipo_dato": "", "restricciones": []}
 
     def __repr__(self):
         return f"CambiarColumna(viejo='{self.nombre_viejo}', nueva_def='{self.nueva_definicion}')"
 
     def analizar_semantica(self, base_datos, nombre_tabla):
+        diccionario = {"TEXTO":"text(255)","ENTERO":"int","CADENA":"varchar(255)"}
         if nombre_tabla not in base_datos:
             raise Exception(f"La tabla '{nombre_tabla}' no existe.")
         if self.nombre_viejo not in base_datos[nombre_tabla]["columnas"]:
             raise Exception(f"La columna '{self.nombre_viejo}' no existe en la tabla '{nombre_tabla}'.")
         if self.nueva_definicion["nombre"] in base_datos[nombre_tabla]["columnas"]:
             raise Exception(f"La columna '{self.nueva_definicion['nombre']}' ya existe en la tabla '{nombre_tabla}'.")
-        if self.nueva_definicion["tipo_dato"] not in ["entero", "texto", "fecha", "decimal", "booleano"]:
+        if self.nueva_definicion["tipo_dato"] not in ["ENTERO", "TEXTO", "FECHA", "DECIMAL", "BOOLEANO"]:
             raise Exception(f"El tipo de dato '{self.nueva_definicion['tipo_dato']}' no es válido.")
-        if not all(restriccion in ["NOT NULL", "UNIQUE", "PRIMARY KEY", "FOREIGN KEY"] for restriccion in self.nueva_definicion["restricciones"]):
+        if not all(restriccion in ["NO NULO", "UNICO", "CLAVE PRIMARIA", "CLAVE FORANEA"] for restriccion in self.nueva_definicion["restricciones"]):
             raise Exception(f"Las restricciones para la nueva columna no son válidas.")
-    
+        self.nueva_definicion['tipo_dato'] = diccionario.get(self.nueva_definicion['tipo_dato'])
+        
     def ejecutar(self, base_datos, nombre_tabla):
-        self.analizar_semantica(base_datos)
+        self.analizar_semantica(base_datos, nombre_tabla)
         sql = f"ALTER TABLE {nombre_tabla} CHANGE COLUMN {self.nombre_viejo} {self.nueva_definicion['nombre']} {self.nueva_definicion['tipo_dato']}"
-        if "NOT NULL" in self.nueva_definicion["restricciones"]:
+        
+        if "NO NULO" in self.nueva_definicion["restricciones"]:
             sql += " NOT NULL"
-        if "UNIQUE" in self.nueva_definicion["restricciones"]:
+        if "UNICO" in self.nueva_definicion["restricciones"]:
             sql += " UNIQUE"
-        if "PRIMARY KEY" in self.nueva_definicion["restricciones"]:
+        if "CLAVE PRIMARIA" in self.nueva_definicion["restricciones"]:
             sql += " PRIMARY KEY"
-        if "FOREIGN KEY" in self.nueva_definicion["restricciones"]:
+        if "CLAVE FORANEA" in self.nueva_definicion["restricciones"]:
             # Aquí agregarías la lógica para claves foráneas si es necesario
             pass
         return sql
