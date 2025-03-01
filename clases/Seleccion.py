@@ -51,16 +51,12 @@ class Seleccion(Instruccion):
     def ejecutar(self, base_datos):
         """Genera la consulta SQL en formato de texto."""
         self.analizar_semantica(base_datos)
-
-        print(self.condiciones)
-        print("Join recibido en ejecutar:", self.unir)
-
-
+        sql = f""
         # Construcción de la parte inicial del SELECT
         if self.columnas == ['*']:
-            sql = f"SELECT * FROM {self.tabla}"
+            sql += f"SELECT * FROM {self.tabla}"
         else:
-            sql = f"SELECT {', '.join(self.columnas)} FROM {self.tabla}"
+            sql += f"SELECT {', '.join(self.columnas)} FROM {self.tabla}"
 
         # Procesar JOIN si existe
         if self.unir:
@@ -72,11 +68,13 @@ class Seleccion(Instruccion):
 
             # Construcción de la condición del JOIN
             condicion_sql = f"{tabla1}.{col1} {operador} {tabla2}.{col2}"
-            sql = f"{tipo_join} JOIN {tabla_join} ON {condicion_sql}"
+            diccionario = {"NORMAL":"INNER","IZQUIERDO":"LEFT","DERECHO":"RIGHT","COMPLETO":"TOTAL"}
+            tipo_join = diccionario.get(tipo_join)
+            sql += f" {tipo_join} JOIN {tabla_join} ON {condicion_sql}"
 
         # Agregar WHERE si hay condiciones
         if self.condiciones:
-            sql = f"{sql} WHERE {self.condiciones}"
+            sql += f" WHERE {self.condiciones}"
 
         return sql
             

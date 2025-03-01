@@ -46,12 +46,14 @@ class AgregarColumna(Instruccion):
         # Validar si la tabla tiene la columna
         if nombre_tabla not in base_datos:
             raise Exception(f"La tabla '{nombre_tabla}' no existe.")
+        
         diccionario = {"TEXTO":"text(255)","ENTERO":"int","CADENA":"varchar(255)","DECIMAL":"decimal(10,2)","BOOLEANO":"boolean"}
+        
         for col_def in self.lista_columnas:
             nombre_columna = col_def.nombre
             if nombre_columna in base_datos[nombre_tabla]["columnas"]:
                 raise Exception(f"La columna '{nombre_columna}' ya existe en la tabla '{nombre_tabla}'.")
-            if col_def.tipo_dato not in ["ENTERO", "TEXTO", "FECHA", "DECIMAL", "BOOLEANO"]:
+            if col_def.tipo_dato not in ["ENTERO", "TEXTO", "FECHA", "DECIMAL", "BOOLEANO","CADENA"]:
                 raise Exception(f"El tipo de dato '{col_def.tipo_dato}' no es válido para la columna '{nombre_columna}'.")
             if not all(restriccion in ["NO NULO", "UNICO", "CLAVE PRIMARIA", "CLAVE FORANEA", "AUTOINCREMENTAl"] for restriccion in col_def.restricciones):
                 raise Exception(f"Las restricciones para '{nombre_columna}' no son válidas.")
@@ -107,7 +109,7 @@ class ModificarColumna(Instruccion):
         for col_def in self.lista_columnas:
             if col_def.nombre not in base_datos[nombre_tabla]["columnas"]:
                 raise Exception(f"La columna '{col_def.nombre}' no existe en la tabla '{nombre_tabla}'.")
-            if col_def.tipo_dato not in ["ENTERO", "TEXTO", "FECHA", "DECIMAL", "BOOLEANO"]:
+            if col_def.tipo_dato not in ["ENTERO", "TEXTO", "FECHA", "DECIMAL", "BOOLEANO","CADENA"]:
                 raise Exception(f"El tipo de dato '{col_def.tipo_dato}' no es válido.")
             if not all(restriccion in ["NO NULO", "UNICO", "CLAVE PRIMARIA", "CLAVE FORANEA"] for restriccion in col_def.restricciones):
                 raise Exception(f"Las restricciones para la columna '{col_def.nombre}' no son válidas.")
