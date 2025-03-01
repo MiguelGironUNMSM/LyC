@@ -26,8 +26,11 @@ class Insertar(Instruccion):
             if columna not in base_datos[self.nombre_tabla]["columnas"]:
                 raise Exception(f"Error semántico: la columna '{columna}' no existe en la tabla '{self.nombre_tabla}'.")
         # Se verifica que el número de columnas sea igual al número de valores
-        if len(self.columnas) != len(self.valores):
-            raise Exception(f"Error semántico: el número de columnas y valores no coincide en la tabla '{self.nombre_tabla}'.")
+        """
+        Cuando es mas de una fila a insertar, se complica, sel columnas es una listaza
+        """
+        #if len(self.columnas) != len(self.valores):
+           # raise Exception(f"Error semántico: el número de columnas y valores no coincide en la tabla '{self.nombre_tabla}'.")
         # Se verifica que no se inserten valores en columnas autoincrementales
         for col in self.columnas:
             if "AUTOINCREMENTAL" in base_datos[self.nombre_tabla]["columnas"][col]["restricciones"]:
@@ -99,9 +102,8 @@ class Insertar(Instruccion):
         # Se valida la no repetición de llaves primarias
         # Se valida la inserción de llaves foráneas
         
-        
-    
     def ejecutar(self, base_datos):
+        print(type(self.valores))
         self.analizar_semantica(base_datos)
         sql = f"INSERT INTO {self.nombre_tabla} ({', '.join(self.columnas)}) VALUES ({', '.join(self.valores)})"
         return sql

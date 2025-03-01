@@ -11,7 +11,7 @@ from clases.Insertar import Insertar
 #SELECCIONAR nombre, id DESDE empleados DONDE id = 5 UNIR COMPLETO departamentos CON empleados(departamento_id) = departamentos(id)
 
 query = """
-SELECCIONAR TODO DESDE empleados UNIR departamentos CON empleados(departamento_id) = departamentos(id)
+INSERTAR EN empleados (nombre, edad, departamento_id) VALORES ("Suyco", 12, 2)
 """
 #ALTERAR TABLA empleados AGREGAR casa ENTERO CLAVE PRIMARIA 
 resultado_lexico = analizar_lexico(query)
