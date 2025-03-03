@@ -5,11 +5,13 @@ class Eliminar(Instruccion):
         self.tabla = tabla
         self.clausula = clausula
         self.limite = limite
+
+    def __str__(self):
+        return f"Eliminar({self.tabla}, {self.clausula}, {self.limite})"
     
     def analizar_semantica(self, base_datos):
         if self.tabla not in base_datos:
             raise Exception(f"Error: La tabla '{self.tabla}' no existe.")
-
             
     def ejecutar(self, base_datos):
         """Genera la consulta SQL en formato de texto."""

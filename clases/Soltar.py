@@ -3,6 +3,10 @@ from AnalizadorSemantico import Instruccion
 class Soltar(Instruccion):
     def __init__(self,tabla):
         self.tabla = tabla
+
+    def __str__(self):
+        return f"Soltar({self.tabla})"
+    
     def analizar_semantica(self, base_datos):
         for t in self.tabla:
             if t not in base_datos:

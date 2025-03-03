@@ -7,6 +7,9 @@ class Seleccion(Instruccion):
         self.condiciones = condiciones  # Condiciones opcionales
         self.unir = unir #datos del join
 
+    def __str__(self):
+        return f"Seleccion({self.columnas}, {self.tabla}, {self.condiciones}, {self.unir})"
+
     def analizar_semantica(self, base_datos):
         """Verifica que la tabla y las columnas existan en la base de datos."""
         # Verificar la existencia de la tabla principal
