@@ -14,12 +14,8 @@ from clases.Seleccion import Seleccion
 #SELECCIONAR nombre, id DESDE empleados DONDE id = 5 UNIR COMPLETO departamentos CON empleados(departamento_id) = departamentos(id)
 
 query = """
-CREAR TABLA mascotas (
-    id ENTERO CLAVE PRIMARIA AUTOINCREMENTAL,
-    nombre TEXTO NO NULO ,
-    dueno_id ENTERO CLAVE FORANEA REFERENCIA empleados(id), 
-    departamento_id ENTERO CLAVE FORANEA REFERENCIA departamentos(id)
-)"""
+INSERTAR EN empleados (nombre, edad, departamento_id) VALORES ("Suyco", 12, 2)
+"""
 #ALTERAR TABLA empleados AGREGAR casa ENTERO CLAVE PRIMARIA 
 resultado_lexico = analizar_lexico(query)
 print("Resultado del analisis lexico:")
