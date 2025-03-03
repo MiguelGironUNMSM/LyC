@@ -1,10 +1,13 @@
 from AnalizadorLexico import analizar_lexico
 from AnalizadorSintactico import analizar_sintaxis
-from clases.Eliminar import Eliminar
-from clases.Soltar import Soltar
+from clases.Actualizar import Actualizar
+from clases.Alterar import AlterarTabla
 from clases.Crear import Crear
-from clases.Seleccion import Seleccion
+from clases.Eliminar import Eliminar
 from clases.Insertar import Insertar
+from clases.Soltar import Soltar
+from clases.Seleccion import Seleccion
+
 
 
 
