@@ -10,11 +10,10 @@ from clases.Seleccion import Seleccion
 
 
 
-
 #SELECCIONAR nombre, id DESDE empleados DONDE id = 5 UNIR COMPLETO departamentos CON empleados(departamento_id) = departamentos(id)
 
 query = """
-INSERTAR EN empleados (nombre, edad, departamento_id) VALORES ("Suyco", 12, 2)
+INSERTAR EN empleados (nombre, edad, departamento_id) VALORES ("Mantari",4, 2)
 """
 #ALTERAR TABLA empleados AGREGAR casa ENTERO CLAVE PRIMARIA 
 resultado_lexico = analizar_lexico(query)
@@ -44,8 +43,8 @@ base_datos = {
 }
 
 resultado_sintactico = analizar_sintaxis(query)
-print("\nResultado del analisis sintáctico:")
+print("\nResultado del analisis sintactico:")
 print(resultado_sintactico)
 
-print("\nResultado del análisis semántico:")
+print("\nResultado del análisis semantico:")
 print(resultado_sintactico.ejecutar(base_datos))
